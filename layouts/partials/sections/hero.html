@@ -1,31 +1,30 @@
 <section class="hero" aria-labelledby="hero-title">
+  <div class="hero__ambient" aria-hidden="true">
+    <span class="ambient-key ambient-key--one"></span>
+    <span class="ambient-key ambient-key--two"></span>
+    <span class="ambient-key ambient-key--three"></span>
+    <span class="ambient-key ambient-key--four"></span>
+    <span class="ambient-key ambient-key--five"></span>
+  </div>
+
   <div class="hero__inner shell">
-    <header class="hero__heading">
+    <div class="hero__copy">
       <p class="eyebrow">{{ .Params.eyebrow }}</p>
       <h1 id="hero-title">{{ .Title }}</h1>
-    </header>
-
-    <div class="hero__intro">
       <div class="hero__lead prose">{{ .Content }}</div>
-      <div class="hero__actions">
-        <div class="button-row">
-          <a class="button button--primary" href="{{ site.Params.releasesURL }}">
-            {{ .Params.primary.label }}
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a class="hero__secondary-link" href="{{ site.Params.githubURL }}">
-            {{ .Params.secondary.label }}
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
+      <div class="button-row">
+        <a class="button button--primary" href="{{ site.Params.releasesURL }}">
+          {{ .Params.primary.label }}
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a class="button button--secondary" href="{{ site.Params.githubURL }}">
+          {{ .Params.secondary.label }}
+        </a>
       </div>
+      <p class="hero__availability">
+        <span aria-hidden="true"></span>{{ .Params.availability }}
+      </p>
     </div>
-
-    <ul class="hero__meta" aria-label="{{ .Params.meta_label }}">
-      {{ range .Params.meta }}
-        <li>{{ . }}</li>
-      {{ end }}
-    </ul>
 
     <div class="hero__visual">
       <div class="app-window">
@@ -42,5 +41,14 @@
         ) }}
       </div>
     </div>
+
+    <dl class="hero__facts">
+      {{ range .Params.facts }}
+        <div>
+          <dt>{{ .value }}</dt>
+          <dd>{{ .label }}</dd>
+        </div>
+      {{ end }}
+    </dl>
   </div>
 </section>

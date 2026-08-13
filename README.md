@@ -35,8 +35,6 @@ filenames, so translations are easy to compare side by side.
 
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
-The Hero support strip is the `meta` list in `01-hero.md`; add, remove, or
-reorder its labels there without editing the template.
 
 ### Editorial rules
 
