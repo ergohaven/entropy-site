@@ -39,6 +39,8 @@ items above it use readable YAML fields. Keep the same keys in both languages.
 The Hero visual is an interactive code-rendered Entropy mockup. Its localized
 labels, key actions, and split/standard/ortholinear preset rows are all kept in
 the `demo` field of `01-hero.md`; routine edits do not require template changes.
+Its chrome, palette, Layout flow, and modal Key Picker mirror the current
+Entropy application rather than forming a separate website-only UI system.
 
 ### Editorial rules
 

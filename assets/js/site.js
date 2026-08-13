@@ -95,8 +95,17 @@
     const layouts = [...demo.querySelectorAll('[data-demo-layout]')];
     const themeButtons = [...demo.querySelectorAll('[data-demo-theme-option]')];
     const actionButtons = [...demo.querySelectorAll('[data-demo-action]')];
-    const currentKey = demo.querySelector('[data-demo-current-key]');
+    const presetToggle = demo.querySelector('[data-demo-presets-toggle]');
+    const presetMenu = demo.querySelector('[data-demo-presets-menu]');
+    const picker = demo.querySelector('[data-demo-picker]');
+    const pickerClose = demo.querySelector('[data-demo-picker-close]');
+    const layer = demo.querySelector('[data-demo-layers]');
+    const layerLabel = demo.querySelector('[data-demo-layer-label]');
+    const previousLayer = demo.querySelector('[data-demo-layer-previous]');
+    const nextLayer = demo.querySelector('[data-demo-layer-next]');
     const status = demo.querySelector('[data-demo-status]');
+    const layerNames = layer?.dataset.demoLayers.split('|') ?? [];
+    let activeLayer = 0;
     let selectedKey = null;
 
     const selectKey = (key) => {
@@ -108,22 +117,44 @@
       });
 
       selectedKey = key;
-      currentKey.textContent = key.querySelector('[data-demo-key-label]').textContent;
       status.textContent = '';
+    };
+
+    const setPresetMenu = (open) => {
+      presetMenu.hidden = !open;
+      presetToggle.setAttribute('aria-expanded', String(open));
+      if (open) {
+        const activePreset = presetButtons.find((button) => button.getAttribute('aria-checked') === 'true');
+        requestAnimationFrame(() => (activePreset ?? presetButtons[0])?.focus());
+      }
+    };
+
+    const closePicker = (restoreFocus = true) => {
+      if (picker.hidden) return;
+      picker.hidden = true;
+      if (restoreFocus) selectedKey?.focus();
+    };
+
+    const openPicker = (key) => {
+      selectKey(key);
+      picker.hidden = false;
+      requestAnimationFrame(() => pickerClose.focus());
     };
 
     const showLayout = (id) => {
       presetButtons.forEach((button) => {
-        button.setAttribute('aria-pressed', String(button.dataset.demoPresetTarget === id));
+        button.setAttribute('aria-checked', String(button.dataset.demoPresetTarget === id));
       });
 
       layouts.forEach((layout) => {
         layout.hidden = layout.dataset.demoLayout !== id;
       });
 
-      const activeLayout = layouts.find((layout) => layout.dataset.demoLayout === id);
-      const keys = [...(activeLayout?.querySelectorAll('[data-demo-key]') ?? [])];
-      selectKey(keys.find((key) => key.dataset.defaultLabel === 'Q') ?? keys[0]);
+      demo.querySelectorAll('[data-demo-key]').forEach((key) => {
+        key.setAttribute('aria-pressed', 'false');
+      });
+      selectedKey = null;
+      setPresetMenu(false);
     };
 
     const setDemoTheme = (theme) => {
@@ -133,8 +164,23 @@
       });
     };
 
+    const setLayer = (index) => {
+      activeLayer = Math.max(0, Math.min(index, layerNames.length - 1));
+      layerLabel.textContent = layerNames[activeLayer];
+      previousLayer.disabled = activeLayer === 0;
+      nextLayer.disabled = activeLayer === layerNames.length - 1;
+    };
+
+    presetToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      setPresetMenu(presetMenu.hidden);
+    });
+
     presetButtons.forEach((button) => {
-      button.addEventListener('click', () => showLayout(button.dataset.demoPresetTarget));
+      button.addEventListener('click', () => {
+        showLayout(button.dataset.demoPresetTarget);
+        presetToggle.focus();
+      });
     });
 
     themeButtons.forEach((button) => {
@@ -143,7 +189,7 @@
 
     demo.addEventListener('click', (event) => {
       const key = event.target.closest('[data-demo-key]');
-      if (key && demo.contains(key)) selectKey(key);
+      if (key && demo.contains(key)) openPicker(key);
     });
 
     actionButtons.forEach((button) => {
@@ -154,14 +200,52 @@
         const previous = label.textContent;
         const next = button.dataset.demoAction;
         label.textContent = next;
-        currentKey.textContent = next;
         selectedKey.setAttribute('aria-label', `${demo.dataset.selectKeyLabel} ${next}`);
         status.textContent = `${demo.dataset.assignedLabel}: ${previous} → ${next}`;
+        closePicker();
       });
     });
 
-    const initialPreset = presetButtons.find((button) => button.getAttribute('aria-pressed') === 'true');
+    pickerClose.addEventListener('click', () => closePicker());
+    picker.addEventListener('click', (event) => {
+      if (event.target === picker) closePicker();
+    });
+    previousLayer.addEventListener('click', () => setLayer(activeLayer - 1));
+    nextLayer.addEventListener('click', () => setLayer(activeLayer + 1));
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('[data-demo-presets-menu], [data-demo-presets-toggle]')) {
+        setPresetMenu(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Tab' && !picker.hidden) {
+        const focusable = [...picker.querySelectorAll('button:not(:disabled)')];
+        const first = focusable[0];
+        const last = focusable.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+
+      if (event.key === 'Escape') {
+        if (!picker.hidden) {
+          closePicker();
+        } else if (!presetMenu.hidden) {
+          setPresetMenu(false);
+          presetToggle.focus();
+        }
+      }
+    });
+
+    const initialPreset = presetButtons.find((button) => button.getAttribute('aria-checked') === 'true');
     showLayout(initialPreset?.dataset.demoPresetTarget ?? layouts[0]?.dataset.demoLayout);
+    setLayer(0);
     setDemoTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
   });
 

@@ -43,38 +43,60 @@
         </div>
 
         <div class="entropy-demo__app">
-          <div class="entropy-demo__navigation">
-            <div class="entropy-demo__tabs" aria-hidden="true">
-              {{ range $index, $tab := $demo.tabs }}
-                <span {{ if eq $index 0 }}class="is-active"{{ end }}>{{ $tab }}</span>
-              {{ end }}
-            </div>
+          <header class="entropy-demo__chrome">
+            <span class="entropy-demo__undo" aria-hidden="true">{{ $demo.undo }}</span>
 
-            <div class="entropy-demo__theme" role="group" aria-label="{{ $demo.theme_label }}">
-              <button type="button" data-demo-theme-option="light" aria-pressed="true">
-                {{ $demo.themes.light }}
-              </button>
-              <button type="button" data-demo-theme-option="dark" aria-pressed="false">
-                {{ $demo.themes.dark }}
-              </button>
-            </div>
-          </div>
-
-          <div class="entropy-demo__toolbar">
-            <div class="entropy-demo__layer">
-              <span>{{ $demo.layer_label }}</span>
-              <strong>{{ $demo.layer }}</strong>
-            </div>
-
-            <div class="entropy-demo__presets" role="group" aria-label="{{ $demo.presets_label }}">
-              {{ range $index, $preset := $demo.presets }}
+            <nav class="entropy-demo__tabs" aria-label="{{ $demo.navigation_label }}">
+              <div class="entropy-demo__layout-menu">
                 <button
+                  class="entropy-demo__tab is-active"
                   type="button"
-                  data-demo-preset-target="{{ $preset.id }}"
-                  aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
-                >{{ $preset.label }}</button>
-              {{ end }}
+                  data-demo-presets-toggle
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  aria-controls="entropy-demo-presets"
+                >{{ index $demo.tabs 0 }}</button>
+
+                <div
+                  class="entropy-demo__preset-menu"
+                  id="entropy-demo-presets"
+                  data-demo-presets-menu
+                  role="menu"
+                  aria-label="{{ $demo.presets_label }}"
+                  hidden
+                >
+                  {{ range $index, $preset := $demo.presets }}
+                    <button
+                      type="button"
+                      role="menuitemradio"
+                      data-demo-preset-target="{{ $preset.id }}"
+                      aria-checked="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+                    >
+                      <span>{{ $preset.label }}</span>
+                      <i aria-hidden="true"></i>
+                    </button>
+                  {{ end }}
+                </div>
+              </div>
+              <i aria-hidden="true"></i>
+              <span class="entropy-demo__tab">{{ index $demo.tabs 1 }}</span>
+              <i aria-hidden="true"></i>
+              <span class="entropy-demo__tab">{{ index $demo.tabs 2 }}</span>
+            </nav>
+
+            <div class="entropy-demo__zoom" aria-hidden="true">
+              <span>−</span><b>{{ $demo.zoom }}</b><span>+</span>
             </div>
+          </header>
+
+          <div
+            class="entropy-demo__layer"
+            data-demo-layers="{{ delimit $demo.layers "|" }}"
+            aria-label="{{ $demo.layer_label }}"
+          >
+            <button type="button" data-demo-layer-previous aria-label="{{ $demo.previous_layer }}" disabled>‹</button>
+            <strong data-demo-layer-label>{{ index $demo.layers 0 }}</strong>
+            <button type="button" data-demo-layer-next aria-label="{{ $demo.next_layer }}">›</button>
           </div>
 
           <div class="entropy-demo__workspace">
@@ -109,24 +131,61 @@
                 </div>
               {{ end }}
             </div>
+          </div>
 
-            <aside class="entropy-demo__picker" aria-label="{{ $demo.picker_label }}">
-              <div class="entropy-demo__selection">
-                <span>{{ $demo.selected_label }}</span>
-                <strong data-demo-current-key>Esc</strong>
-              </div>
+          <footer class="entropy-demo__footer">
+            <p>{{ $demo.signature }} <strong>{{ $demo.signature_brand }}</strong></p>
+            <div class="entropy-demo__theme" role="group" aria-label="{{ $demo.theme_label }}">
+              <button type="button" data-demo-theme-option="light" aria-pressed="true">
+                <span aria-hidden="true">☀</span> {{ $demo.themes.light }}
+              </button>
+              <i aria-hidden="true">|</i>
+              <button type="button" data-demo-theme-option="dark" aria-pressed="false">
+                <span aria-hidden="true">☾</span> {{ $demo.themes.dark }}
+              </button>
+            </div>
+          </footer>
 
-              <p>{{ $demo.hint }}</p>
+          <div class="entropy-demo__picker-backdrop" data-demo-picker hidden>
+            <section
+              class="entropy-demo__picker"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="entropy-demo-picker-title"
+            >
+              <button
+                class="entropy-demo__picker-close"
+                type="button"
+                data-demo-picker-close
+                aria-label="{{ $demo.picker.close_label }}"
+              >×</button>
+              <h3 id="entropy-demo-picker-title">{{ $demo.picker.title }}</h3>
+              <p>{{ $demo.picker.prompt }}</p>
 
-              <div class="entropy-demo__actions" role="group" aria-label="{{ $demo.actions_label }}">
-                {{ range $action := $demo.actions }}
-                  <button type="button" data-demo-action="{{ $action }}">{{ $action }}</button>
+              <div class="entropy-demo__picker-tabs" aria-hidden="true">
+                {{ range $index, $category := $demo.picker.categories }}
+                  <span {{ if eq $index 0 }}class="is-active"{{ end }}>{{ $category }}</span>
                 {{ end }}
               </div>
 
-              <p class="entropy-demo__status" data-demo-status aria-live="polite"></p>
-            </aside>
+              <div class="entropy-demo__picker-heading">
+                <span>{{ $demo.picker.section_label }}</span>
+                <b>{{ $demo.picker.layout }}</b>
+              </div>
+
+              <div class="entropy-demo__actions" role="group" aria-label="{{ $demo.actions_label }}">
+                {{ range $row := $demo.picker.action_rows }}
+                  <div>
+                    {{ range $action := $row }}
+                      <button type="button" data-demo-action="{{ $action }}">{{ $action }}</button>
+                    {{ end }}
+                  </div>
+                {{ end }}
+              </div>
+            </section>
           </div>
+
+          <p class="visually-hidden" data-demo-status aria-live="polite"></p>
         </div>
       </div>
     </div>

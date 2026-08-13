@@ -9,12 +9,17 @@ availability: Доступно для Linux, Windows и macOS
 demo:
   aria_label: Интерактивный пример интерфейса Entropy
   tabs: [Раскладка, Дополнительно, Настройки]
+  navigation_label: Навигация Entropy
+  undo: ↶ Отменить
+  zoom: 100%
   theme_label: Тема примера
   themes:
     light: Светлая
     dark: Тёмная
   layer_label: Слой
-  layer: 0. Основной
+  layers: [0. Основной, 1. Fn, 2. Медиа]
+  previous_layer: Предыдущий слой
+  next_layer: Следующий слой
   presets_label: Пресет раскладки клавиатуры
   presets:
     - id: split
@@ -61,13 +66,24 @@ demo:
             - [Shift, Z, X, C, V, B, N, M, ",", ".", "/", Shift]
         - groups:
             - [Ctrl, Super, Alt, Lower, Space, Space, Space, Space, Raise, Left, Down, Right]
-  picker_label: Выбор действия
-  selected_label: Выбранная клавиша
   actions_label: Назначить действие
   select_key: Выбрать клавишу
   assigned_label: Назначено
-  hint: Выберите клавишу, затем назначьте новое действие
-  actions: [Esc, Tab, Enter, Space, Mute, RGB]
+  signature: инструменты будущего от
+  signature_brand: eh.industries
+  picker:
+    title: Выбор клавиши
+    close_label: Закрыть выбор клавиши
+    prompt: Нажмите клавишу на клавиатуре или выберите ниже
+    categories: [Основные, Символы, Модификаторы, Специальные, Макросы, Tap Dance]
+    section_label: Основные клавиши — стандартная раскладка
+    layout: QWERTY
+    action_rows:
+      - [Esc, "1", "2", "3", "4", "5"]
+      - [Tab, Q, W, E, R, T]
+      - [Caps, A, S, D, F, G]
+      - [Shift, Z, X, C, V, B]
+      - [Ctrl, Super, Alt, Space, Mute, Enter]
 facts:
   - value: Одно приложение
     label: Раскладки, прошивка и живые инструменты

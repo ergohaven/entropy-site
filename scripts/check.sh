@@ -84,6 +84,9 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'data-demo-layout=ortholinear' "$page"
   rg -q 'data-demo-theme-option=light' "$page"
   rg -q 'data-demo-theme-option=dark' "$page"
+  rg -q 'data-demo-presets-menu' "$page"
+  rg -q 'data-demo-picker' "$page"
+  rg -q 'role=dialog' "$page"
   if rg -q '(href|src)=""' "$page"; then
     echo "Empty href or src in $page" >&2
     exit 1
