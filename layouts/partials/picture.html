@@ -1,0 +1,28 @@
+{{- $path := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $sizes := .sizes | default "(min-width: 1100px) 52vw, 100vw" -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- with resources.Get $path -}}
+  {{- $small := .Resize "720x webp q82" -}}
+  {{- $medium := .Resize "1200x webp q84" -}}
+  {{- $large := .Resize "1800x webp q86" -}}
+  <picture class="responsive-picture {{ $class }}">
+    <source
+      type="image/webp"
+      srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $medium.RelPermalink }} {{ $medium.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+      sizes="{{ $sizes }}"
+    >
+    <img
+      src="{{ .RelPermalink }}"
+      width="{{ .Width }}"
+      height="{{ .Height }}"
+      alt="{{ $alt }}"
+      loading="{{ $loading }}"
+      decoding="async"
+      {{ if eq $loading "eager" }}fetchpriority="high"{{ end }}
+    >
+  </picture>
+{{- else -}}
+  {{- errorf "Image not found in assets: %s" $path -}}
+{{- end -}}

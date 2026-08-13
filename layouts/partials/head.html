@@ -1,0 +1,74 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f4f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121113" media="(prefers-color-scheme: dark)">
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('entropy-theme');
+      var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = saved === 'light' || saved === 'dark' ? saved : preferred;
+    } catch (_) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  }());
+</script>
+
+{{ $description := .Params.description | default site.Params.description }}
+{{ $pageTitle := .Params.meta_title | default .Title }}
+<title>{{ $pageTitle }}</title>
+<meta name="description" content="{{ $description }}">
+{{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+<meta name="author" content="{{ site.Params.authorName }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
+
+{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
+{{ end }}
+<link rel="alternate" hreflang="x-default" href="{{ hugo.Sites.Default.Home.Permalink }}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $pageTitle }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="{{ replace site.Language.Locale "-" "_" }}">
+{{ range .Translations }}
+  <meta property="og:locale:alternate" content="{{ replace .Language.Locale "-" "_" }}">
+{{ end }}
+
+{{ with .Params.og_image }}
+  {{ with resources.Get . }}
+    {{ $socialImage := .Fill "1200x630 Center webp q84" }}
+    <meta property="og:image" content="{{ $socialImage.Permalink }}">
+    <meta property="og:image:width" content="{{ $socialImage.Width }}">
+    <meta property="og:image:height" content="{{ $socialImage.Height }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ $socialImage.Permalink }}">
+  {{ end }}
+{{ end }}
+<meta name="twitter:title" content="{{ $pageTitle }}">
+<meta name="twitter:description" content="{{ $description }}">
+
+{{ $styles := resources.Get "css/site.css" | minify | fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+
+{{ $script := resources.Get "js/site.js" | minify | fingerprint "sha256" }}
+<script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
+
+{{ $schema := dict
+  "@context" "https://schema.org"
+  "@type" "SoftwareApplication"
+  "name" site.Params.brandName
+  "description" $description
+  "applicationCategory" "UtilitiesApplication"
+  "operatingSystem" "Linux, Windows, macOS"
+  "downloadUrl" site.Params.releasesURL
+  "codeRepository" site.Params.githubURL
+  "license" "https://www.gnu.org/licenses/gpl-3.0.html"
+  "author" (dict "@type" "Organization" "name" site.Params.authorName)
+}}
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>

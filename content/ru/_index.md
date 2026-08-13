@@ -1,0 +1,34 @@
+---
+title: Entropy
+meta_title: Entropy — open-source конфигуратор клавиатур
+description: Современный open-source конфигуратор программируемых клавиатур и Vial-совместимых устройств ввода.
+translationKey: home
+keywords:
+  - программируемая клавиатура
+  - Vial
+  - QMK
+  - RMK
+  - конфигуратор клавиатуры
+og_image: images/screenshots/hero-layout.png
+nav:
+  features: Возможности
+  workflow: Процесс
+  compatibility: Совместимость
+  download: Скачать
+  github: GitHub
+a11y:
+  skip_to_content: Перейти к содержимому
+  home: Главная Entropy
+  primary_navigation: Основная навигация
+  open_menu: Открыть навигацию
+  close_menu: Закрыть навигацию
+  language_switcher: Сменить язык
+  theme_to_light: Включить светлую тему
+  theme_to_dark: Включить тёмную тему
+  supported_protocols: Поддерживаемые протоколы прошивки
+footer:
+  tagline: Инструменты для будущего человеческого ввода
+  source_label: Исходный код
+  releases_label: Релизы
+  made_by: Open-source проект Ergohaven
+---

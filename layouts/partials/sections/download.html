@@ -1,0 +1,29 @@
+<section class="section download" id="download" aria-labelledby="download-title">
+  <div class="shell download__inner">
+    <header class="download__copy">
+      <p class="eyebrow">{{ .Params.eyebrow }}</p>
+      <h2 id="download-title">{{ .Title }}</h2>
+      <div class="prose">{{ .Content }}</div>
+      <div class="button-row">
+        <a class="button button--primary" href="{{ site.Params.releasesURL }}">
+          {{ .Params.primary.label }}
+          <span aria-hidden="true">↓</span>
+        </a>
+        <a class="button button--secondary" href="{{ site.Params.githubURL }}">
+          {{ .Params.secondary.label }}
+        </a>
+      </div>
+    </header>
+
+    <div class="platforms">
+      {{ range .Params.platforms }}
+        <div class="platform">
+          <strong>{{ .name }}</strong>
+          <span>{{ .package }}</span>
+          <small>{{ .status }}</small>
+        </div>
+      {{ end }}
+      <p class="platforms__footnote">{{ .Params.footnote }}</p>
+    </div>
+  </div>
+</section>

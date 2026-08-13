@@ -1,0 +1,13 @@
+# Hugo output and generated resources
+/public/
+/resources/_gen/
+/.hugo_build.lock
+
+# Project-local Hugo binary
+/.tools/
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.swp

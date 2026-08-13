@@ -1,0 +1,38 @@
+baseURL: https://entropy.invalid/
+title: Entropy
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+enableRobotsTXT: true
+enableGitInfo: false
+cleanDestinationDir: true
+disableKinds:
+  - taxonomy
+  - term
+  - RSS
+
+languages:
+  en:
+    locale: en-US
+    label: English
+    contentDir: content/en
+    weight: 1
+  ru:
+    locale: ru-RU
+    label: Русский
+    contentDir: content/ru
+    weight: 2
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+
+minify:
+  minifyOutput: true
+
+params:
+  brandName: Entropy
+  authorName: Ergohaven
+  githubURL: https://github.com/ergohaven/entropy
+  releasesURL: https://github.com/ergohaven/entropy/releases/latest
+  licenseName: GPL-3.0-or-later

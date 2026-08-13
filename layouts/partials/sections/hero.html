@@ -1,0 +1,54 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__ambient" aria-hidden="true">
+    <span class="ambient-key ambient-key--one"></span>
+    <span class="ambient-key ambient-key--two"></span>
+    <span class="ambient-key ambient-key--three"></span>
+    <span class="ambient-key ambient-key--four"></span>
+    <span class="ambient-key ambient-key--five"></span>
+  </div>
+
+  <div class="hero__inner shell">
+    <div class="hero__copy">
+      <p class="eyebrow">{{ .Params.eyebrow }}</p>
+      <h1 id="hero-title">{{ .Title }}</h1>
+      <div class="hero__lead prose">{{ .Content }}</div>
+      <div class="button-row">
+        <a class="button button--primary" href="{{ site.Params.releasesURL }}">
+          {{ .Params.primary.label }}
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a class="button button--secondary" href="{{ site.Params.githubURL }}">
+          {{ .Params.secondary.label }}
+        </a>
+      </div>
+      <p class="hero__availability">
+        <span aria-hidden="true"></span>{{ .Params.availability }}
+      </p>
+    </div>
+
+    <div class="hero__visual">
+      <div class="app-window">
+        <div class="app-window__bar" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <b>entropy</b>
+        </div>
+        {{ partial "picture.html" (dict
+          "src" .Params.image
+          "alt" .Params.image_alt
+          "class" "app-window__media"
+          "sizes" "(min-width: 1100px) 58vw, (min-width: 720px) 88vw, 96vw"
+          "loading" "eager"
+        ) }}
+      </div>
+    </div>
+
+    <dl class="hero__facts">
+      {{ range .Params.facts }}
+        <div>
+          <dt>{{ .value }}</dt>
+          <dd>{{ .label }}</dd>
+        </div>
+      {{ end }}
+    </dl>
+  </div>
+</section>

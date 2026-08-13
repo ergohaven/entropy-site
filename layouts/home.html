@@ -1,0 +1,42 @@
+{{ define "main" }}
+  {{ $bundle := site.GetPage "/home" }}
+  {{ if not $bundle }}
+    {{ errorf "Missing localized content bundle at content/%s/home/index.md" site.Language.Lang }}
+  {{ end }}
+
+  {{ with $bundle.Resources.GetMatch "01-hero*" }}
+    {{ partial "sections/hero.html" . }}
+  {{ else }}
+    {{ errorf "Missing homepage block: 01-hero.md (%s)" site.Language.Lang }}
+  {{ end }}
+
+  {{ with $bundle.Resources.GetMatch "02-principles*" }}
+    {{ partial "sections/principles.html" . }}
+  {{ else }}
+    {{ errorf "Missing homepage block: 02-principles.md (%s)" site.Language.Lang }}
+  {{ end }}
+
+  {{ with $bundle.Resources.GetMatch "03-showcase*" }}
+    {{ partial "sections/showcase.html" . }}
+  {{ else }}
+    {{ errorf "Missing homepage block: 03-showcase.md (%s)" site.Language.Lang }}
+  {{ end }}
+
+  {{ with $bundle.Resources.GetMatch "04-capabilities*" }}
+    {{ partial "sections/capabilities.html" . }}
+  {{ else }}
+    {{ errorf "Missing homepage block: 04-capabilities.md (%s)" site.Language.Lang }}
+  {{ end }}
+
+  {{ with $bundle.Resources.GetMatch "05-compatibility*" }}
+    {{ partial "sections/compatibility.html" . }}
+  {{ else }}
+    {{ errorf "Missing homepage block: 05-compatibility.md (%s)" site.Language.Lang }}
+  {{ end }}
+
+  {{ with $bundle.Resources.GetMatch "06-download*" }}
+    {{ partial "sections/download.html" . }}
+  {{ else }}
+    {{ errorf "Missing homepage block: 06-download.md (%s)" site.Language.Lang }}
+  {{ end }}
+{{ end }}

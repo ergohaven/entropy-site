@@ -1,0 +1,43 @@
+<section class="section showcase" id="workflow" aria-labelledby="showcase-title">
+  <div class="shell">
+    <header class="section-heading section-heading--center">
+      <p class="eyebrow">{{ .Params.eyebrow }}</p>
+      <h2 id="showcase-title">{{ .Title }}</h2>
+      <div class="section-heading__body prose">{{ .Content }}</div>
+    </header>
+
+    <div class="showcase__stories">
+      {{ range $index, $story := .Params.stories }}
+        <article class="story{{ if eq (mod $index 2) 1 }} story--reverse{{ end }}">
+          <div class="story__copy">
+            <p class="story__kicker">{{ $story.kicker }}</p>
+            <h3>{{ $story.title }}</h3>
+            <p>{{ $story.text }}</p>
+          </div>
+          <div class="story__media">
+            {{ if and $story.image_light $story.image_dark }}
+              {{ partial "picture.html" (dict
+                "src" $story.image_light
+                "alt" $story.image_alt
+                "class" "theme-media theme-media--light"
+                "sizes" "(min-width: 900px) 54vw, 94vw"
+              ) }}
+              {{ partial "picture.html" (dict
+                "src" $story.image_dark
+                "alt" $story.image_alt
+                "class" "theme-media theme-media--dark"
+                "sizes" "(min-width: 900px) 54vw, 94vw"
+              ) }}
+            {{ else }}
+              {{ partial "picture.html" (dict
+                "src" $story.image
+                "alt" $story.image_alt
+                "sizes" "(min-width: 900px) 54vw, 94vw"
+              ) }}
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
