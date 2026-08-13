@@ -6,7 +6,7 @@ primary:
 secondary:
   label: View on GitHub
 availability: Available for Linux, Windows, and macOS
-image: images/screenshots/hero-layout.png
+image: images/screenshots/01-hero-layout.png
 image_alt: Entropy layout editor showing a split keyboard
 facts:
   - value: One app

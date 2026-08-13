@@ -5,18 +5,18 @@ stories:
   - kicker: Выбор кейкода
     title: Найдите нужное действие, не теряя контекст.
     text: Ищите кейкоды по смыслу — базовые клавиши, символы, модификаторы, макросы, Tap Dance, действия прошивки и многое другое.
-    image_light: images/screenshots/key-picker-light.png
-    image_dark: images/screenshots/key-picker-dark.png
+    image_light: images/screenshots/03-01-key-picker-light.png
+    image_dark: images/screenshots/03-01-key-picker-dark.png
     image_alt: Окно выбора кейкода Entropy с полной раскладкой клавиатуры
   - kicker: Тестер матрицы
     title: Проверьте физическое устройство до того, как доверитесь раскладке.
     text: Тестируйте каждую позицию матрицы в реальном времени и сразу находите проблемы со свитчами, проводкой или раскладкой.
-    image: images/screenshots/matrix-tester.png
+    image: images/screenshots/03-02-matrix-tester.png
     image_alt: Тестер матрицы Entropy с отмеченными проверенными клавишами
   - kicker: Расширение текста
     title: Превратите программируемые клавиши в повседневные сокращения.
     text: Создавайте локальные текстовые подстановки для своего устройства, сохраняя конфигурацию видимой и полностью подконтрольной.
-    image: images/screenshots/text-expander.png
+    image: images/screenshots/03-03-text-expander.png
     image_alt: Экран настройки расширения текста Entropy
 ---
 

@@ -6,7 +6,7 @@ primary:
 secondary:
   label: Открыть GitHub
 availability: Доступно для Linux, Windows и macOS
-image: images/screenshots/hero-layout.png
+image: images/screenshots/01-hero-layout.png
 image_alt: Редактор раскладки Entropy со сплит-клавиатурой
 facts:
   - value: Одно приложение

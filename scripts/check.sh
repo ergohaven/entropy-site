@@ -8,6 +8,20 @@ diff -u \
   <(find content/en/home -maxdepth 1 -type f -name '*.md' -printf '%f\n' | sort) \
   <(find content/ru/home -maxdepth 1 -type f -name '*.md' -printf '%f\n' | sort)
 
+image_name_pattern='^[0-9]{2}(-[0-9]{2})?-[a-z0-9]+(-[a-z0-9]+)*\.(png|jpe?g|webp)$'
+invalid_image_names=$(
+  find assets/images/screenshots -maxdepth 1 -type f -printf '%f\n' \
+    | LC_ALL=C sort \
+    | rg -v "$image_name_pattern" \
+    || true
+)
+
+if [[ -n "$invalid_image_names" ]]; then
+  echo "Screenshot names must start with their two-digit content block number:" >&2
+  echo "$invalid_image_names" >&2
+  exit 1
+fi
+
 "$project_dir/scripts/build.sh"
 
 test -f public/index.html

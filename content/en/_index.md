@@ -9,7 +9,7 @@ keywords:
   - QMK
   - RMK
   - keyboard configurator
-og_image: images/screenshots/hero-layout.png
+og_image: images/screenshots/01-hero-layout.png
 nav:
   features: Features
   workflow: Workflow

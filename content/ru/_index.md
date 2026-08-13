@@ -9,7 +9,7 @@ keywords:
   - QMK
   - RMK
   - конфигуратор клавиатуры
-og_image: images/screenshots/hero-layout.png
+og_image: images/screenshots/01-hero-layout.png
 nav:
   features: Возможности
   workflow: Процесс
