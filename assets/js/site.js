@@ -90,4 +90,79 @@
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  document.querySelectorAll('[data-entropy-demo]').forEach((demo) => {
+    const presetButtons = [...demo.querySelectorAll('[data-demo-preset-target]')];
+    const layouts = [...demo.querySelectorAll('[data-demo-layout]')];
+    const themeButtons = [...demo.querySelectorAll('[data-demo-theme-option]')];
+    const actionButtons = [...demo.querySelectorAll('[data-demo-action]')];
+    const currentKey = demo.querySelector('[data-demo-current-key]');
+    const status = demo.querySelector('[data-demo-status]');
+    let selectedKey = null;
+
+    const selectKey = (key) => {
+      if (!key) return;
+
+      demo.querySelectorAll('[data-demo-key]').forEach((item) => {
+        const isSelected = item === key;
+        item.setAttribute('aria-pressed', String(isSelected));
+      });
+
+      selectedKey = key;
+      currentKey.textContent = key.querySelector('[data-demo-key-label]').textContent;
+      status.textContent = '';
+    };
+
+    const showLayout = (id) => {
+      presetButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.demoPresetTarget === id));
+      });
+
+      layouts.forEach((layout) => {
+        layout.hidden = layout.dataset.demoLayout !== id;
+      });
+
+      const activeLayout = layouts.find((layout) => layout.dataset.demoLayout === id);
+      const keys = [...(activeLayout?.querySelectorAll('[data-demo-key]') ?? [])];
+      selectKey(keys.find((key) => key.dataset.defaultLabel === 'Q') ?? keys[0]);
+    };
+
+    const setDemoTheme = (theme) => {
+      demo.dataset.demoTheme = theme;
+      themeButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.demoThemeOption === theme));
+      });
+    };
+
+    presetButtons.forEach((button) => {
+      button.addEventListener('click', () => showLayout(button.dataset.demoPresetTarget));
+    });
+
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => setDemoTheme(button.dataset.demoThemeOption));
+    });
+
+    demo.addEventListener('click', (event) => {
+      const key = event.target.closest('[data-demo-key]');
+      if (key && demo.contains(key)) selectKey(key);
+    });
+
+    actionButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!selectedKey) return;
+
+        const label = selectedKey.querySelector('[data-demo-key-label]');
+        const previous = label.textContent;
+        const next = button.dataset.demoAction;
+        label.textContent = next;
+        currentKey.textContent = next;
+        selectedKey.setAttribute('aria-label', `${demo.dataset.selectKeyLabel} ${next}`);
+        status.textContent = `${demo.dataset.assignedLabel}: ${previous} → ${next}`;
+      });
+    });
+
+    const initialPreset = presetButtons.find((button) => button.getAttribute('aria-pressed') === 'true');
+    showLayout(initialPreset?.dataset.demoPresetTarget ?? layouts[0]?.dataset.demoLayout);
+    setDemoTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+  });
+
 })();

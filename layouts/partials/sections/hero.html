@@ -27,18 +27,107 @@
     </div>
 
     <div class="hero__visual">
-      <div class="app-window">
+      {{ $demo := .Params.demo }}
+      <div
+        class="app-window entropy-demo"
+        data-entropy-demo
+        data-demo-theme="light"
+        data-select-key-label="{{ $demo.select_key }}"
+        data-assigned-label="{{ $demo.assigned_label }}"
+        role="region"
+        aria-label="{{ $demo.aria_label }}"
+      >
         <div class="app-window__bar" aria-hidden="true">
           <span></span><span></span><span></span>
           <b>entropy</b>
         </div>
-        {{ partial "picture.html" (dict
-          "src" .Params.image
-          "alt" .Params.image_alt
-          "class" "app-window__media"
-          "sizes" "(min-width: 1100px) 58vw, (min-width: 720px) 88vw, 96vw"
-          "loading" "eager"
-        ) }}
+
+        <div class="entropy-demo__app">
+          <div class="entropy-demo__navigation">
+            <div class="entropy-demo__tabs" aria-hidden="true">
+              {{ range $index, $tab := $demo.tabs }}
+                <span {{ if eq $index 0 }}class="is-active"{{ end }}>{{ $tab }}</span>
+              {{ end }}
+            </div>
+
+            <div class="entropy-demo__theme" role="group" aria-label="{{ $demo.theme_label }}">
+              <button type="button" data-demo-theme-option="light" aria-pressed="true">
+                {{ $demo.themes.light }}
+              </button>
+              <button type="button" data-demo-theme-option="dark" aria-pressed="false">
+                {{ $demo.themes.dark }}
+              </button>
+            </div>
+          </div>
+
+          <div class="entropy-demo__toolbar">
+            <div class="entropy-demo__layer">
+              <span>{{ $demo.layer_label }}</span>
+              <strong>{{ $demo.layer }}</strong>
+            </div>
+
+            <div class="entropy-demo__presets" role="group" aria-label="{{ $demo.presets_label }}">
+              {{ range $index, $preset := $demo.presets }}
+                <button
+                  type="button"
+                  data-demo-preset-target="{{ $preset.id }}"
+                  aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+                >{{ $preset.label }}</button>
+              {{ end }}
+            </div>
+          </div>
+
+          <div class="entropy-demo__workspace">
+            <div class="entropy-demo__canvas">
+              {{ range $presetIndex, $preset := $demo.presets }}
+                <div
+                  class="entropy-demo__keyboard entropy-demo__keyboard--{{ $preset.id }}"
+                  data-demo-layout="{{ $preset.id }}"
+                  role="group"
+                  aria-label="{{ $preset.label }}"
+                  {{ if ne $presetIndex 0 }}hidden{{ end }}
+                >
+                  {{ range $row := $preset.rows }}
+                    <div class="entropy-demo__row">
+                      {{ range $group := $row.groups }}
+                        <div class="entropy-demo__key-group">
+                          {{ range $key := $group }}
+                            {{ $wide := or (eq $key "Space") (eq $key "Shift") (eq $key "Enter") (eq $key "Bksp") (eq $key "Caps") (eq $key "Tab") }}
+                            <button
+                              class="entropy-demo__key{{ if $wide }} entropy-demo__key--wide{{ end }}"
+                              type="button"
+                              data-demo-key
+                              data-default-label="{{ $key }}"
+                              aria-label="{{ $demo.select_key }} {{ $key }}"
+                              aria-pressed="false"
+                            ><span data-demo-key-label>{{ $key }}</span></button>
+                          {{ end }}
+                        </div>
+                      {{ end }}
+                    </div>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+
+            <aside class="entropy-demo__picker" aria-label="{{ $demo.picker_label }}">
+              <div class="entropy-demo__selection">
+                <span>{{ $demo.selected_label }}</span>
+                <strong data-demo-current-key>Esc</strong>
+              </div>
+
+              <p>{{ $demo.hint }}</p>
+
+              <div class="entropy-demo__actions" role="group" aria-label="{{ $demo.actions_label }}">
+                {{ range $action := $demo.actions }}
+                  <button type="button" data-demo-action="{{ $action }}">{{ $action }}</button>
+                {{ end }}
+              </div>
+
+              <p class="entropy-demo__status" data-demo-status aria-live="polite"></p>
+            </aside>
+          </div>
+        </div>
       </div>
     </div>
 

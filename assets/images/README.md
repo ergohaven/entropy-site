@@ -1,7 +1,8 @@
 # Images
 
 All editable landing-page images live here. Templates never hide image paths in
-HTML; each path is declared next to its text in `content/<language>/home/*.md`.
+HTML; each path is declared in `content/<language>/_index.md` or next to its
+text in `content/<language>/home/*.md`.
 
 ## Replace an existing image
 
@@ -16,7 +17,8 @@ HTML; each path is declared next to its text in `content/<language>/home/*.md`.
 Prefix every content image with the number of the Markdown block that uses it.
 For blocks with multiple images, add a second two-digit number for their order:
 
-- `01-hero-layout.png` belongs to `01-hero.md`.
+- `01-hero-layout.png` is the homepage social-preview image; the visible Hero
+  interface itself is rendered from HTML, CSS, and JavaScript.
 - `03-01-key-picker-light.png` and `03-01-key-picker-dark.png` are theme
   variants of the first image in `03-features.md`.
 - `03-02-matrix-tester.png` is the second image in `03-features.md`.

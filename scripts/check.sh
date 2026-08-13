@@ -78,6 +78,12 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'id=features' "$page"
   rg -q 'id=compatibility' "$page"
   rg -q 'id=download' "$page"
+  rg -q 'data-entropy-demo' "$page"
+  rg -q 'data-demo-layout=split' "$page"
+  rg -q 'data-demo-layout=standard' "$page"
+  rg -q 'data-demo-layout=ortholinear' "$page"
+  rg -q 'data-demo-theme-option=light' "$page"
+  rg -q 'data-demo-theme-option=dark' "$page"
   if rg -q '(href|src)=""' "$page"; then
     echo "Empty href or src in $page" >&2
     exit 1

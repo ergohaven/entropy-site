@@ -36,6 +36,10 @@ filenames, so translations are easy to compare side by side.
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
 
+The Hero visual is an interactive code-rendered Entropy mockup. Its localized
+labels, key actions, and split/standard/ortholinear preset rows are all kept in
+the `demo` field of `01-hero.md`; routine edits do not require template changes.
+
 ### Editorial rules
 
 - A heading that consists of one sentence never ends with a period.
@@ -51,8 +55,8 @@ are declared in the Markdown block that displays them. See
 
 Image names follow the same numbered structure as content blocks. The first
 two-digit prefix identifies the block; an optional second prefix identifies the
-image within that block, for example `01-hero-layout.png` and
-`03-02-matrix-tester.png`.
+image within that block, for example the social preview
+`01-hero-layout.png` and `03-02-matrix-tester.png`.
 
 Hugo generates responsive WebP sizes during the build. Never edit or commit
 `resources/_gen/` or `public/`.
