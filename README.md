@@ -42,7 +42,12 @@ the `demo` field of `01-hero.md`; routine edits do not require template changes.
 The split preset uses the 60-key Ergohaven K:04 geometry and its two encoder
 modules from the current K:04 Vial JSON. Its chrome, palette, Layout flow, and
 modal Key Picker mirror the current Entropy application rather than forming a
-separate website-only UI system.
+separate website-only UI system. The mockup uses the same bundled Roboto
+Regular font as Entropy, contextual bottom hints, localized hover tooltips, and
+the complete 86-key QWERTY Basic picker grid. The font file lives at
+`static/fonts/Roboto-Regular.ttf`; replace it only when the application font is
+updated. Its Apache 2.0 license is kept beside it in
+`static/fonts/LICENSE-Roboto.txt`.
 
 ### Editorial rules
 
@@ -80,6 +85,7 @@ layouts/
   partials/                Shared header, footer, metadata, responsive images
 scripts/                   Pinned Hugo setup, preview, and production build
 static/                    Files copied as-is
+  fonts/                   Fonts mirrored from the Entropy application
 hugo.yaml                  Languages, base URL, and shared project links
 ```
 

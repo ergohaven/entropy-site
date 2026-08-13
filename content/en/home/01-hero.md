@@ -121,19 +121,152 @@ demo:
   assigned_label: Assigned
   signature: tools of the future by
   signature_brand: eh.industries
+  hints:
+    change_key: Left click to change this key
+    change_modifier_key: Right click to change the modifier key
+    switch_modifier_side: Ctrl+right-click to switch left/right side
+    go_to_layer: Right click to go to that layer
+    change_layer_target: Ctrl+right-click to change layer target
+    rename_layer: Click to rename layer
+  tooltips:
+    key: "Key: %s"
+    encoder: "%s encoder action"
+    layout: Device layout and connected devices
+    advanced: Advanced device features
+    settings: Application and device settings
+    light_theme: Use light theme
+    dark_theme: Use dark theme
+    layer: Click to rename layer
+    keys:
+      Esc: Escape — cancel / close
+      Space: Space
+      Menu: Menu key — open right-click context menu
+      Left: Arrow Left
+      Up: Arrow Up
+      Down: Arrow Down
+      Right: Arrow Right
+      Tab: Tab — indent / move focus forward
+      Caps: Caps Lock — toggle uppercase input
+      Bksp: Backspace — delete character before cursor
+      Enter: Enter — confirm / new line
+      Delete: Delete — delete character after cursor
+      Insert: Insert — toggle insert/overwrite mode
+      Home: Home — jump to beginning of line
+      End: End — jump to end of line
+      Page Up: Page Up — scroll up one page
+      Page Down: Page Down — scroll down one page
+      Print Screen: Print Screen — take a screenshot
+      Pause: Pause / Break
+      Ctrl: Left Control
+      Shift: Left Shift
+      Alt: Left Alt
+      Super: Left Super, desktop modifier key and OS shortcuts
+      Mute: Mute
+      Vol+: Volume up
+      Vol−: Volume down
+      "MO(1)": Hold to activate layer 1
+      "MO(2)": Hold to activate layer 2
   picker:
     title: Key Picker
     close_label: Close Key Picker
     prompt: Press a key on your keyboard, or pick below
-    categories: [Basic, Symbols, Mods, Special, Macros, Tap Dance]
+    categories: [Basic, Symbols, Mods, Special, Macros, Tap Dance, Custom]
     section_label: Basic keys — standard keyboard layout
     layout: QWERTY
-    action_rows:
-      - [Esc, "1", "2", "3", "4", "5"]
-      - [Tab, Q, W, E, R, T]
-      - [Caps, A, S, D, F, G]
-      - [Shift, Z, X, C, V, B]
-      - [Ctrl, Super, Alt, Space, Mute, Enter]
+    layout_label: Key legend layout
+    rows:
+      - keys:
+          - { label: Esc }
+          - { label: F1 }
+          - { label: F2 }
+          - { label: F3 }
+          - { label: F4 }
+          - { label: F5 }
+          - { label: F6 }
+          - { label: F7 }
+          - { label: F8 }
+          - { label: F9 }
+          - { label: F10 }
+          - { label: F11 }
+          - { label: F12 }
+          - { top: Print, label: Screen, action: Print Screen }
+          - { top: Scroll, label: Lock, action: Scroll Lock }
+          - { label: Pause }
+      - keys:
+          - { top: "~", label: "`" }
+          - { top: "!", label: "1" }
+          - { top: "@", label: "2" }
+          - { top: "#", label: "3" }
+          - { top: "$", label: "4" }
+          - { top: "%", label: "5" }
+          - { top: "^", label: "6" }
+          - { top: "&", label: "7" }
+          - { top: "*", label: "8" }
+          - { top: "(", label: "9" }
+          - { top: ")", label: "0" }
+          - { top: "_", label: "-" }
+          - { top: "+", label: "=" }
+          - { label: "←", action: Bksp }
+          - { label: Insert }
+          - { label: Delete }
+      - keys:
+          - { label: Tab, span: 2 }
+          - { label: Q }
+          - { label: W }
+          - { label: E }
+          - { label: R }
+          - { label: T }
+          - { label: Y }
+          - { label: U }
+          - { label: I }
+          - { label: O }
+          - { label: P }
+          - { top: "{", label: "[" }
+          - { top: "}", label: "]" }
+          - { top: "|", label: "\\" }
+          - { label: Home }
+      - keys:
+          - { top: Caps, label: Lock, action: Caps, span: 2 }
+          - { label: A }
+          - { label: S }
+          - { label: D }
+          - { label: F }
+          - { label: G }
+          - { label: H }
+          - { label: J }
+          - { label: K }
+          - { label: L }
+          - { top: ":", label: ";" }
+          - { top: '"', label: "'" }
+          - { label: "↵", action: Enter, span: 2 }
+          - { label: End }
+      - keys:
+          - { label: Shift, span: 3 }
+          - { label: Z }
+          - { label: X }
+          - { label: C }
+          - { label: V }
+          - { label: B }
+          - { label: N }
+          - { label: M }
+          - { top: "<", label: "," }
+          - { top: ">", label: "." }
+          - { top: "?", label: "/" }
+          - { label: Shift, span: 2 }
+          - { top: Page, label: Up, action: Page Up }
+      - keys:
+          - { label: Ctrl, span: 2 }
+          - { label: Super }
+          - { label: Alt }
+          - { label: Space, span: 4 }
+          - { label: Alt }
+          - { label: Menu }
+          - { label: Ctrl }
+          - { label: "←", action: Left }
+          - { label: "↑", action: Up }
+          - { label: "↓", action: Down }
+          - { label: "→", action: Right }
+          - { top: Page, label: Down, action: Page Down }
 facts:
   - value: One app
     label: Layouts, firmware, and live tools

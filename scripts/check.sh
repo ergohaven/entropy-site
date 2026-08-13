@@ -68,6 +68,15 @@ test -f public/index.html
 test -f public/ru/index.html
 test -f public/robots.txt
 test -f public/sitemap.xml
+test -f public/fonts/Roboto-Regular.ttf
+test -f public/fonts/LICENSE-Roboto.txt
+
+expected_roboto_sha='56a45233d29f11b4dfb86d248e921939d115778f87325e7ae8cc108383d6664d'
+actual_roboto_sha=$(sha256sum public/fonts/Roboto-Regular.ttf | cut -d' ' -f1)
+if [[ "$actual_roboto_sha" != "$expected_roboto_sha" ]]; then
+  echo "Hero mockup must use the same Roboto Regular font as Entropy" >&2
+  exit 1
+fi
 
 rg -q '<html lang=en-US' public/index.html
 rg -q '<html lang=ru-RU' public/ru/index.html
@@ -87,7 +96,17 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'data-demo-theme-option=dark' "$page"
   rg -q 'data-demo-presets-menu' "$page"
   rg -q 'data-demo-picker' "$page"
+  rg -q 'data-demo-bottom-hint' "$page"
+  rg -q 'data-demo-tooltip-bubble' "$page"
   rg -q 'role=dialog' "$page"
+  if [[ $(rg -o 'data-demo-action=' "$page" | wc -l) -ne 86 ]]; then
+    echo "Hero Key Picker must render all 86 Basic QWERTY keys in $page" >&2
+    exit 1
+  fi
+  if [[ $(rg -o 'data-demo-picker-tab' "$page" | wc -l) -ne 7 ]]; then
+    echo "Hero Key Picker must render all seven tabs in $page" >&2
+    exit 1
+  fi
   if [[ $(rg -o 'data-demo-matrix=' "$page" | wc -l) -ne 60 ]]; then
     echo "K:04 Hero preset must render all 60 matrix keys in $page" >&2
     exit 1

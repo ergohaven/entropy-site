@@ -121,19 +121,152 @@ demo:
   assigned_label: Назначено
   signature: инструменты будущего от
   signature_brand: eh.industries
+  hints:
+    change_key: Левый клик — изменить эту клавишу
+    change_modifier_key: Правый клик — изменить клавишу-модификатор
+    switch_modifier_side: Ctrl + правый клик — переключить левую/правую сторону
+    go_to_layer: Правый клик — перейти на этот слой
+    change_layer_target: Ctrl + правый клик — изменить целевой слой
+    rename_layer: Клик — переименовать слой
+  tooltips:
+    key: "Клавиша: %s"
+    encoder: "Действие энкодера: %s"
+    layout: Раскладка устройства и подключённые устройства
+    advanced: Дополнительные функции устройства
+    settings: Настройки приложения и устройства
+    light_theme: Включить светлую тему
+    dark_theme: Включить тёмную тему
+    layer: Клик — переименовать слой
+    keys:
+      Esc: Escape — отмена / закрыть
+      Space: Пробел
+      Menu: Menu — открыть контекстное меню
+      Left: Стрелка влево
+      Up: Стрелка вверх
+      Down: Стрелка вниз
+      Right: Стрелка вправо
+      Tab: Tab — отступ / фокус вперёд
+      Caps: Caps Lock — переключить верхний регистр
+      Bksp: Backspace — удалить символ перед курсором
+      Enter: Enter — подтвердить / новая строка
+      Delete: Delete — удалить символ после курсора
+      Insert: Insert — переключить режим вставки/замены
+      Home: Home — перейти к началу строки
+      End: End — перейти к концу строки
+      Page Up: Page Up — прокрутить на страницу вверх
+      Page Down: Page Down — прокрутить на страницу вниз
+      Print Screen: Print Screen — сделать скриншот
+      Pause: Pause / Break
+      Ctrl: Левый Control
+      Shift: Левый Shift
+      Alt: Левый Alt
+      Super: Левый Super — модификатор рабочего стола и системные сочетания
+      Mute: Выключить звук
+      Vol+: Увеличить громкость
+      Vol−: Уменьшить громкость
+      "MO(1)": Удерживать для активации слоя 1
+      "MO(2)": Удерживать для активации слоя 2
   picker:
-    title: Выбор клавиши
-    close_label: Закрыть выбор клавиши
+    title: Пикер клавиш
+    close_label: Закрыть пикер клавиш
     prompt: Нажмите клавишу на клавиатуре или выберите ниже
-    categories: [Основные, Символы, Модификаторы, Специальные, Макросы, Tap Dance]
-    section_label: Основные клавиши — стандартная раскладка
+    categories: [Базовые, Символы, Моды, Спец, Макросы, Tap Dance, Кастом]
+    section_label: Базовые клавиши — стандартная раскладка
     layout: QWERTY
-    action_rows:
-      - [Esc, "1", "2", "3", "4", "5"]
-      - [Tab, Q, W, E, R, T]
-      - [Caps, A, S, D, F, G]
-      - [Shift, Z, X, C, V, B]
-      - [Ctrl, Super, Alt, Space, Mute, Enter]
+    layout_label: Раскладка легенд клавиш
+    rows:
+      - keys:
+          - { label: Esc }
+          - { label: F1 }
+          - { label: F2 }
+          - { label: F3 }
+          - { label: F4 }
+          - { label: F5 }
+          - { label: F6 }
+          - { label: F7 }
+          - { label: F8 }
+          - { label: F9 }
+          - { label: F10 }
+          - { label: F11 }
+          - { label: F12 }
+          - { top: Print, label: Screen, action: Print Screen }
+          - { top: Scroll, label: Lock, action: Scroll Lock }
+          - { label: Pause }
+      - keys:
+          - { top: "~", label: "`" }
+          - { top: "!", label: "1" }
+          - { top: "@", label: "2" }
+          - { top: "#", label: "3" }
+          - { top: "$", label: "4" }
+          - { top: "%", label: "5" }
+          - { top: "^", label: "6" }
+          - { top: "&", label: "7" }
+          - { top: "*", label: "8" }
+          - { top: "(", label: "9" }
+          - { top: ")", label: "0" }
+          - { top: "_", label: "-" }
+          - { top: "+", label: "=" }
+          - { label: "←", action: Bksp }
+          - { label: Insert }
+          - { label: Delete }
+      - keys:
+          - { label: Tab, span: 2 }
+          - { label: Q }
+          - { label: W }
+          - { label: E }
+          - { label: R }
+          - { label: T }
+          - { label: Y }
+          - { label: U }
+          - { label: I }
+          - { label: O }
+          - { label: P }
+          - { top: "{", label: "[" }
+          - { top: "}", label: "]" }
+          - { top: "|", label: "\\" }
+          - { label: Home }
+      - keys:
+          - { top: Caps, label: Lock, action: Caps, span: 2 }
+          - { label: A }
+          - { label: S }
+          - { label: D }
+          - { label: F }
+          - { label: G }
+          - { label: H }
+          - { label: J }
+          - { label: K }
+          - { label: L }
+          - { top: ":", label: ";" }
+          - { top: '"', label: "'" }
+          - { label: "↵", action: Enter, span: 2 }
+          - { label: End }
+      - keys:
+          - { label: Shift, span: 3 }
+          - { label: Z }
+          - { label: X }
+          - { label: C }
+          - { label: V }
+          - { label: B }
+          - { label: N }
+          - { label: M }
+          - { top: "<", label: "," }
+          - { top: ">", label: "." }
+          - { top: "?", label: "/" }
+          - { label: Shift, span: 2 }
+          - { top: Page, label: Up, action: Page Up }
+      - keys:
+          - { label: Ctrl, span: 2 }
+          - { label: Super }
+          - { label: Alt }
+          - { label: Space, span: 4 }
+          - { label: Alt }
+          - { label: Menu }
+          - { label: Ctrl }
+          - { label: "←", action: Left }
+          - { label: "↑", action: Up }
+          - { label: "↓", action: Down }
+          - { label: "→", action: Right }
+          - { top: Page, label: Down, action: Page Down }
 facts:
   - value: Одно приложение
     label: Раскладки, прошивка и живые инструменты

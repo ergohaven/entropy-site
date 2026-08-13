@@ -103,10 +103,78 @@
     const layerLabel = demo.querySelector('[data-demo-layer-label]');
     const previousLayer = demo.querySelector('[data-demo-layer-previous]');
     const nextLayer = demo.querySelector('[data-demo-layer-next]');
+    const bottomHint = demo.querySelector('[data-demo-bottom-hint]');
+    const tooltip = demo.querySelector('[data-demo-tooltip-bubble]');
     const status = demo.querySelector('[data-demo-status]');
     const layerNames = layer?.dataset.demoLayers.split('|') ?? [];
     let activeLayer = 0;
     let selectedKey = null;
+
+    const setBottomHint = (lines = []) => {
+      bottomHint.replaceChildren(...lines.filter(Boolean).map((line) => {
+        const item = document.createElement('span');
+        item.textContent = line;
+        return item;
+      }));
+    };
+
+    const hintLinesFor = (target) => {
+      if (target.matches('[data-demo-layer-hint]')) {
+        return [demo.dataset.hintRenameLayer];
+      }
+
+      const label = target.querySelector('[data-demo-key-label]')?.textContent.trim() ?? '';
+      if (/^MO\(\d+\)$/.test(label)) {
+        return [
+          demo.dataset.hintChangeKey,
+          demo.dataset.hintGoToLayer,
+          demo.dataset.hintChangeLayerTarget,
+        ];
+      }
+
+      if (['Ctrl', 'Shift', 'Alt', 'Super'].includes(label)) {
+        return [
+          demo.dataset.hintChangeKey,
+          demo.dataset.hintChangeModifierKey,
+          demo.dataset.hintSwitchModifierSide,
+        ];
+      }
+
+      return [demo.dataset.hintChangeKey];
+    };
+
+    const hideTooltip = () => {
+      tooltip.hidden = true;
+      tooltip.textContent = '';
+    };
+
+    const showTooltip = (target) => {
+      const text = target.dataset.demoTooltip;
+      if (!text) return;
+
+      tooltip.textContent = text;
+      tooltip.hidden = false;
+      tooltip.style.left = '0px';
+      tooltip.style.top = '0px';
+
+      const demoRect = demo.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const tooltipRect = tooltip.getBoundingClientRect();
+      const edge = 8;
+      const gap = 7;
+      const centeredLeft = targetRect.left - demoRect.left
+        + (targetRect.width - tooltipRect.width) / 2;
+      const left = Math.min(
+        Math.max(centeredLeft, edge),
+        demoRect.width - tooltipRect.width - edge,
+      );
+      let top = targetRect.top - demoRect.top - tooltipRect.height - gap;
+      if (top < edge) top = targetRect.bottom - demoRect.top + gap;
+      top = Math.min(top, demoRect.height - tooltipRect.height - edge);
+
+      tooltip.style.left = `${Math.max(edge, left)}px`;
+      tooltip.style.top = `${Math.max(edge, top)}px`;
+    };
 
     const selectKey = (key) => {
       if (!key) return;
@@ -137,6 +205,8 @@
 
     const openPicker = (key) => {
       selectKey(key);
+      setBottomHint();
+      hideTooltip();
       picker.hidden = false;
       requestAnimationFrame(() => pickerClose.focus());
     };
@@ -201,8 +271,31 @@
         const next = button.dataset.demoAction;
         label.textContent = next;
         selectedKey.setAttribute('aria-label', `${demo.dataset.selectKeyLabel} ${next}`);
+        selectedKey.dataset.demoTooltip = demo.dataset.keyTooltipTemplate.replace('%s', next);
         status.textContent = `${demo.dataset.assignedLabel}: ${previous} → ${next}`;
         closePicker();
+      });
+    });
+
+    demo.querySelectorAll('[data-demo-key], [data-demo-layer-hint]').forEach((target) => {
+      target.addEventListener('pointerenter', () => setBottomHint(hintLinesFor(target)));
+      target.addEventListener('pointerleave', () => {
+        if (document.activeElement !== target) setBottomHint();
+      });
+      target.addEventListener('focus', () => setBottomHint(hintLinesFor(target)));
+      target.addEventListener('blur', () => {
+        if (!target.matches(':hover')) setBottomHint();
+      });
+    });
+
+    demo.querySelectorAll('[data-demo-tooltip]').forEach((target) => {
+      target.addEventListener('pointerenter', () => showTooltip(target));
+      target.addEventListener('pointerleave', () => {
+        if (document.activeElement !== target) hideTooltip();
+      });
+      target.addEventListener('focus', () => showTooltip(target));
+      target.addEventListener('blur', () => {
+        if (!target.matches(':hover')) hideTooltip();
       });
     });
 
@@ -212,6 +305,8 @@
     });
     previousLayer.addEventListener('click', () => setLayer(activeLayer - 1));
     nextLayer.addEventListener('click', () => setLayer(activeLayer + 1));
+    picker.addEventListener('scroll', hideTooltip, true);
+    window.addEventListener('resize', hideTooltip, { passive: true });
 
     document.addEventListener('click', (event) => {
       if (!event.target.closest('[data-demo-presets-menu], [data-demo-presets-toggle]')) {
