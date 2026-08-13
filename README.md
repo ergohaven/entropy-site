@@ -37,10 +37,12 @@ Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
 
 The Hero visual is an interactive code-rendered Entropy mockup. Its localized
-labels, key actions, and split/standard/ortholinear preset rows are all kept in
+labels, key actions, and split/standard/ortholinear preset data are all kept in
 the `demo` field of `01-hero.md`; routine edits do not require template changes.
-Its chrome, palette, Layout flow, and modal Key Picker mirror the current
-Entropy application rather than forming a separate website-only UI system.
+The split preset uses the 60-key Ergohaven K:04 geometry and its two encoder
+modules from the current K:04 Vial JSON. Its chrome, palette, Layout flow, and
+modal Key Picker mirror the current Entropy application rather than forming a
+separate website-only UI system.
 
 ### Editorial rules
 

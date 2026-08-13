@@ -103,30 +103,83 @@
             <div class="entropy-demo__canvas">
               {{ range $presetIndex, $preset := $demo.presets }}
                 <div
-                  class="entropy-demo__keyboard entropy-demo__keyboard--{{ $preset.id }}"
+                  class="entropy-demo__keyboard entropy-demo__keyboard--{{ $preset.id }}{{ if $preset.keys }} entropy-demo__keyboard--positioned{{ end }}"
                   data-demo-layout="{{ $preset.id }}"
+                  {{ with $preset.source }}data-demo-layout-source="{{ . }}"{{ end }}
                   role="group"
                   aria-label="{{ $preset.label }}"
+                  {{ with $preset.view }}style="aspect-ratio: {{ .width }} / {{ .height }}"{{ end }}
                   {{ if ne $presetIndex 0 }}hidden{{ end }}
                 >
-                  {{ range $row := $preset.rows }}
-                    <div class="entropy-demo__row">
-                      {{ range $group := $row.groups }}
-                        <div class="entropy-demo__key-group">
-                          {{ range $key := $group }}
-                            {{ $wide := or (eq $key "Space") (eq $key "Shift") (eq $key "Enter") (eq $key "Bksp") (eq $key "Caps") (eq $key "Tab") }}
+                  {{ if $preset.keys }}
+                    {{ $view := $preset.view }}
+                    {{ range $key := $preset.keys }}
+                      {{ $width := default 1 $key.w }}
+                      {{ $height := default 1 $key.h }}
+                      {{ $left := div (mul (sub $key.x $view.min_x) 100.0) $view.width }}
+                      {{ $top := div (mul (sub $key.y $view.min_y) 100.0) $view.height }}
+                      {{ $keyWidth := div (mul $width 100.0) $view.width }}
+                      {{ $keyHeight := div (mul $height 100.0) $view.height }}
+                      {{ $wide := or (eq $key.label "Space") (eq $key.label "Shift") (eq $key.label "Enter") (eq $key.label "Bksp") (eq $key.label "Caps") (eq $key.label "Tab") }}
+                      <div
+                        class="entropy-demo__positioned-key"
+                        style="left: {{ $left }}%; top: {{ $top }}%; width: {{ $keyWidth }}%; height: {{ $keyHeight }}%;{{ with $key.r }} --demo-key-rotation: {{ . }}deg; transform-origin: {{ div (mul (sub $key.rx $key.x) 100.0) $width }}% {{ div (mul (sub $key.ry $key.y) 100.0) $height }}%;{{ end }}"
+                      >
+                        <button
+                          class="entropy-demo__key{{ if $wide }} entropy-demo__key--wide{{ end }}"
+                          type="button"
+                          data-demo-key
+                          data-demo-matrix="{{ $key.matrix }}"
+                          data-default-label="{{ $key.label }}"
+                          aria-label="{{ $demo.select_key }} {{ $key.label }}"
+                          aria-pressed="false"
+                        ><span data-demo-key-label>{{ $key.label }}</span></button>
+                      </div>
+                    {{ end }}
+
+                    {{ range $encoder := $preset.encoders }}
+                      {{ $left := div (mul (sub $encoder.x $view.min_x) 100.0) $view.width }}
+                      {{ $top := div (mul (sub $encoder.y $view.min_y) 100.0) $view.height }}
+                      {{ $encoderWidth := div 100.0 $view.width }}
+                      {{ $encoderHeight := div 200.0 $view.height }}
+                      <div
+                        class="entropy-demo__encoder"
+                        style="left: {{ $left }}%; top: {{ $top }}%; width: {{ $encoderWidth }}%; height: {{ $encoderHeight }}%"
+                      >
+                        <div class="entropy-demo__encoder-dial">
+                          {{ range $label := slice $encoder.clockwise $encoder.counter_clockwise }}
                             <button
-                              class="entropy-demo__key{{ if $wide }} entropy-demo__key--wide{{ end }}"
+                              class="entropy-demo__encoder-action"
                               type="button"
                               data-demo-key
-                              data-default-label="{{ $key }}"
-                              aria-label="{{ $demo.select_key }} {{ $key }}"
+                              data-default-label="{{ $label }}"
+                              aria-label="{{ $demo.select_key }} {{ $label }}"
                               aria-pressed="false"
-                            ><span data-demo-key-label>{{ $key }}</span></button>
+                            ><span data-demo-key-label>{{ $label }}</span></button>
                           {{ end }}
                         </div>
-                      {{ end }}
-                    </div>
+                      </div>
+                    {{ end }}
+                  {{ else }}
+                    {{ range $row := $preset.rows }}
+                      <div class="entropy-demo__row">
+                        {{ range $group := $row.groups }}
+                          <div class="entropy-demo__key-group">
+                            {{ range $key := $group }}
+                              {{ $wide := or (eq $key "Space") (eq $key "Shift") (eq $key "Enter") (eq $key "Bksp") (eq $key "Caps") (eq $key "Tab") }}
+                              <button
+                                class="entropy-demo__key{{ if $wide }} entropy-demo__key--wide{{ end }}"
+                                type="button"
+                                data-demo-key
+                                data-default-label="{{ $key }}"
+                                aria-label="{{ $demo.select_key }} {{ $key }}"
+                                aria-pressed="false"
+                              ><span data-demo-key-label>{{ $key }}</span></button>
+                            {{ end }}
+                          </div>
+                        {{ end }}
+                      </div>
+                    {{ end }}
                   {{ end }}
                 </div>
               {{ end }}

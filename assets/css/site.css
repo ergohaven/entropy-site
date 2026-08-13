@@ -808,6 +808,85 @@ html[data-theme="dark"] .button--primary {
   padding-bottom: 1.5rem;
 }
 
+.entropy-demo__keyboard--positioned {
+  position: relative;
+  display: block;
+  width: 98%;
+  padding-bottom: 0;
+}
+
+.entropy-demo__positioned-key {
+  --demo-key-rotation: 0deg;
+  position: absolute;
+  z-index: 0;
+  transform: rotate(var(--demo-key-rotation));
+}
+
+.entropy-demo__positioned-key:hover,
+.entropy-demo__positioned-key:focus-within {
+  z-index: 2;
+}
+
+.entropy-demo__positioned-key .entropy-demo__key {
+  width: calc(100% - clamp(2px, 0.35vw, 5px));
+  height: calc(100% - clamp(2px, 0.35vw, 5px));
+  margin: clamp(1px, 0.175vw, 2.5px);
+  font-size: clamp(0.32rem, 0.82vw, 0.72rem);
+  transform: none;
+}
+
+.entropy-demo__encoder {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+}
+
+.entropy-demo__encoder-dial {
+  display: grid;
+  width: calc(100% - clamp(2px, 0.35vw, 5px));
+  aspect-ratio: 1;
+  grid-template-rows: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid var(--demo-line);
+  border-radius: 50%;
+  background: var(--demo-surface);
+}
+
+.entropy-demo__encoder-action {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  color: var(--demo-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(0.28rem, 0.62vw, 0.54rem);
+  line-height: 1;
+}
+
+.entropy-demo__encoder-action:first-child {
+  border-bottom: 1px solid var(--demo-line);
+}
+
+.entropy-demo__encoder-action span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entropy-demo__encoder-action:hover,
+.entropy-demo__encoder-action:focus-visible {
+  background: var(--demo-hover);
+}
+
+.entropy-demo__encoder-action[aria-pressed="true"] {
+  background: var(--demo-accent);
+  color: #fff;
+}
+
 .entropy-demo__keyboard--standard .entropy-demo__row,
 .entropy-demo__keyboard--ortholinear .entropy-demo__row {
   gap: 0;
@@ -865,66 +944,10 @@ html[data-theme="dark"] .button--primary {
     background: var(--demo-hover);
     transform: translateY(-2px) rotate(var(--demo-key-rotation));
   }
-}
 
-.entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(1),
-.entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(2) {
-  top: 0.6rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(3) {
-  top: 0.15rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(5) {
-  top: 0.15rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(6) {
-  top: 0.35rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child {
-  margin-top: 0.8rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(1) {
-  top: 0.2rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(2) {
-  top: 0.45rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(3) {
-  top: 0.8rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(4) {
-  --demo-key-rotation: -4deg;
-  top: 1.15rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(5) {
-  --demo-key-rotation: -8deg;
-  top: 1.35rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(6) {
-  --demo-key-rotation: -12deg;
-  top: 1.05rem;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key-group:last-child .entropy-demo__key:nth-child(1) {
-  --demo-key-rotation: 12deg;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key-group:last-child .entropy-demo__key:nth-child(2) {
-  --demo-key-rotation: 8deg;
-}
-
-.entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key-group:last-child .entropy-demo__key:nth-child(3) {
-  --demo-key-rotation: 4deg;
+  .entropy-demo__positioned-key .entropy-demo__key:hover:not([aria-pressed="true"]) {
+    transform: translateY(-2px);
+  }
 }
 
 .entropy-demo__footer {
@@ -1769,48 +1792,6 @@ html[data-theme="dark"] .theme-media--dark {
     height: clamp(1.45rem, 6.5vw, 2.8rem);
     border-radius: 0.3rem;
     font-size: clamp(0.35rem, 1.5vw, 0.62rem);
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(1),
-  .entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(2) {
-    top: 0.3rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(3),
-  .entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(5) {
-    top: 0.08rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__key-group .entropy-demo__key:nth-child(6) {
-    top: 0.18rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child {
-    margin-top: 0.35rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(1) {
-    top: 0.1rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(2) {
-    top: 0.2rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(3) {
-    top: 0.35rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(4) {
-    top: 0.55rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(5) {
-    top: 0.7rem;
-  }
-
-  .entropy-demo__keyboard--split .entropy-demo__row:last-child .entropy-demo__key:nth-child(6) {
-    top: 0.55rem;
   }
 
   .entropy-demo__footer {
