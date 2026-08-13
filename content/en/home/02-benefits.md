@@ -1,6 +1,6 @@
 ---
 title: Complex firmware. A calm interface.
-eyebrow: Designed for direct control
+eyebrow: Why Entropy
 items:
   - marker: "01"
     title: Firmware-aware

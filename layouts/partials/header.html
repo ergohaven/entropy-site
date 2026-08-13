@@ -22,8 +22,8 @@
     </button>
 
     <nav class="site-nav" id="site-navigation" aria-label="{{ .Params.a11y.primary_navigation }}" data-site-nav>
+      <a href="{{ site.Home.RelPermalink }}#benefits">{{ .Params.nav.benefits }}</a>
       <a href="{{ site.Home.RelPermalink }}#features">{{ .Params.nav.features }}</a>
-      <a href="{{ site.Home.RelPermalink }}#workflow">{{ .Params.nav.workflow }}</a>
       <a href="{{ site.Home.RelPermalink }}#compatibility">{{ .Params.nav.compatibility }}</a>
       <a href="{{ site.Params.githubURL }}">{{ .Params.nav.github }}</a>
       <a class="site-nav__download" href="{{ site.Home.RelPermalink }}#download">{{ .Params.nav.download }}</a>

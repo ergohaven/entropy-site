@@ -10,33 +10,27 @@
     {{ errorf "Missing homepage block: 01-hero.md (%s)" site.Language.Lang }}
   {{ end }}
 
-  {{ with $bundle.Resources.GetMatch "02-principles*" }}
-    {{ partial "sections/principles.html" . }}
+  {{ with $bundle.Resources.GetMatch "02-benefits*" }}
+    {{ partial "sections/benefits.html" . }}
   {{ else }}
-    {{ errorf "Missing homepage block: 02-principles.md (%s)" site.Language.Lang }}
+    {{ errorf "Missing homepage block: 02-benefits.md (%s)" site.Language.Lang }}
   {{ end }}
 
-  {{ with $bundle.Resources.GetMatch "03-showcase*" }}
-    {{ partial "sections/showcase.html" . }}
+  {{ with $bundle.Resources.GetMatch "03-features*" }}
+    {{ partial "sections/features.html" . }}
   {{ else }}
-    {{ errorf "Missing homepage block: 03-showcase.md (%s)" site.Language.Lang }}
+    {{ errorf "Missing homepage block: 03-features.md (%s)" site.Language.Lang }}
   {{ end }}
 
-  {{ with $bundle.Resources.GetMatch "04-capabilities*" }}
-    {{ partial "sections/capabilities.html" . }}
-  {{ else }}
-    {{ errorf "Missing homepage block: 04-capabilities.md (%s)" site.Language.Lang }}
-  {{ end }}
-
-  {{ with $bundle.Resources.GetMatch "05-compatibility*" }}
+  {{ with $bundle.Resources.GetMatch "04-compatibility*" }}
     {{ partial "sections/compatibility.html" . }}
   {{ else }}
-    {{ errorf "Missing homepage block: 05-compatibility.md (%s)" site.Language.Lang }}
+    {{ errorf "Missing homepage block: 04-compatibility.md (%s)" site.Language.Lang }}
   {{ end }}
 
-  {{ with $bundle.Resources.GetMatch "06-download*" }}
+  {{ with $bundle.Resources.GetMatch "05-download*" }}
     {{ partial "sections/download.html" . }}
   {{ else }}
-    {{ errorf "Missing homepage block: 06-download.md (%s)" site.Language.Lang }}
+    {{ errorf "Missing homepage block: 05-download.md (%s)" site.Language.Lang }}
   {{ end }}
 {{ end }}

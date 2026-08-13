@@ -11,8 +11,8 @@ keywords:
   - keyboard configurator
 og_image: images/screenshots/01-hero-layout.png
 nav:
+  benefits: Benefits
   features: Features
-  workflow: Workflow
   compatibility: Compatibility
   download: Download
   github: GitHub

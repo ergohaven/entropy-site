@@ -28,11 +28,10 @@ filenames, so translations are easy to compare side by side.
 | --- | --- | --- |
 | Page metadata, navigation, footer | `content/en/_index.md` | `content/ru/_index.md` |
 | Hero | `content/en/home/01-hero.md` | `content/ru/home/01-hero.md` |
-| Design principles | `content/en/home/02-principles.md` | `content/ru/home/02-principles.md` |
-| Product workflow and screenshots | `content/en/home/03-showcase.md` | `content/ru/home/03-showcase.md` |
-| Feature groups | `content/en/home/04-capabilities.md` | `content/ru/home/04-capabilities.md` |
-| Device compatibility | `content/en/home/05-compatibility.md` | `content/ru/home/05-compatibility.md` |
-| Download section | `content/en/home/06-download.md` | `content/ru/home/06-download.md` |
+| Benefits | `content/en/home/02-benefits.md` | `content/ru/home/02-benefits.md` |
+| Features and screenshots | `content/en/home/03-features.md` | `content/ru/home/03-features.md` |
+| Device compatibility | `content/en/home/04-compatibility.md` | `content/ru/home/04-compatibility.md` |
+| Download section | `content/en/home/05-download.md` | `content/ru/home/05-download.md` |
 
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.

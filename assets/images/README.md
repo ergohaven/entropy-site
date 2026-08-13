@@ -18,8 +18,8 @@ For blocks with multiple images, add a second two-digit number for their order:
 
 - `01-hero-layout.png` belongs to `01-hero.md`.
 - `03-01-key-picker-light.png` and `03-01-key-picker-dark.png` are theme
-  variants of the first image in `03-showcase.md`.
-- `03-02-matrix-tester.png` is the second image in `03-showcase.md`.
+  variants of the first image in `03-features.md`.
+- `03-02-matrix-tester.png` is the second image in `03-features.md`.
 
 Light and dark variants share the same section and position numbers. Keep the
 descriptive part lowercase and hyphen-separated.
