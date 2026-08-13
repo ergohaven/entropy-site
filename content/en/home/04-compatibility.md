@@ -1,5 +1,5 @@
 ---
-title: Built for the devices around your hands.
+title: Built for the devices around your hands
 eyebrow: Vial-compatible by design
 devices:
   - Programmable keyboards

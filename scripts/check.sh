@@ -18,6 +18,36 @@ for language in en ru; do
     <(find "content/$language/home" -maxdepth 1 -type f -name '*.md' -printf '%f\n' | LC_ALL=C sort)
 done
 
+single_sentence_heading_periods=$(
+  awk '
+    /^[[:space:]]*title:[[:space:]]*/ {
+      value = $0
+      sub(/^[[:space:]]*title:[[:space:]]*/, "", value)
+      sub(/[[:space:]]+#.*$/, "", value)
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
+
+      quote = substr(value, 1, 1)
+      if ((quote == "\"" || quote == sprintf("%c", 39)) &&
+          substr(value, length(value), 1) == quote) {
+        value = substr(value, 2, length(value) - 2)
+      }
+
+      if (substr(value, length(value), 1) == ".") {
+        stem = substr(value, 1, length(value) - 1)
+        if (stem !~ /[.!?][[:space:]]/) {
+          printf "%s:%d:%s\n", FILENAME, FNR, $0
+        }
+      }
+    }
+  ' content/en/*.md content/en/home/*.md content/ru/*.md content/ru/home/*.md
+)
+
+if [[ -n "$single_sentence_heading_periods" ]]; then
+  echo "Single-sentence headings must not end with a period:" >&2
+  echo "$single_sentence_heading_periods" >&2
+  exit 1
+fi
+
 image_name_pattern='^[0-9]{2}(-[0-9]{2})?-[a-z0-9]+(-[a-z0-9]+)*\.(png|jpe?g|webp)$'
 invalid_image_names=$(
   find assets/images/screenshots -maxdepth 1 -type f -printf '%f\n' \

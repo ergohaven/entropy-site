@@ -1,5 +1,5 @@
 ---
-title: Сделайте клавиатуру по-настоящему своей.
+title: Сделайте клавиатуру по-настоящему своей
 eyebrow: Open source · Vial-QMK · Vial-RMK
 primary:
   label: Скачать Entropy

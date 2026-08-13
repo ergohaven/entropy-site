@@ -1,5 +1,5 @@
 ---
-title: Make your keyboard truly yours.
+title: Make your keyboard truly yours
 eyebrow: Open source · Vial-QMK · Vial-RMK
 primary:
   label: Download Entropy

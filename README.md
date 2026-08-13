@@ -36,6 +36,13 @@ filenames, so translations are easy to compare side by side.
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
 
+### Editorial rules
+
+- A heading that consists of one sentence never ends with a period.
+- Multi-sentence headings keep the punctuation needed to separate their
+  sentences.
+- Keep the meaning and hierarchy aligned between English and Russian.
+
 ## Editing images
 
 Source images live in `assets/images/screenshots/`. Image filenames and alt text
