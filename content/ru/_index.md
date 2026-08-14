@@ -11,7 +11,6 @@ keywords:
   - конфигуратор клавиатуры
 og_image: images/screenshots/01-hero-layout.png
 nav:
-  benefits: Преимущества
   features: Возможности
   compatibility: Совместимость
   download: Скачать

@@ -11,7 +11,6 @@ keywords:
   - keyboard configurator
 og_image: images/screenshots/01-hero-layout.png
 nav:
-  benefits: Benefits
   features: Features
   compatibility: Compatibility
   download: Download

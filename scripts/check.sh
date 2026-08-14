@@ -78,6 +78,7 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'id=features' "$page"
   rg -q 'id=compatibility' "$page"
   rg -q 'id=download' "$page"
+  rg -q 'data-language-menu' "$page"
   feature_story_count=$(rg -o 'data-feature-story' "$page" | wc -l)
   if [[ "$feature_story_count" -ne 6 ]]; then
     echo "Expected 6 primary feature stories in $page, found $feature_story_count" >&2
@@ -88,5 +89,10 @@ for page in public/index.html public/ru/index.html; do
     exit 1
   fi
 done
+
+if rg -q 'brand__mark' layouts/partials/header.html; then
+  echo "Header must use the text-only Entropy wordmark" >&2
+  exit 1
+fi
 
 echo "Entropy site checks passed"

@@ -7,6 +7,7 @@
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const siteNav = document.querySelector('[data-site-nav]');
   const siteHeader = document.querySelector('[data-site-header]');
+  const languageMenu = document.querySelector('[data-language-menu]');
   const darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
 
   const storedTheme = () => {
@@ -62,10 +63,15 @@
     );
     siteNav.classList.toggle('is-open', open);
     body.classList.toggle('menu-open', open);
+    if (!open && languageMenu) languageMenu.open = false;
   };
 
   menuToggle?.addEventListener('click', () => {
-    setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
+    const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+    setMenu(open);
+    if (open) {
+      window.requestAnimationFrame(() => siteNav?.querySelector('a, summary')?.focus());
+    }
   });
 
   siteNav?.addEventListener('click', (event) => {
@@ -73,9 +79,20 @@
   });
 
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && languageMenu?.open) {
+      languageMenu.open = false;
+      languageMenu.querySelector('summary')?.focus();
+      return;
+    }
     if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
       setMenu(false);
       menuToggle.focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (languageMenu?.open && !languageMenu.contains(event.target)) {
+      languageMenu.open = false;
     }
   });
 
