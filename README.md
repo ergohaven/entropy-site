@@ -62,8 +62,9 @@ image within that block, for example `01-01-hero-layout-en.png` and
 Localized variants keep the same block and position numbers and use a language
 suffix, as in `01-01-hero-layout-en.png` and `01-01-hero-layout-ru.png`.
 
-Hugo generates responsive WebP sizes during the build. Never edit or commit
-`resources/_gen/` or `public/`.
+Hugo generates high-quality responsive WebP sizes at 720, 1280, 1920, and
+2560 px during the build. The largest candidate keeps product UI sharp on
+high-density displays. Never edit or commit `resources/_gen/` or `public/`.
 
 ## Project structure
 

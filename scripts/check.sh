@@ -106,6 +106,12 @@ for page in public/index.html public/ru/index.html; do
     echo "Empty href or src in $page" >&2
     exit 1
   fi
+  for image_width in 720 1280 1920 2560; do
+    if ! rg -q " ${image_width}w" "$page"; then
+      echo "Responsive image width ${image_width}w is missing from $page" >&2
+      exit 1
+    fi
+  done
 done
 
 if rg -q 'brand__mark' layouts/partials/header.html; then
