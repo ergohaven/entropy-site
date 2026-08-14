@@ -14,4 +14,4 @@ protocols:
 note: Feature availability follows the capabilities exposed by each device's firmware. Entropy keeps unsupported controls hidden instead of leaving dead ends in the interface.
 ---
 
-Entropy is not tied to a single keyboard model. It speaks to Vial-compatible firmware and adapts its interface to the hardware that is actually connected.
+Entropy is not tied to a single keyboard model. It connects to supported Vial-compatible devices over USB or wirelessly via Bluetooth and shows battery level directly in the interface when the device reports it.

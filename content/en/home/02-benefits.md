@@ -9,8 +9,8 @@ items:
     title: Built for real hardware
     text: Keyboards, macropads, pointing devices, encoders, displays, and modules share one predictable workflow.
   - marker: "03"
-    title: Fast by default
-    text: Find an action, change a value, test the result, and get back to using your device.
+    title: Real-time changes
+    text: Every change takes effect and is saved to the device immediately—no firmware rebuild or reflash required.
 ---
 
 Powerful firmware should not demand a complicated tool. Entropy keeps the depth and removes the friction, so advanced configuration remains readable, deliberate, and reversible.

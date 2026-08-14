@@ -73,6 +73,14 @@ rg -q '<html lang=en-US' public/index.html
 rg -q '<html lang=ru-RU' public/ru/index.html
 rg -q '01-01-hero-layout-en' public/index.html
 rg -q '01-01-hero-layout-ru' public/ru/index.html
+rg -qi 'reflash' public/index.html
+rg -qi 'перепрошив' public/ru/index.html
+rg -q 'Bluetooth' public/index.html
+rg -q 'Bluetooth' public/ru/index.html
+rg -qi 'wirelessly' public/index.html
+rg -qi 'без проводов' public/ru/index.html
+rg -qi 'battery' public/index.html
+rg -qi 'заряд' public/ru/index.html
 
 for page in public/index.html public/ru/index.html; do
   rg -q '<h1' "$page"
