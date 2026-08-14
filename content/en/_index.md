@@ -23,6 +23,9 @@ a11y:
   language_switcher: Change language
   theme_to_light: Switch to light theme
   theme_to_dark: Switch to dark theme
+  enlarge_image: Enlarge image
+  image_preview: Enlarged image
+  close_image: Close enlarged image
   footer_navigation: Footer navigation
 footer:
   credit: Entropy by Ergohaven

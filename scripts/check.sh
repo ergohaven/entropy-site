@@ -120,7 +120,13 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'id=features' "$page"
   rg -q 'id=download' "$page"
   rg -q 'data-language-menu' "$page"
+  rg -q 'data-image-lightbox' "$page"
   rg -q 'site-footer__license' "$page"
+  image_zoom_trigger_count=$(rg -o 'data-image-zoom-trigger' "$page" | wc -l)
+  if [[ "$image_zoom_trigger_count" -ne 7 ]]; then
+    echo "Expected 7 clickable landing images in $page, found $image_zoom_trigger_count" >&2
+    exit 1
+  fi
   feature_story_count=$(rg -o 'data-feature-story' "$page" | wc -l)
   if [[ "$feature_story_count" -ne 6 ]]; then
     echo "Expected 6 primary feature stories in $page, found $feature_story_count" >&2
@@ -146,6 +152,11 @@ for page in public/index.html public/ru/index.html; do
     fi
   done
 done
+
+if rg -q 'story__media:hover|scale\(1\.015\)' assets/css/site.css; then
+  echo "Feature images must not scale on hover" >&2
+  exit 1
+fi
 
 if rg -q 'brand__mark' layouts/partials/header.html; then
   echo "Header must use the text-only Entropy wordmark" >&2

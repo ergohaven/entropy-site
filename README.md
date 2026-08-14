@@ -72,7 +72,7 @@ commit `resources/_gen/` or `public/`.
 ```text
 assets/
   css/site.css             Visual system and responsive layout
-  js/site.js               Theme, mobile navigation, subtle reveal behavior
+  js/site.js               Theme, navigation, and image lightbox behavior
   images/                  Human-managed source images
 content/
   en/                      English text

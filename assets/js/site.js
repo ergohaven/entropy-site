@@ -8,7 +8,11 @@
   const siteNav = document.querySelector('[data-site-nav]');
   const siteHeader = document.querySelector('[data-site-header]');
   const languageMenu = document.querySelector('[data-language-menu]');
+  const imageLightbox = document.querySelector('[data-image-lightbox]');
+  const imageLightboxClose = imageLightbox?.querySelector('[data-image-lightbox-close]');
+  const imageLightboxImage = imageLightbox?.querySelector('[data-image-lightbox-image]');
   const darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
+  let activeImageTrigger = null;
 
   const storedTheme = () => {
     try {
@@ -94,6 +98,44 @@
     if (languageMenu?.open && !languageMenu.contains(event.target)) {
       languageMenu.open = false;
     }
+  });
+
+  const closeImageLightbox = () => {
+    if (imageLightbox?.open) imageLightbox.close();
+  };
+
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest?.('[data-image-zoom-trigger]');
+    if (!trigger || !imageLightbox || !imageLightboxImage) return;
+
+    const source = trigger.dataset.imageSrc;
+    const sourceImage = trigger.querySelector('img');
+    if (!source || !sourceImage) return;
+
+    activeImageTrigger = trigger;
+    imageLightboxImage.src = source;
+    imageLightboxImage.alt = sourceImage.alt;
+    body.classList.add('image-lightbox-open');
+    imageLightbox.showModal();
+  });
+
+  imageLightboxClose?.addEventListener('click', closeImageLightbox);
+
+  imageLightbox?.addEventListener('click', (event) => {
+    if (event.target === imageLightbox) closeImageLightbox();
+  });
+
+  imageLightbox?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeImageLightbox();
+  });
+
+  imageLightbox?.addEventListener('close', () => {
+    body.classList.remove('image-lightbox-open');
+    imageLightboxImage?.removeAttribute('src');
+    if (imageLightboxImage) imageLightboxImage.alt = '';
+    if (activeImageTrigger?.isConnected) activeImageTrigger.focus();
+    activeImageTrigger = null;
   });
 
   window.addEventListener('resize', () => {

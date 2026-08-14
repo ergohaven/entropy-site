@@ -23,6 +23,9 @@ a11y:
   language_switcher: Сменить язык
   theme_to_light: Включить светлую тему
   theme_to_dark: Включить тёмную тему
+  enlarge_image: Увеличить изображение
+  image_preview: Увеличенное изображение
+  close_image: Закрыть увеличенное изображение
   footer_navigation: Навигация в подвале
 footer:
   credit: Entropy от Ergohaven
