@@ -23,9 +23,11 @@ For blocks with multiple images, add a second two-digit number for their order:
 
 - `01-01-hero-layout-en.png` and `01-01-hero-layout-ru.png` are localized
   variants of the first image in `01-hero.md`.
-- `03-01-key-picker-light.png` and `03-01-key-picker-dark.png` are theme
-  variants of the first image in `03-features.md`.
-- `03-02-matrix-tester.png` is the second image in `03-features.md`.
+- `03-01-key-picker-en.png` and `03-01-key-picker-ru.png` are localized
+  variants of the first story in `03-features.md`.
+- `03-03-text-expander.png` is a shared feature screenshot.
+- `03-04-import-export-en.png` and `03-04-import-export-ru.png` are localized
+  export screenshots.
 
 Language, light, and dark variants share the same section and position numbers.
 Use `-en` / `-ru` for localized screenshots and `-light` / `-dark` for theme

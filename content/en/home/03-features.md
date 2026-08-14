@@ -5,9 +5,8 @@ stories:
   - kicker: Layout and Key Picker
     title: Find the right action without breaking your flow
     text: Work across layers and browse keycodes by intent—from basic keys and symbols to modifiers and firmware actions.
-    image_light: images/screenshots/03-01-key-picker-light.png
-    image_dark: images/screenshots/03-01-key-picker-dark.png
-    image_alt: Entropy Key Picker with a complete keyboard layout
+    image: images/screenshots/03-01-key-picker-en.png
+    image_alt: Entropy Key Picker showing the Basic keycode tab over a split keyboard layout
   - kicker: Macros and advanced actions
     title: Give one key—or a combination—richer behavior
     text: Build macros, Combo chords, and Tap Dance actions visually, without editing firmware code by hand.
@@ -15,7 +14,8 @@ stories:
   - kicker: Import and export
     title: Move the configuration or turn it into a clear reference
     text: Preserve an editable device configuration in `.entlayout`, or export layers as PNG, SVG, and print-ready PDF.
-    placeholder: true
+    image: images/screenshots/03-04-import-export-en.png
+    image_alt: Entropy layout export screen with format and layer controls beside a three-layer preview
   - kicker: Layout Indicator
     title: Keep the active layer in sight
     text: Pin a separate window above other apps, adjust its opacity, and follow the current layer and pressed keys without returning to the configurator.

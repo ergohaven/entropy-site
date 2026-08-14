@@ -57,10 +57,10 @@ are declared in the Markdown block that displays them. See
 Image names follow the same numbered structure as content blocks. The first
 two-digit prefix identifies the block; an optional second prefix identifies the
 image within that block, for example `01-01-hero-layout-en.png` and
-`03-02-matrix-tester.png`.
+`03-04-import-export-en.png`.
 
 Localized variants keep the same block and position numbers and use a language
-suffix, as in `01-01-hero-layout-en.png` and `01-01-hero-layout-ru.png`.
+suffix, as in `03-01-key-picker-en.png` and `03-01-key-picker-ru.png`.
 
 Hugo generates high-quality responsive WebP sizes at 720, 1280, 1920, and
 2560 px during the build. The largest candidate keeps product UI sharp on

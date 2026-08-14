@@ -73,6 +73,12 @@ rg -q '<html lang=en-US' public/index.html
 rg -q '<html lang=ru-RU' public/ru/index.html
 rg -q '01-01-hero-layout-en\.png' public/index.html
 rg -q '01-01-hero-layout-ru\.png' public/ru/index.html
+rg -q '03-01-key-picker-en\.png' public/index.html
+rg -q '03-01-key-picker-ru\.png' public/ru/index.html
+rg -q '03-04-import-export-en\.png' public/index.html
+rg -q '03-04-import-export-ru\.png' public/ru/index.html
+rg -q '03-03-text-expander\.png' public/index.html
+rg -q '03-03-text-expander\.png' public/ru/index.html
 rg -qi 'reflash' public/index.html
 rg -qi 'перепрошив' public/ru/index.html
 rg -q 'Bluetooth' public/index.html
