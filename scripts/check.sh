@@ -119,6 +119,7 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'id=benefits' "$page"
   rg -q 'id=features' "$page"
   rg -q 'id=download' "$page"
+  rg -q 'data-site-header' "$page"
   rg -q 'data-language-menu' "$page"
   rg -q 'data-image-lightbox' "$page"
   rg -q 'site-footer__license' "$page"
@@ -157,6 +158,9 @@ if rg -q 'story__media:hover|scale\(1\.015\)' assets/css/site.css; then
   echo "Feature images must not scale on hover" >&2
   exit 1
 fi
+
+rg -q '\.site-header\.is-hidden' assets/css/site.css
+rg -q "classList\.add\('is-hidden'\)" assets/js/site.js
 
 if rg -q 'brand__mark' layouts/partials/header.html; then
   echo "Header must use the text-only Entropy wordmark" >&2

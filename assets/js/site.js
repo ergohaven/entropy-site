@@ -13,6 +13,8 @@
   const imageLightboxImage = imageLightbox?.querySelector('[data-image-lightbox-image]');
   const darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
   let activeImageTrigger = null;
+  let lastHeaderScrollY = Math.max(window.scrollY, 0);
+  let headerScrollFrame = null;
 
   const storedTheme = () => {
     try {
@@ -67,6 +69,8 @@
     );
     siteNav.classList.toggle('is-open', open);
     body.classList.toggle('menu-open', open);
+    siteHeader?.classList.remove('is-hidden');
+    lastHeaderScrollY = Math.max(window.scrollY, 0);
     if (!open && languageMenu) languageMenu.open = false;
   };
 
@@ -140,13 +144,48 @@
 
   window.addEventListener('resize', () => {
     if (window.innerWidth > 980) setMenu(false);
+    siteHeader?.classList.remove('is-hidden');
+    lastHeaderScrollY = Math.max(window.scrollY, 0);
   }, { passive: true });
 
   const updateHeader = () => {
-    siteHeader?.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (!siteHeader) return;
+
+    const scrollY = Math.max(window.scrollY, 0);
+    const scrollDelta = scrollY - lastHeaderScrollY;
+    const topThreshold = siteHeader.offsetHeight + 24;
+    const mustStayVisible = scrollY <= topThreshold
+      || body.classList.contains('menu-open')
+      || languageMenu?.open
+      || siteHeader.matches(':focus-within');
+
+    siteHeader.classList.toggle('is-scrolled', scrollY > 8);
+
+    if (mustStayVisible || scrollDelta < -6) {
+      siteHeader.classList.remove('is-hidden');
+    } else if (scrollDelta > 6) {
+      siteHeader.classList.add('is-hidden');
+    }
+
+    if (Math.abs(scrollDelta) > 6 || scrollY <= topThreshold) {
+      lastHeaderScrollY = scrollY;
+    }
   };
 
+  const requestHeaderUpdate = () => {
+    if (headerScrollFrame !== null) return;
+
+    headerScrollFrame = window.requestAnimationFrame(() => {
+      updateHeader();
+      headerScrollFrame = null;
+    });
+  };
+
+  siteHeader?.addEventListener('focusin', () => {
+    siteHeader.classList.remove('is-hidden');
+  });
+
   updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
 
 })();
