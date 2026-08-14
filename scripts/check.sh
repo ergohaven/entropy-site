@@ -89,6 +89,8 @@ rg -qi 'wirelessly' public/index.html
 rg -qi 'без проводов' public/ru/index.html
 rg -qi 'battery' public/index.html
 rg -qi 'заряд' public/ru/index.html
+rg -q 'not tied to a single keyboard model' public/index.html
+rg -q 'не привязана к одной модели' public/ru/index.html
 rg -q 'Macros and advanced actions' public/index.html
 rg -q 'Макросы и продвинутые действия' public/ru/index.html
 
@@ -99,6 +101,11 @@ fi
 
 if rg -q 'Open source · Vial-QMK · Vial-RMK' public/index.html public/ru/index.html; then
   echo "Obsolete Hero eyebrow is still rendered" >&2
+  exit 1
+fi
+
+if rg -q 'Vial-compatible by design|Совместимость с Vial по архитектуре' public/index.html public/ru/index.html; then
+  echo "Obsolete compatibility eyebrow is still rendered" >&2
   exit 1
 fi
 
