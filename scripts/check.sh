@@ -79,6 +79,8 @@ rg -q '03-04-import-export-en\.png' public/index.html
 rg -q '03-04-import-export-ru\.png' public/ru/index.html
 rg -q '03-03-text-expander\.png' public/index.html
 rg -q '03-03-text-expander\.png' public/ru/index.html
+rg -q 'open-source workspace.*Vial-QMK.*Vial-RMK' public/index.html
+rg -q 'открытым исходным кодом.*Vial-QMK.*Vial-RMK' public/ru/index.html
 rg -qi 'reflash' public/index.html
 rg -qi 'перепрошив' public/ru/index.html
 rg -q 'Bluetooth' public/index.html
@@ -92,6 +94,11 @@ rg -q 'Макросы и продвинутые действия' public/ru/inde
 
 if rg -q 'Firmware and device|Прошивка и устройство' public/index.html public/ru/index.html; then
   echo "Obsolete firmware-and-device feature story is still rendered" >&2
+  exit 1
+fi
+
+if rg -q 'Open source · Vial-QMK · Vial-RMK' public/index.html public/ru/index.html; then
+  echo "Obsolete Hero eyebrow is still rendered" >&2
   exit 1
 fi
 

@@ -494,16 +494,6 @@ html[data-theme="dark"] .button--primary {
   text-align: center;
 }
 
-.hero__copy .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2rem;
-  padding-inline: 0.75rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--bg-elevated);
-}
-
 .hero__lead {
   width: min(100%, 760px);
   margin-inline: auto;
@@ -1321,12 +1311,6 @@ html[data-theme="dark"] .theme-media--dark {
   .icon-button {
     width: 2.75rem;
     height: 2.75rem;
-  }
-
-  .hero__copy .eyebrow {
-    padding-inline: 0.55rem;
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
   }
 
   .hero .button-row,

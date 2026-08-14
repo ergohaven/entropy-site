@@ -1,6 +1,5 @@
 ---
 title: Make your keyboard truly yours
-eyebrow: Open source · Vial-QMK · Vial-RMK
 primary:
   label: Download Entropy
 secondary:
@@ -17,4 +16,4 @@ facts:
     label: Open source, without lock-in
 ---
 
-Entropy brings layouts, firmware settings, and desktop tools into one coherent workspace. Connect a Vial-compatible device and configure everything from layers and keycodes to lighting and device behavior.
+Entropy is an open-source workspace for keyboards and input devices running Vial-QMK or Vial-RMK. Configure layouts, firmware settings, and desktop tools—from layers and keycodes to lighting and device behavior—in one coherent interface.
