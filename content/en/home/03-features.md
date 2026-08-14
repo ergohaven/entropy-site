@@ -10,7 +10,8 @@ stories:
   - kicker: Macros and advanced actions
     title: Give one key—or a combination—richer behavior
     text: Build macros, Combo chords, and Tap Dance actions visually, without editing firmware code by hand.
-    placeholder: true
+    image: images/screenshots/03-02-advanced-actions-en.gif
+    image_alt: Animated Entropy Key Picker demonstrating Macro and Tap Dance configuration on a split keyboard layout
   - kicker: Import and export
     title: Move the configuration or turn it into a clear reference
     text: Preserve an editable device configuration in `.entlayout`, or export layers as PNG, SVG, and print-ready PDF.

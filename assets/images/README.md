@@ -25,6 +25,8 @@ For blocks with multiple images, add a second two-digit number for their order:
   variants of the first image in `01-hero.md`.
 - `03-01-key-picker-en.png` and `03-01-key-picker-ru.png` are localized
   variants of the first story in `03-features.md`.
+- `03-02-advanced-actions-en.gif` and `03-02-advanced-actions-ru.gif` are
+  localized Macro and Tap Dance animations.
 - `03-03-text-expander-en.gif` and `03-03-text-expander-ru.gif` are localized
   Text Expander animations.
 - `03-04-import-export-en.png` and `03-04-import-export-ru.png` are localized

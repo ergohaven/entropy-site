@@ -74,6 +74,8 @@ rg -q '01-01-hero-layout-en\.png' public/index.html
 rg -q '01-01-hero-layout-ru\.png' public/ru/index.html
 rg -q '03-01-key-picker-en\.png' public/index.html
 rg -q '03-01-key-picker-ru\.png' public/ru/index.html
+rg -q '03-02-advanced-actions-en\.gif' public/index.html
+rg -q '03-02-advanced-actions-ru\.gif' public/ru/index.html
 rg -q '03-04-import-export-en\.png' public/index.html
 rg -q '03-04-import-export-ru\.png' public/ru/index.html
 rg -q '03-05-layout-indicator-en\.gif' public/index.html
@@ -124,14 +126,13 @@ for page in public/index.html public/ru/index.html; do
     echo "Expected 6 primary feature stories in $page, found $feature_story_count" >&2
     exit 1
   fi
-  feature_placeholder_count=$(rg -o 'data-feature-placeholder' "$page" | wc -l)
-  if [[ "$feature_placeholder_count" -ne 1 ]]; then
-    echo "Expected 1 remaining feature placeholder in $page, found $feature_placeholder_count" >&2
+  if rg -q 'data-feature-placeholder' "$page"; then
+    echo "Unexpected feature placeholder in $page" >&2
     exit 1
   fi
   animated_image_count=$(rg -o 'data-animated-image' "$page" | wc -l)
-  if [[ "$animated_image_count" -ne 3 ]]; then
-    echo "Expected 3 animated feature images in $page, found $animated_image_count" >&2
+  if [[ "$animated_image_count" -ne 4 ]]; then
+    echo "Expected 4 animated feature images in $page, found $animated_image_count" >&2
     exit 1
   fi
   if rg -q '(href|src)=""' "$page"; then
