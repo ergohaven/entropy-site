@@ -759,6 +759,18 @@ html[data-theme="dark"] .button--primary {
   transform: scale(1.015);
 }
 
+.story__placeholder {
+  display: flex;
+  aspect-ratio: 16 / 9;
+  flex-direction: column;
+  background: var(--bg-elevated);
+}
+
+.story__placeholder-canvas {
+  flex: 1;
+  background: var(--bg-elevated);
+}
+
 .theme-media--dark {
   display: none;
 }

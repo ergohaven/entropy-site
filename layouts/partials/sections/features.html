@@ -8,14 +8,22 @@
 
     <div class="features__stories">
       {{ range $index, $story := .Params.stories }}
-        <article class="story{{ if eq (mod $index 2) 1 }} story--reverse{{ end }}">
+        <article class="story{{ if eq (mod $index 2) 1 }} story--reverse{{ end }}" data-feature-story>
           <div class="story__copy">
             <p class="story__kicker">{{ $story.kicker }}</p>
             <h3>{{ $story.title }}</h3>
             <p>{{ $story.text }}</p>
           </div>
-          <div class="story__media">
-            {{ if and $story.image_light $story.image_dark }}
+          <div class="story__media{{ if $story.placeholder }} story__media--placeholder{{ end }}">
+            {{ if $story.placeholder }}
+              <div class="story__placeholder" aria-hidden="true" data-feature-placeholder>
+                <div class="app-window__bar">
+                  <span></span><span></span><span></span>
+                  <b>entropy</b>
+                </div>
+                <div class="story__placeholder-canvas"></div>
+              </div>
+            {{ else if and $story.image_light $story.image_dark }}
               {{ partial "picture.html" (dict
                 "src" $story.image_light
                 "alt" $story.image_alt
@@ -28,12 +36,14 @@
                 "class" "theme-media theme-media--dark"
                 "sizes" "(min-width: 900px) 54vw, 94vw"
               ) }}
-            {{ else }}
+            {{ else if $story.image }}
               {{ partial "picture.html" (dict
                 "src" $story.image
                 "alt" $story.image_alt
                 "sizes" "(min-width: 900px) 54vw, 94vw"
               ) }}
+            {{ else }}
+              {{ errorf "Feature story %q requires an image or placeholder: true" $story.title }}
             {{ end }}
           </div>
         </article>

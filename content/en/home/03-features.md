@@ -2,47 +2,58 @@
 title: From the first layer to the last detail
 eyebrow: Features
 stories:
-  - kicker: Key Picker
+  - kicker: Layout and Key Picker
     title: Find the right action without breaking your flow
-    text: Search and browse keycodes by intent—basic keys, symbols, modifiers, macros, Tap Dance, custom firmware actions, and more.
+    text: Work across layers and browse keycodes by intent—from basic keys and symbols to modifiers and firmware actions.
     image_light: images/screenshots/03-01-key-picker-light.png
     image_dark: images/screenshots/03-01-key-picker-dark.png
     image_alt: Entropy Key Picker with a complete keyboard layout
-  - kicker: Matrix Tester
-    title: Verify the physical device before you trust the map
-    text: Test every matrix position live and spot wiring, switch, or layout issues while the keyboard is still in front of you.
-    image: images/screenshots/03-02-matrix-tester.png
-    image_alt: Entropy Matrix Tester highlighting tested switches
+  - kicker: Firmware and device
+    title: Open only the settings your device actually supports
+    text: Entropy reads firmware capabilities and assembles the relevant interface—without dead pages or unavailable controls.
+    placeholder: true
+  - kicker: Import and export
+    title: Move the configuration or turn it into a clear reference
+    text: Preserve an editable device configuration in `.entlayout`, or export layers as PNG, SVG, and print-ready PDF.
+    placeholder: true
+  - kicker: Layout Indicator
+    title: Keep the active layer in sight
+    text: Pin a separate window above other apps, adjust its opacity, and follow the current layer and pressed keys without returning to the configurator.
+    placeholder: true
   - kicker: Text Expander
-    title: Turn programmable keys into everyday shortcuts
-    text: Create local text expansions that work with your device, while keeping the configuration visible and under your control.
+    title: Turn short triggers into text you use every day
+    text: Create local expansions for addresses, signatures, and repeated text while keeping every rule visible and under your control.
     image: images/screenshots/03-03-text-expander.png
     image_alt: Entropy Text Expander configuration screen
+  - kicker: Typing Trainer
+    title: Train speed and accuracy without leaving Entropy
+    text: Run timed or word-count exercises, switch between EN and RU, add punctuation and digits, and track your result history.
+    placeholder: true
 catalog:
-  eyebrow: The whole device, in one place
+  eyebrow: More capabilities
   title: More than a layout editor
-  text: Entropy brings common Vial workflows and device-specific firmware features into the same focused interface—without pretending every device is identical.
+  text: The main workflows are complemented by tools for complex behavior, precise firmware tuning, and everyday work with the device.
 categories:
-  - title: Configure
-    text: Build the behavior you want.
+  - title: Behavior
+    text: Build complex actions without editing firmware by hand.
     items:
-      - Layers and keycodes
       - Macros and combos
       - Tap Dance and key overrides
-      - RGB and lighting
-  - title: Tune
-    text: Reach the firmware details that matter.
+      - Copy, mirror, and undo
+      - Names for layers and entries
+  - title: Firmware
+    text: Tune the settings exposed by the device.
     items:
-      - Auto Shift and Tap-Hold
+      - Auto Shift, Tap-Hold, and One Shot
       - Mouse Keys and pointing controls
-      - Layer LEDs and modules
-      - Custom device settings
-  - title: Extend
-    text: Let hardware and desktop work together.
+      - RGB, Layer LEDs, and encoders
+      - Modules and device-specific settings
+  - title: Tools
+    text: Test the device and connect it to the desktop.
     items:
-      - Text Expander
+      - Matrix Tester
       - Universal Symbols
-      - Layout Sync and Indicator
+      - Layout Sync
       - Live Features
 ---
 

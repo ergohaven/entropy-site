@@ -11,6 +11,11 @@ HTML; each path is declared next to its text in `content/<language>/home/*.md`.
 3. Update the matching `image_alt` text in every language.
 4. Run `./scripts/build.sh`.
 
+Feature stories can temporarily use `placeholder: true` instead of an image.
+When the screenshot is ready, add it here, replace `placeholder` with the matching
+`image` or `image_light` / `image_dark` fields in both language files, and update
+the localized `image_alt` text.
+
 ## Naming
 
 Prefix every content image with the number of the Markdown block that uses it.

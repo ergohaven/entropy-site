@@ -78,6 +78,11 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'id=features' "$page"
   rg -q 'id=compatibility' "$page"
   rg -q 'id=download' "$page"
+  feature_story_count=$(rg -o 'data-feature-story' "$page" | wc -l)
+  if [[ "$feature_story_count" -ne 6 ]]; then
+    echo "Expected 6 primary feature stories in $page, found $feature_story_count" >&2
+    exit 1
+  fi
   if rg -q '(href|src)=""' "$page"; then
     echo "Empty href or src in $page" >&2
     exit 1
