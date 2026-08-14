@@ -481,7 +481,7 @@ html[data-theme="dark"] .button--primary {
 .hero {
   position: relative;
   overflow: clip;
-  padding-top: clamp(3rem, 5.5vw, 5rem);
+  padding-top: clamp(2.5rem, 4.5vw, 4rem);
 }
 
 .hero__inner {
@@ -1220,7 +1220,7 @@ html[data-theme="dark"] .theme-media--dark {
   }
 
   .hero {
-    padding-top: 2.5rem;
+    padding-top: 2rem;
   }
 
   .hero__visual {
