@@ -39,6 +39,7 @@
             {{ else if $story.image }}
               {{ partial "picture.html" (dict
                 "src" $story.image
+                "poster" $story.image_poster
                 "alt" $story.image_alt
                 "sizes" "(min-width: 900px) 54vw, 94vw"
               ) }}

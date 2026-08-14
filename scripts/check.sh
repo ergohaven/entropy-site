@@ -47,7 +47,7 @@ if [[ -n "$single_sentence_heading_periods" ]]; then
   exit 1
 fi
 
-image_name_pattern='^[0-9]{2}(-[0-9]{2})?-[a-z0-9]+(-[a-z0-9]+)*\.(png|jpe?g|webp)$'
+image_name_pattern='^[0-9]{2}(-[0-9]{2})?-[a-z0-9]+(-[a-z0-9]+)*\.(gif|png|jpe?g|webp)$'
 invalid_image_names=$(
   find assets/images/screenshots -maxdepth 1 -type f -printf '%f\n' \
     | LC_ALL=C sort \
@@ -76,6 +76,10 @@ rg -q '03-01-key-picker-en\.png' public/index.html
 rg -q '03-01-key-picker-ru\.png' public/ru/index.html
 rg -q '03-04-import-export-en\.png' public/index.html
 rg -q '03-04-import-export-ru\.png' public/ru/index.html
+rg -q '03-05-layout-indicator-en\.gif' public/index.html
+rg -q '03-05-layout-indicator-ru\.gif' public/ru/index.html
+rg -q '03-05-layout-indicator-poster-en\.webp' public/index.html
+rg -q '03-05-layout-indicator-poster-ru\.webp' public/ru/index.html
 rg -q '03-03-text-expander\.png' public/index.html
 rg -q '03-03-text-expander\.png' public/ru/index.html
 rg -q 'open-source workspace.*Vial-QMK.*Vial-RMK' public/index.html
@@ -118,6 +122,16 @@ for page in public/index.html public/ru/index.html; do
   feature_story_count=$(rg -o 'data-feature-story' "$page" | wc -l)
   if [[ "$feature_story_count" -ne 6 ]]; then
     echo "Expected 6 primary feature stories in $page, found $feature_story_count" >&2
+    exit 1
+  fi
+  feature_placeholder_count=$(rg -o 'data-feature-placeholder' "$page" | wc -l)
+  if [[ "$feature_placeholder_count" -ne 2 ]]; then
+    echo "Expected 2 remaining feature placeholders in $page, found $feature_placeholder_count" >&2
+    exit 1
+  fi
+  animated_image_count=$(rg -o 'data-animated-image' "$page" | wc -l)
+  if [[ "$animated_image_count" -ne 1 ]]; then
+    echo "Expected 1 animated feature image in $page, found $animated_image_count" >&2
     exit 1
   fi
   if rg -q '(href|src)=""' "$page"; then
