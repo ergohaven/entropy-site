@@ -81,6 +81,13 @@ rg -qi 'wirelessly' public/index.html
 rg -qi 'без проводов' public/ru/index.html
 rg -qi 'battery' public/index.html
 rg -qi 'заряд' public/ru/index.html
+rg -q 'Macros and advanced actions' public/index.html
+rg -q 'Макросы и продвинутые действия' public/ru/index.html
+
+if rg -q 'Firmware and device|Прошивка и устройство' public/index.html public/ru/index.html; then
+  echo "Obsolete firmware-and-device feature story is still rendered" >&2
+  exit 1
+fi
 
 for page in public/index.html public/ru/index.html; do
   rg -q '<h1' "$page"

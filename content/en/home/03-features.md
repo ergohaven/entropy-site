@@ -8,9 +8,9 @@ stories:
     image_light: images/screenshots/03-01-key-picker-light.png
     image_dark: images/screenshots/03-01-key-picker-dark.png
     image_alt: Entropy Key Picker with a complete keyboard layout
-  - kicker: Firmware and device
-    title: Open only the settings your device actually supports
-    text: Entropy reads firmware capabilities and assembles the relevant interface—without dead pages or unavailable controls.
+  - kicker: Macros and advanced actions
+    title: Give one key—or a combination—richer behavior
+    text: Build macros, Combo chords, and Tap Dance actions visually, without editing firmware code by hand.
     placeholder: true
   - kicker: Import and export
     title: Move the configuration or turn it into a clear reference
@@ -34,11 +34,11 @@ catalog:
   title: More than a layout editor
   text: The main workflows are complemented by tools for complex behavior, precise firmware tuning, and everyday work with the device.
 categories:
-  - title: Behavior
-    text: Build complex actions without editing firmware by hand.
+  - title: Key behavior
+    text: Refine how the layout behaves and stays organized.
     items:
-      - Macros and combos
-      - Tap Dance and key overrides
+      - Key Overrides
+      - Magic and Grave Escape
       - Copy, mirror, and undo
       - Names for layers and entries
   - title: Firmware
@@ -57,4 +57,4 @@ categories:
       - Live Features
 ---
 
-Layouts, advanced firmware settings, live diagnostics, and daily tools belong together. Entropy keeps them in one visual system so moving from idea to working behavior feels natural.
+Layouts, advanced actions, live diagnostics, and daily tools belong together. Entropy keeps them in one visual system so moving from idea to working behavior feels natural.
