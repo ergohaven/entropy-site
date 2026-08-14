@@ -56,11 +56,11 @@ are declared in the Markdown block that displays them. See
 
 Image names follow the same numbered structure as content blocks. The first
 two-digit prefix identifies the block; an optional second prefix identifies the
-image within that block, for example `01-01-hero-layout-en.jpg` and
+image within that block, for example `01-01-hero-layout-en.png` and
 `03-02-matrix-tester.png`.
 
 Localized variants keep the same block and position numbers and use a language
-suffix, as in `01-01-hero-layout-en.jpg` and `01-01-hero-layout-ru.jpg`.
+suffix, as in `01-01-hero-layout-en.png` and `01-01-hero-layout-ru.png`.
 
 Hugo generates responsive WebP sizes during the build. Never edit or commit
 `resources/_gen/` or `public/`.

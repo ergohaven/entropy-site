@@ -71,8 +71,8 @@ test -f public/sitemap.xml
 
 rg -q '<html lang=en-US' public/index.html
 rg -q '<html lang=ru-RU' public/ru/index.html
-rg -q '01-01-hero-layout-en' public/index.html
-rg -q '01-01-hero-layout-ru' public/ru/index.html
+rg -q '01-01-hero-layout-en\.png' public/index.html
+rg -q '01-01-hero-layout-ru\.png' public/ru/index.html
 rg -qi 'reflash' public/index.html
 rg -qi 'перепрошив' public/ru/index.html
 rg -q 'Bluetooth' public/index.html

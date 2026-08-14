@@ -21,7 +21,7 @@ the localized `image_alt` text.
 Prefix every content image with the number of the Markdown block that uses it.
 For blocks with multiple images, add a second two-digit number for their order:
 
-- `01-01-hero-layout-en.jpg` and `01-01-hero-layout-ru.jpg` are localized
+- `01-01-hero-layout-en.png` and `01-01-hero-layout-ru.png` are localized
   variants of the first image in `01-hero.md`.
 - `03-01-key-picker-light.png` and `03-01-key-picker-dark.png` are theme
   variants of the first image in `03-features.md`.
