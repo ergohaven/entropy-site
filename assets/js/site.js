@@ -15,6 +15,7 @@
   let activeImageTrigger = null;
   let lastHeaderScrollY = Math.max(window.scrollY, 0);
   let headerScrollFrame = null;
+  const headerHideProgress = 0.12;
 
   const storedTheme = () => {
     try {
@@ -153,8 +154,9 @@
 
     const scrollY = Math.max(window.scrollY, 0);
     const scrollDelta = scrollY - lastHeaderScrollY;
-    const topThreshold = siteHeader.offsetHeight + 24;
-    const mustStayVisible = scrollY <= topThreshold
+    const scrollRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+    const hideThreshold = Math.max(siteHeader.offsetHeight + 24, scrollRange * headerHideProgress);
+    const mustStayVisible = scrollY <= hideThreshold
       || body.classList.contains('menu-open')
       || languageMenu?.open
       || siteHeader.matches(':focus-within');
@@ -167,7 +169,7 @@
       siteHeader.classList.add('is-hidden');
     }
 
-    if (Math.abs(scrollDelta) > 6 || scrollY <= topThreshold) {
+    if (Math.abs(scrollDelta) > 6 || scrollY <= hideThreshold) {
       lastHeaderScrollY = scrollY;
     }
   };

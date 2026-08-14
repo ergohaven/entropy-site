@@ -161,6 +161,7 @@ fi
 
 rg -q '\.site-header\.is-hidden' assets/css/site.css
 rg -q "classList\.add\('is-hidden'\)" assets/js/site.js
+rg -q 'headerHideProgress = 0\.12' assets/js/site.js
 
 if rg -q 'brand__mark' layouts/partials/header.html; then
   echo "Header must use the text-only Entropy wordmark" >&2
