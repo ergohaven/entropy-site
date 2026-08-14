@@ -29,6 +29,8 @@ For blocks with multiple images, add a second two-digit number for their order:
   Text Expander animations.
 - `03-04-import-export-en.png` and `03-04-import-export-ru.png` are localized
   export screenshots.
+- `03-06-typing-trainer-en.gif` and `03-06-typing-trainer-ru.gif` are localized
+  Typing Trainer animations.
 
 Language, light, and dark variants share the same section and position numbers.
 Use `-en` / `-ru` for localized screenshots and `-light` / `-dark` for theme

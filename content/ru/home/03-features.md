@@ -29,7 +29,8 @@ stories:
   - kicker: Typing Trainer
     title: Тренируйте скорость и точность, не выходя из Entropy
     text: Запускайте упражнения по времени или количеству слов, выбирайте EN/RU, добавляйте пунктуацию и цифры и отслеживайте историю результатов.
-    placeholder: true
+    image: images/screenshots/03-06-typing-trainer-ru.gif
+    image_alt: Анимированный Typing Trainer Entropy с выполнением упражнения на русском языке
 catalog:
   eyebrow: Остальные возможности
   title: Больше, чем редактор раскладки

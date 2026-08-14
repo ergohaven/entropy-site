@@ -29,7 +29,8 @@ stories:
   - kicker: Typing Trainer
     title: Train speed and accuracy without leaving Entropy
     text: Run timed or word-count exercises, switch between EN and RU, add punctuation and digits, and track your result history.
-    placeholder: true
+    image: images/screenshots/03-06-typing-trainer-en.gif
+    image_alt: Animated Entropy Typing Trainer showing an English timed exercise in progress
 catalog:
   eyebrow: More capabilities
   title: More than a layout editor
