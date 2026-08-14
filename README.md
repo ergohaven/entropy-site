@@ -30,8 +30,7 @@ filenames, so translations are easy to compare side by side.
 | Hero | `content/en/home/01-hero.md` | `content/ru/home/01-hero.md` |
 | Benefits | `content/en/home/02-benefits.md` | `content/ru/home/02-benefits.md` |
 | Features and screenshots | `content/en/home/03-features.md` | `content/ru/home/03-features.md` |
-| Device compatibility | `content/en/home/04-compatibility.md` | `content/ru/home/04-compatibility.md` |
-| Download section | `content/en/home/05-download.md` | `content/ru/home/05-download.md` |
+| Download section | `content/en/home/04-download.md` | `content/ru/home/04-download.md` |
 
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.

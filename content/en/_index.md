@@ -12,7 +12,6 @@ keywords:
 og_image: images/screenshots/01-01-hero-layout-en.png
 nav:
   features: Features
-  compatibility: Compatibility
   download: Download
   github: GitHub
 a11y:
@@ -24,7 +23,6 @@ a11y:
   language_switcher: Change language
   theme_to_light: Switch to light theme
   theme_to_dark: Switch to dark theme
-  supported_protocols: Supported firmware protocols
   footer_navigation: Footer navigation
 footer:
   credit: Entropy by Ergohaven

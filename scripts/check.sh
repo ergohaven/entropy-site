@@ -8,8 +8,7 @@ expected_blocks=$(printf '%s\n' \
   01-hero.md \
   02-benefits.md \
   03-features.md \
-  04-compatibility.md \
-  05-download.md \
+  04-download.md \
   index.md)
 
 for language in en ru; do
@@ -89,7 +88,7 @@ rg -qi 'wirelessly' public/index.html
 rg -qi 'без проводов' public/ru/index.html
 rg -qi 'battery' public/index.html
 rg -qi 'заряд' public/ru/index.html
-rg -q 'not tied to a single keyboard model' public/index.html
+rg -q 'not tied to a single model' public/index.html
 rg -q 'не привязана к одной модели' public/ru/index.html
 rg -q 'Macros and advanced actions' public/index.html
 rg -q 'Макросы и продвинутые действия' public/ru/index.html
@@ -104,8 +103,8 @@ if rg -q 'Open source · Vial-QMK · Vial-RMK' public/index.html public/ru/index
   exit 1
 fi
 
-if rg -q 'Vial-compatible by design|Совместимость с Vial по архитектуре' public/index.html public/ru/index.html; then
-  echo "Obsolete compatibility eyebrow is still rendered" >&2
+if rg -q 'id=compatibility|#compatibility|Vial-compatible by design|Совместимость с Vial по архитектуре' public/index.html public/ru/index.html; then
+  echo "Removed compatibility section is still rendered or linked" >&2
   exit 1
 fi
 
@@ -113,7 +112,6 @@ for page in public/index.html public/ru/index.html; do
   rg -q '<h1' "$page"
   rg -q 'id=benefits' "$page"
   rg -q 'id=features' "$page"
-  rg -q 'id=compatibility' "$page"
   rg -q 'id=download' "$page"
   rg -q 'data-language-menu' "$page"
   rg -q 'site-footer__license' "$page"
