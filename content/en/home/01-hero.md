@@ -17,4 +17,4 @@ facts:
     label: Open source, without lock-in
 ---
 
-Entropy is a calm, modern workspace for programmable keyboards and input devices. Connect a Vial-compatible device and shape every layer, key, macro, light, and behavior in one coherent interface.
+Entropy brings layouts, firmware settings, and desktop tools into one coherent workspace. Connect a Vial-compatible device and configure everything from layers and keycodes to lighting and device behavior.
