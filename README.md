@@ -36,19 +36,6 @@ filenames, so translations are easy to compare side by side.
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
 
-The Hero visual is an interactive code-rendered Entropy mockup. Its localized
-labels, key actions, and split/standard/ortholinear preset data are all kept in
-the `demo` field of `01-hero.md`; routine edits do not require template changes.
-The split preset uses the 60-key Ergohaven K:04 geometry and its two encoder
-modules from the current K:04 Vial JSON. Its chrome, palette, Layout flow, and
-modal Key Picker mirror the current Entropy application rather than forming a
-separate website-only UI system. The mockup uses the same bundled Roboto
-Regular font as Entropy, contextual bottom hints, localized hover tooltips, and
-the complete 86-key QWERTY Basic picker grid. The font file lives at
-`static/fonts/Roboto-Regular.ttf`; replace it only when the application font is
-updated. Its Apache 2.0 license is kept beside it in
-`static/fonts/LICENSE-Roboto.txt`.
-
 ### Editorial rules
 
 - A heading that consists of one sentence never ends with a period.
@@ -64,8 +51,8 @@ are declared in the Markdown block that displays them. See
 
 Image names follow the same numbered structure as content blocks. The first
 two-digit prefix identifies the block; an optional second prefix identifies the
-image within that block, for example the social preview
-`01-hero-layout.png` and `03-02-matrix-tester.png`.
+image within that block, for example `01-hero-layout.png` and
+`03-02-matrix-tester.png`.
 
 Hugo generates responsive WebP sizes during the build. Never edit or commit
 `resources/_gen/` or `public/`.
@@ -85,7 +72,6 @@ layouts/
   partials/                Shared header, footer, metadata, responsive images
 scripts/                   Pinned Hugo setup, preview, and production build
 static/                    Files copied as-is
-  fonts/                   Fonts mirrored from the Entropy application
 hugo.yaml                  Languages, base URL, and shared project links
 ```
 
