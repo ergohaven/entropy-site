@@ -81,6 +81,7 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'id=compatibility' "$page"
   rg -q 'id=download' "$page"
   rg -q 'data-language-menu' "$page"
+  rg -q 'site-footer__license' "$page"
   feature_story_count=$(rg -o 'data-feature-story' "$page" | wc -l)
   if [[ "$feature_story_count" -ne 6 ]]; then
     echo "Expected 6 primary feature stories in $page, found $feature_story_count" >&2
@@ -94,6 +95,11 @@ done
 
 if rg -q 'brand__mark' layouts/partials/header.html; then
   echo "Header must use the text-only Entropy wordmark" >&2
+  exit 1
+fi
+
+if rg -q 'brand__mark|footer\.tagline|footer\.made_by' layouts/partials/footer.html; then
+  echo "Footer must remain a compact text-only service line" >&2
   exit 1
 fi
 

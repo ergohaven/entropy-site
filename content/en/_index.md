@@ -25,9 +25,10 @@ a11y:
   theme_to_light: Switch to light theme
   theme_to_dark: Switch to dark theme
   supported_protocols: Supported firmware protocols
+  footer_navigation: Footer navigation
 footer:
-  tagline: Tools for the future of human input
-  source_label: Source code
+  credit: Entropy by Ergohaven
+  github_label: GitHub
   releases_label: Releases
-  made_by: An open-source project by Ergohaven
+  license_label: GPL-3.0
 ---

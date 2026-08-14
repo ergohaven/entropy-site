@@ -25,9 +25,10 @@ a11y:
   theme_to_light: Включить светлую тему
   theme_to_dark: Включить тёмную тему
   supported_protocols: Поддерживаемые протоколы прошивки
+  footer_navigation: Навигация в подвале
 footer:
-  tagline: Инструменты для будущего человеческого ввода
-  source_label: Исходный код
+  credit: Entropy от Ergohaven
+  github_label: GitHub
   releases_label: Релизы
-  made_by: Open-source проект Ergohaven
+  license_label: GPL-3.0
 ---
