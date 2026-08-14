@@ -78,8 +78,8 @@ rg -q '03-04-import-export-en\.png' public/index.html
 rg -q '03-04-import-export-ru\.png' public/ru/index.html
 rg -q '03-05-layout-indicator-en\.gif' public/index.html
 rg -q '03-05-layout-indicator-ru\.gif' public/ru/index.html
-rg -q '03-03-text-expander\.png' public/index.html
-rg -q '03-03-text-expander\.png' public/ru/index.html
+rg -q '03-03-text-expander-en\.gif' public/index.html
+rg -q '03-03-text-expander-ru\.gif' public/ru/index.html
 rg -q 'open-source workspace.*Vial-QMK.*Vial-RMK' public/index.html
 rg -q 'открытым исходным кодом.*Vial-QMK.*Vial-RMK' public/ru/index.html
 rg -qi 'reflash' public/index.html
@@ -128,8 +128,8 @@ for page in public/index.html public/ru/index.html; do
     exit 1
   fi
   animated_image_count=$(rg -o 'data-animated-image' "$page" | wc -l)
-  if [[ "$animated_image_count" -ne 1 ]]; then
-    echo "Expected 1 animated feature image in $page, found $animated_image_count" >&2
+  if [[ "$animated_image_count" -ne 2 ]]; then
+    echo "Expected 2 animated feature images in $page, found $animated_image_count" >&2
     exit 1
   fi
   if rg -q '(href|src)=""' "$page"; then

@@ -24,8 +24,8 @@ stories:
   - kicker: Text Expander
     title: Turn short triggers into text you use every day
     text: Create local expansions for addresses, signatures, and repeated text while keeping every rule visible and under your control.
-    image: images/screenshots/03-03-text-expander.png
-    image_alt: Entropy Text Expander configuration screen
+    image: images/screenshots/03-03-text-expander-en.gif
+    image_alt: Animated Entropy Text Expander showing a local shortcut rule and the resulting expanded text
   - kicker: Typing Trainer
     title: Train speed and accuracy without leaving Entropy
     text: Run timed or word-count exercises, switch between EN and RU, add punctuation and digits, and track your result history.
