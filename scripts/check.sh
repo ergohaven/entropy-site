@@ -78,8 +78,6 @@ rg -q '03-04-import-export-en\.png' public/index.html
 rg -q '03-04-import-export-ru\.png' public/ru/index.html
 rg -q '03-05-layout-indicator-en\.gif' public/index.html
 rg -q '03-05-layout-indicator-ru\.gif' public/ru/index.html
-rg -q '03-05-layout-indicator-poster-en\.webp' public/index.html
-rg -q '03-05-layout-indicator-poster-ru\.webp' public/ru/index.html
 rg -q '03-03-text-expander\.png' public/index.html
 rg -q '03-03-text-expander\.png' public/ru/index.html
 rg -q 'open-source workspace.*Vial-QMK.*Vial-RMK' public/index.html

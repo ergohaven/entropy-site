@@ -3,30 +3,19 @@
 {{- $class := .class | default "" -}}
 {{- $sizes := .sizes | default "(min-width: 1100px) 52vw, 100vw" -}}
 {{- $loading := .loading | default "lazy" -}}
-{{- $posterPath := .poster | default "" -}}
 {{- with resources.Get $path -}}
   {{- if eq .MediaType.SubType "gif" -}}
-    {{- $animation := . -}}
-    {{- with resources.Get $posterPath -}}
-      <picture class="responsive-picture {{ $class }}">
-        <source
-          media="(prefers-reduced-motion: reduce)"
-          type="{{ .MediaType.Type }}"
-          srcset="{{ .RelPermalink }}"
-        >
-        <img
-          src="{{ $animation.RelPermalink }}"
-          width="{{ $animation.Width }}"
-          height="{{ $animation.Height }}"
-          alt="{{ $alt }}"
-          loading="{{ $loading }}"
-          decoding="async"
-          data-animated-image
-        >
-      </picture>
-    {{- else -}}
-      {{- errorf "Animated image requires a static poster in assets: %s" $path -}}
-    {{- end -}}
+    <picture class="responsive-picture {{ $class }}">
+      <img
+        src="{{ .RelPermalink }}"
+        width="{{ .Width }}"
+        height="{{ .Height }}"
+        alt="{{ $alt }}"
+        loading="{{ $loading }}"
+        decoding="async"
+        data-animated-image
+      >
+    </picture>
   {{- else -}}
     {{- $small := .Resize "720x webp q92" -}}
     {{- $medium := .Resize "1280x webp q93" -}}

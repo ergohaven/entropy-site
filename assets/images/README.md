@@ -37,9 +37,8 @@ PNG, JPEG, WebP, and animated GIF source files are supported. Use PNG for still
 Entropy UI captures and GIF only when motion explains the feature; avoid JPEG
 because its compression softens text and thin interface lines. Hugo creates
 high-quality responsive WebP variants up to 2560 px for still images. Animated
-GIFs remain unchanged and use a companion static WebP poster for
-`prefers-reduced-motion`. Declare both `image` and `image_poster` beside the
-feature text. Do not commit generated images from `resources/_gen/`.
+GIFs remain unchanged so their motion is preserved. Do not commit generated
+images from `resources/_gen/`.
 
 Use screenshots at least 2560 px wide for Hero and 2000-2400 px wide for tightly
 cropped feature views. Keep important interface content away from the outer 5%

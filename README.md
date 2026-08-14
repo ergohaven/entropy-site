@@ -64,8 +64,8 @@ suffix, as in `03-01-key-picker-en.png` and `03-01-key-picker-ru.png`.
 Hugo generates high-quality responsive WebP sizes at 720, 1280, 1920, and
 2560 px during the build. The largest candidate keeps product UI sharp on
 high-density displays. Animated GIF feature captures are served unchanged and
-use an explicitly declared static WebP poster when reduced motion is requested.
-Never edit or commit `resources/_gen/` or `public/`.
+remain animated regardless of the system motion preference. Never edit or
+commit `resources/_gen/` or `public/`.
 
 ## Project structure
 

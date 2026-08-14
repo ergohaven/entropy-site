@@ -20,7 +20,6 @@ stories:
     title: Keep the active layer in sight
     text: Pin a separate window above other apps, adjust its opacity, and follow the current layer and pressed keys without returning to the configurator.
     image: images/screenshots/03-05-layout-indicator-en.gif
-    image_poster: images/screenshots/03-05-layout-indicator-poster-en.webp
     image_alt: Animated Entropy Layout Indicator showing layer changes and pressed keys on a split keyboard
   - kicker: Text Expander
     title: Turn short triggers into text you use every day
