@@ -1,5 +1,8 @@
 ---
 title: Complex firmware. A calm interface.
+title_lines:
+  - Complex firmware.
+  - A calm interface.
 eyebrow: Why Entropy
 items:
   - marker: "01"
@@ -10,7 +13,7 @@ items:
     text: Entropy is not tied to a single model. Connect supported keyboards, macropads, and input devices over USB or wirelessly via Bluetooth.
   - marker: "03"
     title: Real-time changes
-    text: Every change takes effect and is saved to the device immediately—no firmware rebuild or reflashing required.
+    text: Every change takes effect and is saved to the device immediately — no firmware rebuild or reflashing required.
 ---
 
-Powerful firmware should not demand a complicated tool. Entropy keeps the depth and removes the friction, so advanced configuration remains readable, deliberate, and reversible.
+Connect a Vial-QMK or Vial-RMK device and Entropy shows the controls its firmware actually supports. Layout, lighting, and device changes are applied and saved as you work — no firmware rebuild or reflashing.

@@ -31,8 +31,9 @@ a11y:
   back_to_top_aria: Прокрутить страницу к началу
   footer_navigation: Навигация в подвале
 footer:
-  credit: Entropy от Ergohaven
-  download_label: Скачать
+  credit_prefix: tools of the future by
+  credit_site: eh.works
+  credit_url: https://eh.works/
   github_label: GitHub
   releases_label: Релизы
   license_label: GPL-3.0

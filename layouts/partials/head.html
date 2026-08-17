@@ -3,13 +3,25 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f6f4f2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121113" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href="{{ "favicon-light.svg" | relURL }}"
+  data-theme-favicon
+  data-light-href="{{ "favicon-light.svg" | relURL }}"
+  data-dark-href="{{ "favicon-dark.svg" | relURL }}"
+>
 
 <script>
   (function () {
     try {
       var saved = localStorage.getItem('entropy-theme');
       var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      document.documentElement.dataset.theme = saved === 'light' || saved === 'dark' ? saved : preferred;
+      var theme = saved === 'light' || saved === 'dark' ? saved : preferred;
+      var favicon = document.querySelector('[data-theme-favicon]');
+      document.documentElement.dataset.theme = theme;
+      if (favicon) favicon.href = theme === 'dark' ? favicon.dataset.darkHref : favicon.dataset.lightHref;
     } catch (_) {
       document.documentElement.dataset.theme = 'light';
     }
@@ -23,7 +35,6 @@
 {{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
 <meta name="author" content="{{ site.Params.authorName }}">
 <link rel="canonical" href="{{ .Permalink }}">
-<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
 
 {{ range .AllTranslations }}
   <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">

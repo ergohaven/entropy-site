@@ -4,12 +4,12 @@ eyebrow: Features
 stories:
   - kicker: Layout and Key Picker
     title: Find the right action without breaking your flow
-    text: Work across layers and browse keycodes by intent—from basic keys and symbols to modifiers and firmware actions.
+    text: Work across layers and browse keycodes by intent — from basic keys and symbols to modifiers and firmware actions.
     image_light: images/screenshots/03-01-key-picker-en-light.png
     image_dark: images/screenshots/03-01-key-picker-en-dark.png
     image_alt: Entropy Key Picker showing the Basic keycode tab over a split keyboard layout
   - kicker: Macros and advanced actions
-    title: Give one key—or a combination—richer behavior
+    title: Give one key — or a combination — richer behavior
     text: Build macros, Combos, and Tap Dance actions visually, without editing firmware code by hand.
     image_light: images/screenshots/03-02-advanced-actions-en-light.gif
     image_dark: images/screenshots/03-02-advanced-actions-en-dark.gif
@@ -34,7 +34,7 @@ stories:
     image_alt: Animated Entropy Text Expander showing a local shortcut rule and the resulting expanded text
   - kicker: Typing Trainer
     title: Train speed and accuracy without leaving Entropy
-    text: Run timed or word-count exercises, switch between EN and RU, add punctuation and digits, and track your result history.
+    text: Run timed or word-count exercises, add punctuation and digits, and track your result history.
     image_light: images/screenshots/03-06-typing-trainer-en-light.gif
     image_dark: images/screenshots/03-06-typing-trainer-en-dark.gif
     image_alt: Animated Entropy Typing Trainer showing an English timed exercise in progress

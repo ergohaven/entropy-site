@@ -89,7 +89,22 @@
         </a>
       </div>
 
-      <p class="download-flow__footnote">{{ .Params.footnote }}</p>
+      <div class="download-flow__installation">
+        <p class="download-flow__installation-label">{{ .Params.flow.installation_label }}</p>
+        {{ range .Params.platforms }}
+          {{ if not .instruction }}
+            {{ errorf "Download platform %q requires an installation instruction" .id }}
+          {{ end }}
+          <div
+            class="download-flow__instruction"
+            data-download-instruction="{{ .id }}"
+            {{ if ne .id $firstPlatform.id }}hidden{{ end }}
+          >
+            <p>{{ .instruction }}</p>
+            {{ with .command }}<code>{{ . }}</code>{{ end }}
+          </div>
+        {{ end }}
+      </div>
       <noscript>
         <p class="download-flow__noscript">{{ .Params.flow.noscript }}</p>
       </noscript>

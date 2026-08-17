@@ -4,6 +4,7 @@
   const root = document.documentElement;
   const body = document.body;
   const themeToggle = document.querySelector('[data-theme-toggle]');
+  const themeFavicon = document.querySelector('[data-theme-favicon]');
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const siteNav = document.querySelector('[data-site-nav]');
   const siteHeader = document.querySelector('[data-site-header]');
@@ -43,9 +44,18 @@
     );
   };
 
+  const updateThemeFavicon = () => {
+    if (!themeFavicon) return;
+
+    themeFavicon.href = root.dataset.theme === 'dark'
+      ? themeFavicon.dataset.darkHref
+      : themeFavicon.dataset.lightHref;
+  };
+
   const setTheme = (theme, persist = false) => {
     root.dataset.theme = theme;
     updateThemeButton();
+    updateThemeFavicon();
 
     if (persist) {
       try {
@@ -57,6 +67,7 @@
   };
 
   updateThemeButton();
+  updateThemeFavicon();
 
   themeToggle?.addEventListener('click', () => {
     setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
@@ -212,6 +223,9 @@
     const actionLabel = downloadFlow.querySelector('[data-download-action-label]');
     const actionIcon = downloadFlow.querySelector('[data-download-action-icon]');
     const releaseNotes = downloadFlow.querySelector('[data-release-notes]');
+    const installationInstructions = [
+      ...downloadFlow.querySelectorAll('[data-download-instruction]')
+    ];
     const fallbackUrl = downloadFlow.dataset.releaseFallback;
     const apiUrl = downloadFlow.dataset.releaseApi;
 
@@ -240,7 +254,10 @@
     const setAction = (label, url, directDownload = false) => {
       action.href = isTrustedReleaseUrl(url) ? url : fallbackUrl;
       actionLabel.textContent = label;
-      if (actionIcon) actionIcon.textContent = directDownload ? '↓' : '↗';
+      if (actionIcon) {
+        actionIcon.hidden = directDownload;
+        actionIcon.textContent = directDownload ? '' : '↗';
+      }
     };
 
     const setFile = (asset) => {
@@ -269,6 +286,9 @@
       if (architectureField) architectureField.hidden = !isMac;
       if (architectureSelect) architectureSelect.disabled = !isMac;
       if (packageName) packageName.textContent = option?.dataset.package || '';
+      installationInstructions.forEach((instruction) => {
+        instruction.hidden = instruction.dataset.downloadInstruction !== platform;
+      });
 
       if (selection) {
         if (automaticSelection && detectedPlatform === 'other') {

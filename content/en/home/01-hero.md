@@ -31,4 +31,4 @@ facts:
     label: Open source, without lock-in
 ---
 
-Entropy is an open-source workspace for keyboards and input devices powered by Vial-QMK or Vial-RMK. Configure layouts, device settings, and desktop tools—from layers and keycodes to lighting and device behavior—in one coherent interface.
+Entropy is an open-source workspace for keyboards and input devices powered by Vial-QMK or Vial-RMK. Configure layouts, device settings, and desktop tools — from layers and keycodes to lighting and device behavior — in one coherent interface.

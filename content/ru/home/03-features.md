@@ -2,12 +2,12 @@
 title: От первого слоя до последней детали
 eyebrow: Возможности
 stories:
-  - kicker: Раскладка и Key Picker
+  - kicker: Раскладка и выбор клавиш
     title: Найдите нужное действие, не теряя контекст
     text: Работайте со слоями и находите кейкоды по смыслу — от базовых клавиш и символов до модификаторов и действий прошивки.
     image_light: images/screenshots/03-01-key-picker-ru-light.png
     image_dark: images/screenshots/03-01-key-picker-ru-dark.png
-    image_alt: Пикер клавиш Entropy с открытой вкладкой базовых кейкодов поверх раскладки сплит-клавиатуры
+    image_alt: Окно выбора клавиш Entropy с открытой вкладкой базовых кейкодов поверх раскладки сплит-клавиатуры
   - kicker: Макросы и продвинутые действия
     title: Назначайте отдельной клавише или сочетанию более сложное поведение
     text: Создавайте макросы, Combo и Tap Dance визуально, без ручного редактирования кода прошивки.
@@ -20,24 +20,24 @@ stories:
     image_light: images/screenshots/03-04-import-export-ru-light.png
     image_dark: images/screenshots/03-04-import-export-ru-dark.png
     image_alt: Экран экспорта раскладки Entropy с настройками формата и слоёв рядом с предпросмотром трёх слоёв
-  - kicker: Layout Indicator
+  - kicker: Индикатор раскладки
     title: Держите активный слой перед глазами
     text: Закрепляйте отдельное окно поверх приложений, настраивайте его прозрачность и следите за текущим слоем и нажатиями, не возвращаясь к конфигуратору.
     image_light: images/screenshots/03-05-layout-indicator-ru-light.gif
     image_dark: images/screenshots/03-05-layout-indicator-ru-dark.gif
     image_alt: Анимированный индикатор раскладки Entropy со сменой слоёв и подсветкой нажатых клавиш сплит-клавиатуры
-  - kicker: Text Expander
+  - kicker: Подстановка текста
     title: Превратите короткие команды в текст, который используете каждый день
     text: Создавайте локальные текстовые подстановки для адресов, подписей и повторяющихся фрагментов, сохраняя правила полностью под своим контролем.
     image_light: images/screenshots/03-03-text-expander-ru-light.gif
     image_dark: images/screenshots/03-03-text-expander-ru-dark.gif
-    image_alt: Анимированный Text Expander Entropy с созданием локального правила и подстановкой готового текста
-  - kicker: Typing Trainer
+    image_alt: Анимированная подстановка текста Entropy с созданием локального правила и выводом готового текста
+  - kicker: Тренажёр печати
     title: Тренируйте скорость и точность, не выходя из Entropy
-    text: Запускайте упражнения по времени или количеству слов, выбирайте EN/RU, добавляйте пунктуацию и цифры и отслеживайте историю результатов.
+    text: Запускайте упражнения по времени или количеству слов, добавляйте пунктуацию и цифры и отслеживайте историю результатов.
     image_light: images/screenshots/03-06-typing-trainer-ru-light.gif
     image_dark: images/screenshots/03-06-typing-trainer-ru-dark.gif
-    image_alt: Анимированный Typing Trainer Entropy с выполнением упражнения на русском языке
+    image_alt: Анимированный тренажёр печати Entropy с выполнением упражнения на русском языке
 catalog:
   eyebrow: Остальные возможности
   title: Больше, чем редактор раскладки

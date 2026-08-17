@@ -31,8 +31,9 @@ a11y:
   back_to_top_aria: Scroll back to the top of the page
   footer_navigation: Footer navigation
 footer:
-  credit: Entropy by Ergohaven
-  download_label: Download
+  credit_prefix: tools of the future by
+  credit_site: eh.industries
+  credit_url: https://eh.industries/
   github_label: GitHub
   releases_label: Releases
   license_label: GPL-3.0

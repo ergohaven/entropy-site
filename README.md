@@ -36,11 +36,13 @@ Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
 
 The localized Documentation URLs live under each language's `params` in
-`hugo.yaml`. The Download panel keeps its translated labels in `04-download.md`
-and reads the current release from the GitHub API configured in `hugo.yaml`.
-Asset suffixes in the same config map Linux, Windows, and both macOS builds to
-the files published by the Entropy release workflow. The browser selects a
-matching build but never starts a download without a click.
+`hugo.yaml`. Localized footer branding labels and URLs live in each language's
+`_index.md`. The Download panel keeps its translated labels and per-platform
+installation instructions in `04-download.md`, then reads the current release
+from the GitHub API configured in `hugo.yaml`. Asset suffixes in the same config
+map Linux, Windows, and both macOS builds to the files published by the Entropy
+release workflow. The browser selects a matching build and instruction but
+never starts a download without a click.
 
 Feature stories whose final screenshot is not ready use `placeholder: true` in
 `03-features.md`. The section renders the same blank Entropy window in its place;
@@ -69,6 +71,10 @@ Image names follow the same numbered structure as content blocks. The first
 two-digit prefix identifies the block; an optional second prefix identifies the
 image within that block, for example `01-01-hero-layout-split-en-light.png` and
 `03-04-import-export-en-dark.png`.
+
+Theme-aware browser icons live in `static/favicon-light.svg` and
+`static/favicon-dark.svg`. The active icon follows the selected site theme;
+`static/favicon.ico` is the fallback for older browsers.
 
 Localized and themed variants keep the same block and position numbers and use
 language and theme suffixes, as in `03-01-key-picker-en-light.png` and
@@ -117,6 +123,7 @@ Automatic Hugo download supports Linux x86_64 and arm64. On another development
 platform, install the exact Hugo Extended version from `.hugo-version`; the
 scripts will use it automatically.
 
-Before publishing, replace the reserved `https://entropy.invalid/` base URL in
-`hugo.yaml` with the production domain. GitHub, Documentation, release API, and
-download asset mapping are also kept in that file.
+Pushes to `main` are verified and deployed to GitHub Pages by
+`.github/workflows/pages.yml`. The production URL and generated `CNAME` are set
+to <https://entropy.tools/>. GitHub, Documentation, release API, and download
+asset mapping are also kept in `hugo.yaml`.
