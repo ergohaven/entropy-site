@@ -35,10 +35,22 @@ filenames, so translations are easy to compare side by side.
 Text below the second `---` in a block is ordinary Markdown. Short structured
 items above it use readable YAML fields. Keep the same keys in both languages.
 
+The localized Documentation URLs live under each language's `params` in
+`hugo.yaml`. The Download panel keeps its translated labels in `04-download.md`
+and reads the current release from the GitHub API configured in `hugo.yaml`.
+Asset suffixes in the same config map Linux, Windows, and both macOS builds to
+the files published by the Entropy release workflow. The browser selects a
+matching build but never starts a download without a click.
+
 Feature stories whose final screenshot is not ready use `placeholder: true` in
 `03-features.md`. The section renders the same blank Entropy window in its place;
 replace that flag with `image` or `image_light` / `image_dark` fields when the
 real asset is available.
+
+Hero keyboard layouts are declared as the `presets` list in `01-hero.md`. The
+first entry is shown by default; the compact tabs above the screenshot let the
+visitor switch layouts manually without automatic rotation. Keep preset IDs and
+order aligned between EN and RU.
 
 ### Editorial rules
 
@@ -55,11 +67,12 @@ are declared in the Markdown block that displays them. See
 
 Image names follow the same numbered structure as content blocks. The first
 two-digit prefix identifies the block; an optional second prefix identifies the
-image within that block, for example `01-01-hero-layout-en.png` and
-`03-04-import-export-en.png`.
+image within that block, for example `01-01-hero-layout-split-en-light.png` and
+`03-04-import-export-en-dark.png`.
 
-Localized variants keep the same block and position numbers and use a language
-suffix, as in `03-01-key-picker-en.png` and `03-01-key-picker-ru.png`.
+Localized and themed variants keep the same block and position numbers and use
+language and theme suffixes, as in `03-01-key-picker-en-light.png` and
+`03-01-key-picker-ru-dark.png`.
 
 Hugo generates high-quality responsive WebP sizes at 720, 1280, 1920, and
 2560 px during the build. The largest candidate keeps product UI sharp on
@@ -72,7 +85,7 @@ commit `resources/_gen/` or `public/`.
 ```text
 assets/
   css/site.css             Visual system and responsive layout
-  js/site.js               Theme, navigation, and image lightbox behavior
+  js/site.js               Theme, navigation, Hero presets, and lightbox behavior
   images/                  Human-managed source images
 content/
   en/                      English text
@@ -105,5 +118,5 @@ platform, install the exact Hugo Extended version from `.hugo-version`; the
 scripts will use it automatically.
 
 Before publishing, replace the reserved `https://entropy.invalid/` base URL in
-`hugo.yaml` with the production domain. GitHub links and the download destination
-are also kept in that file.
+`hugo.yaml` with the production domain. GitHub, Documentation, release API, and
+download asset mapping are also kept in that file.

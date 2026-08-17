@@ -61,6 +61,10 @@ if [[ -n "$invalid_image_names" ]]; then
   exit 1
 fi
 
+if command -v node >/dev/null 2>&1; then
+  node --check assets/js/site.js
+fi
+
 "$project_dir/scripts/build.sh"
 
 test -f public/index.html
@@ -70,20 +74,24 @@ test -f public/sitemap.xml
 
 rg -q '<html lang=en-US' public/index.html
 rg -q '<html lang=ru-RU' public/ru/index.html
-rg -q '01-01-hero-layout-en\.png' public/index.html
-rg -q '01-01-hero-layout-ru\.png' public/ru/index.html
-rg -q '03-01-key-picker-en\.png' public/index.html
-rg -q '03-01-key-picker-ru\.png' public/ru/index.html
-rg -q '03-02-advanced-actions-en\.gif' public/index.html
-rg -q '03-02-advanced-actions-ru\.gif' public/ru/index.html
-rg -q '03-04-import-export-en\.png' public/index.html
-rg -q '03-04-import-export-ru\.png' public/ru/index.html
-rg -q '03-05-layout-indicator-en\.gif' public/index.html
-rg -q '03-05-layout-indicator-ru\.gif' public/ru/index.html
-rg -q '03-03-text-expander-en\.gif' public/index.html
-rg -q '03-03-text-expander-ru\.gif' public/ru/index.html
-rg -q '03-06-typing-trainer-en\.gif' public/index.html
-rg -q '03-06-typing-trainer-ru\.gif' public/ru/index.html
+for theme in light dark; do
+  for preset in split ortho standard; do
+    rg -q "01-01-hero-layout-${preset}-en-${theme}\\.png" public/index.html
+    rg -q "01-01-hero-layout-${preset}-ru-${theme}\\.png" public/ru/index.html
+  done
+  rg -q "03-01-key-picker-en-${theme}\\.png" public/index.html
+  rg -q "03-01-key-picker-ru-${theme}\\.png" public/ru/index.html
+  rg -q "03-02-advanced-actions-en-${theme}\\.gif" public/index.html
+  rg -q "03-02-advanced-actions-ru-${theme}\\.gif" public/ru/index.html
+  rg -q "03-04-import-export-en-${theme}\\.png" public/index.html
+  rg -q "03-04-import-export-ru-${theme}\\.png" public/ru/index.html
+  rg -q "03-05-layout-indicator-en-${theme}\\.gif" public/index.html
+  rg -q "03-05-layout-indicator-ru-${theme}\\.gif" public/ru/index.html
+  rg -q "03-03-text-expander-en-${theme}\\.gif" public/index.html
+  rg -q "03-03-text-expander-ru-${theme}\\.gif" public/ru/index.html
+  rg -q "03-06-typing-trainer-en-${theme}\\.gif" public/index.html
+  rg -q "03-06-typing-trainer-ru-${theme}\\.gif" public/ru/index.html
+done
 rg -q 'open-source workspace.*Vial-QMK.*Vial-RMK' public/index.html
 rg -q 'открытым исходным кодом.*Vial-QMK.*Vial-RMK' public/ru/index.html
 rg -qi 'reflash' public/index.html
@@ -98,6 +106,18 @@ rg -q 'not tied to a single model' public/index.html
 rg -q 'не привязана к одной модели' public/ru/index.html
 rg -q 'Macros and advanced actions' public/index.html
 rg -q 'Макросы и продвинутые действия' public/ru/index.html
+rg -q 'href=https://docs\.eh\.industries/software/entropy/' public/index.html
+rg -q 'href=https://docs\.eh\.works/software/entropy/' public/ru/index.html
+
+if rg -q 'docs\.eh\.works' public/index.html || rg -q 'docs\.eh\.industries' public/ru/index.html; then
+  echo "Documentation language domains are mixed" >&2
+  exit 1
+fi
+
+if rg -q '`\.entlayout`' public/index.html public/ru/index.html; then
+  echo "Markdown backticks must not leak into visible front matter text" >&2
+  exit 1
+fi
 
 if rg -q 'Firmware and device|Прошивка и устройство' public/index.html public/ru/index.html; then
   echo "Obsolete firmware-and-device feature story is still rendered" >&2
@@ -122,10 +142,38 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'data-site-header' "$page"
   rg -q 'data-language-menu' "$page"
   rg -q 'data-image-lightbox' "$page"
+  rg -q 'data-hero-presets' "$page"
+  rg -q 'data-back-to-top' "$page"
+  rg -q 'data-download-flow' "$page"
+  rg -q 'data-platform-select' "$page"
+  rg -q 'data-architecture-select' "$page"
+  rg -q 'data-download-action' "$page"
+  rg -q 'data-release-notes' "$page"
+  rg -q 'value=linux' "$page"
+  rg -q 'value=windows' "$page"
+  rg -q 'value=macos' "$page"
+  rg -q 'value=other' "$page"
+  rg -q 'data-state=loading' "$page"
   rg -q 'site-footer__license' "$page"
+  rg -q 'site-footer__download' "$page"
+  download_anchor_count=$(rg -o '#download' "$page" | wc -l)
+  if [[ "$download_anchor_count" -ne 3 ]]; then
+    echo "Expected Header, Hero, and Footer download anchors in $page, found $download_anchor_count" >&2
+    exit 1
+  fi
   image_zoom_trigger_count=$(rg -o 'data-image-zoom-trigger' "$page" | wc -l)
-  if [[ "$image_zoom_trigger_count" -ne 7 ]]; then
-    echo "Expected 7 clickable landing images in $page, found $image_zoom_trigger_count" >&2
+  if [[ "$image_zoom_trigger_count" -ne 18 ]]; then
+    echo "Expected 18 theme-specific clickable landing images in $page, found $image_zoom_trigger_count" >&2
+    exit 1
+  fi
+  hero_preset_tab_count=$(rg -o 'data-hero-preset-tab' "$page" | wc -l)
+  if [[ "$hero_preset_tab_count" -ne 3 ]]; then
+    echo "Expected 3 Hero preset tabs in $page, found $hero_preset_tab_count" >&2
+    exit 1
+  fi
+  hero_preset_panel_count=$(rg -o 'data-hero-preset-panel' "$page" | wc -l)
+  if [[ "$hero_preset_panel_count" -ne 3 ]]; then
+    echo "Expected 3 Hero preset panels in $page, found $hero_preset_panel_count" >&2
     exit 1
   fi
   feature_story_count=$(rg -o 'data-feature-story' "$page" | wc -l)
@@ -138,8 +186,8 @@ for page in public/index.html public/ru/index.html; do
     exit 1
   fi
   animated_image_count=$(rg -o 'data-animated-image' "$page" | wc -l)
-  if [[ "$animated_image_count" -ne 4 ]]; then
-    echo "Expected 4 animated feature images in $page, found $animated_image_count" >&2
+  if [[ "$animated_image_count" -ne 8 ]]; then
+    echo "Expected 8 theme-specific animated feature images in $page, found $animated_image_count" >&2
     exit 1
   fi
   if rg -q '(href|src)=""' "$page"; then
@@ -159,9 +207,23 @@ if rg -q 'story__media:hover|scale\(1\.015\)' assets/css/site.css; then
   exit 1
 fi
 
+if rg -U -q '\.button:hover[^\{]*\{[^\}]*transform' assets/css/site.css; then
+  echo "Buttons must not move on hover" >&2
+  exit 1
+fi
+
 rg -q '\.site-header\.is-hidden' assets/css/site.css
 rg -q "classList\.add\('is-hidden'\)" assets/js/site.js
 rg -q 'headerHideProgress = 0\.12' assets/js/site.js
+rg -q 'backToTopProgress = 0\.35' assets/js/site.js
+rg -q "event\.key === 'ArrowRight'" assets/js/site.js
+rg -q "event\.key === 'ArrowLeft'" assets/js/site.js
+rg -q 'prefers-reduced-motion: reduce' assets/css/site.css
+rg -q 'api\.github\.com/repos/ergohaven/entropy/releases/latest' hugo.yaml
+rg -q -- '-x86_64\.AppImage' hugo.yaml
+rg -q -- '-windows-x86_64\.exe' hugo.yaml
+rg -q -- '-macos-arm64\.dmg' hugo.yaml
+rg -q -- '-macos-x86_64\.dmg' hugo.yaml
 
 if rg -q 'brand__mark' layouts/partials/header.html; then
   echo "Header must use the text-only Entropy wordmark" >&2

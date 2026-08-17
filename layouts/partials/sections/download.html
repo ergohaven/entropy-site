@@ -5,25 +5,94 @@
       <h2 id="download-title">{{ .Title }}</h2>
       <div class="prose">{{ .Content }}</div>
       <div class="button-row">
-        <a class="button button--primary" href="{{ site.Params.releasesURL }}">
-          {{ .Params.primary.label }}
-          <span aria-hidden="true">↓</span>
-        </a>
         <a class="button button--secondary" href="{{ site.Params.githubURL }}">
           {{ .Params.secondary.label }}
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
     </header>
 
-    <div class="platforms">
-      {{ range .Params.platforms }}
-        <div class="platform">
-          <strong>{{ .name }}</strong>
-          <span>{{ .package }}</span>
-          <small>{{ .status }}</small>
+    {{ $firstPlatform := index .Params.platforms 0 }}
+    <div
+      class="download-flow"
+      data-download-flow
+      data-state="loading"
+      aria-busy="true"
+      data-release-api="{{ site.Params.release_api_url }}"
+      data-release-fallback="{{ site.Params.releasesURL }}"
+    >
+      <script type="application/json" data-download-manifest>{{ site.Params.download_assets | jsonify | safeJS }}</script>
+
+      <div class="download-flow__selectors">
+        <label class="download-field">
+          <span class="download-field__label">{{ .Params.flow.os_label }}</span>
+          <span class="download-select">
+            <select data-platform-select>
+              {{ range .Params.platforms }}
+                <option value="{{ .id }}" data-package="{{ .package }}">{{ .name }}</option>
+              {{ end }}
+            </select>
+            <i aria-hidden="true"></i>
+          </span>
+        </label>
+
+        <label class="download-field" data-architecture-field hidden>
+          <span class="download-field__label">{{ .Params.flow.architecture_label }}</span>
+          <span class="download-select">
+            <select data-architecture-select disabled>
+              {{ range .Params.architectures }}
+                <option value="{{ .id }}">{{ .name }}</option>
+              {{ end }}
+            </select>
+            <i aria-hidden="true"></i>
+          </span>
+        </label>
+      </div>
+
+      <div class="download-flow__summary">
+        <p
+          class="download-flow__selection"
+          data-download-selection
+          data-detected-template="{{ .Params.flow.detected }}"
+          data-selected-template="{{ .Params.flow.selected }}"
+          data-unknown-text="{{ .Params.flow.detection_unknown }}"
+        ></p>
+        <p class="download-flow__package" data-download-package>{{ $firstPlatform.package }}</p>
+        <div class="download-flow__release" role="status" aria-live="polite" aria-atomic="true">
+          <p
+            class="download-flow__status"
+            data-download-status
+            data-loading-text="{{ .Params.flow.loading }}"
+            data-ready-template="{{ .Params.flow.ready }}"
+            data-unavailable-template="{{ .Params.flow.unavailable }}"
+            data-error-text="{{ .Params.flow.error }}"
+            data-unknown-text="{{ .Params.flow.unknown }}"
+          >{{ .Params.flow.loading }}</p>
+          <p class="download-flow__file" data-download-file hidden></p>
         </div>
-      {{ end }}
-      <p class="platforms__footnote">{{ .Params.footnote }}</p>
+      </div>
+
+      <div class="download-flow__actions">
+        <a
+          class="button button--primary"
+          href="{{ site.Params.releasesURL }}"
+          data-download-action
+          data-loading-label="{{ .Params.flow.action_loading }}"
+          data-ready-template="{{ .Params.flow.action_ready }}"
+          data-releases-label="{{ .Params.flow.action_releases }}"
+        >
+          <span data-download-action-label>{{ .Params.flow.action_loading }}</span>
+          <span data-download-action-icon aria-hidden="true">↗</span>
+        </a>
+        <a class="download-flow__release-notes" href="{{ site.Params.releasesURL }}" data-release-notes>
+          {{ .Params.flow.release_notes }} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <p class="download-flow__footnote">{{ .Params.footnote }}</p>
+      <noscript>
+        <p class="download-flow__noscript">{{ .Params.flow.noscript }}</p>
+      </noscript>
     </div>
   </div>
 </section>

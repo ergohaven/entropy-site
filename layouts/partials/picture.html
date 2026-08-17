@@ -3,7 +3,7 @@
 {{- $class := .class | default "" -}}
 {{- $sizes := .sizes | default "(min-width: 1100px) 52vw, 100vw" -}}
 {{- $loading := .loading | default "lazy" -}}
-{{- $zoomLabel := site.Home.Params.a11y.enlarge_image | default "Enlarge image" -}}
+{{- $zoomLabel := site.Home.Params.a11y.enlarge_image -}}
 {{- with resources.Get $path -}}
   <button
     type="button"

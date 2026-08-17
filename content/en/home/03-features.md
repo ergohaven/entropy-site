@@ -5,32 +5,38 @@ stories:
   - kicker: Layout and Key Picker
     title: Find the right action without breaking your flow
     text: Work across layers and browse keycodes by intent—from basic keys and symbols to modifiers and firmware actions.
-    image: images/screenshots/03-01-key-picker-en.png
+    image_light: images/screenshots/03-01-key-picker-en-light.png
+    image_dark: images/screenshots/03-01-key-picker-en-dark.png
     image_alt: Entropy Key Picker showing the Basic keycode tab over a split keyboard layout
   - kicker: Macros and advanced actions
     title: Give one key—or a combination—richer behavior
-    text: Build macros, Combo chords, and Tap Dance actions visually, without editing firmware code by hand.
-    image: images/screenshots/03-02-advanced-actions-en.gif
+    text: Build macros, Combos, and Tap Dance actions visually, without editing firmware code by hand.
+    image_light: images/screenshots/03-02-advanced-actions-en-light.gif
+    image_dark: images/screenshots/03-02-advanced-actions-en-dark.gif
     image_alt: Animated Entropy Key Picker demonstrating Macro and Tap Dance configuration on a split keyboard layout
   - kicker: Import and export
     title: Move the configuration or turn it into a clear reference
-    text: Preserve an editable device configuration in `.entlayout`, or export layers as PNG, SVG, and print-ready PDF.
-    image: images/screenshots/03-04-import-export-en.png
+    text: Preserve an editable device configuration in .entlayout, or export layers as PNG, SVG, and print-ready PDF.
+    image_light: images/screenshots/03-04-import-export-en-light.png
+    image_dark: images/screenshots/03-04-import-export-en-dark.png
     image_alt: Entropy layout export screen with format and layer controls beside a three-layer preview
   - kicker: Layout Indicator
     title: Keep the active layer in sight
     text: Pin a separate window above other apps, adjust its opacity, and follow the current layer and pressed keys without returning to the configurator.
-    image: images/screenshots/03-05-layout-indicator-en.gif
+    image_light: images/screenshots/03-05-layout-indicator-en-light.gif
+    image_dark: images/screenshots/03-05-layout-indicator-en-dark.gif
     image_alt: Animated Entropy Layout Indicator showing layer changes and pressed keys on a split keyboard
   - kicker: Text Expander
     title: Turn short triggers into text you use every day
     text: Create local expansions for addresses, signatures, and repeated text while keeping every rule visible and under your control.
-    image: images/screenshots/03-03-text-expander-en.gif
+    image_light: images/screenshots/03-03-text-expander-en-light.gif
+    image_dark: images/screenshots/03-03-text-expander-en-dark.gif
     image_alt: Animated Entropy Text Expander showing a local shortcut rule and the resulting expanded text
   - kicker: Typing Trainer
     title: Train speed and accuracy without leaving Entropy
     text: Run timed or word-count exercises, switch between EN and RU, add punctuation and digits, and track your result history.
-    image: images/screenshots/03-06-typing-trainer-en.gif
+    image_light: images/screenshots/03-06-typing-trainer-en-light.gif
+    image_dark: images/screenshots/03-06-typing-trainer-en-dark.gif
     image_alt: Animated Entropy Typing Trainer showing an English timed exercise in progress
 catalog:
   eyebrow: More capabilities

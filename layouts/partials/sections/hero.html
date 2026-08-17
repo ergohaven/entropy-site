@@ -12,12 +12,13 @@
       <h1 id="hero-title">{{ .Title }}</h1>
       <div class="hero__lead prose">{{ .Content }}</div>
       <div class="button-row">
-        <a class="button button--primary" href="{{ site.Params.releasesURL }}">
+        <a class="button button--primary" href="{{ site.Home.RelPermalink }}#download">
           {{ .Params.primary.label }}
-          <span aria-hidden="true">↗</span>
+          <span aria-hidden="true">↓</span>
         </a>
         <a class="button button--secondary" href="{{ site.Params.githubURL }}">
           {{ .Params.secondary.label }}
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
       <p class="hero__availability">
@@ -25,19 +26,72 @@
       </p>
     </div>
 
-    <div class="hero__visual">
+    {{ $presets := .Params.presets }}
+    {{ if not $presets }}
+      {{ errorf "Hero requires at least one keyboard layout preset" }}
+    {{ end }}
+    {{ if not .Params.preset_selector_label }}
+      {{ errorf "Hero requires preset_selector_label" }}
+    {{ end }}
+
+    <div class="hero__visual" data-hero-presets>
+      <div
+        class="hero__preset-switcher"
+        role="tablist"
+        aria-label="{{ .Params.preset_selector_label }}"
+      >
+        {{ range $index, $preset := $presets }}
+          {{ $selected := eq $index 0 }}
+          <button
+            type="button"
+            class="hero__preset-tab"
+            id="hero-preset-tab-{{ $preset.id }}"
+            role="tab"
+            aria-selected="{{ $selected }}"
+            aria-controls="hero-preset-panel-{{ $preset.id }}"
+            tabindex="{{ if $selected }}0{{ else }}-1{{ end }}"
+            data-hero-preset-tab="{{ $preset.id }}"
+          >
+            {{ $preset.label }}
+          </button>
+        {{ end }}
+      </div>
+
       <div class="app-window">
         <div class="app-window__bar" aria-hidden="true">
           <span></span><span></span><span></span>
           <b>entropy</b>
         </div>
-        {{ partial "picture.html" (dict
-          "src" .Params.image
-          "alt" .Params.image_alt
-          "class" "app-window__media"
-          "sizes" "(min-width: 1276px) 1180px, (min-width: 761px) 92vw, calc(100vw - 1.3rem)"
-          "loading" "eager"
-        ) }}
+        {{ range $index, $preset := $presets }}
+          {{ if or (not $preset.id) (not $preset.label) (not $preset.image_light) (not $preset.image_dark) (not $preset.image_alt) }}
+            {{ errorf "Hero preset %d requires id, label, image_light, image_dark, and image_alt" $index }}
+          {{ end }}
+          {{ $selected := eq $index 0 }}
+          {{ $loading := cond $selected "eager" "lazy" }}
+          <div
+            class="hero__preset-panel"
+            id="hero-preset-panel-{{ $preset.id }}"
+            role="tabpanel"
+            aria-labelledby="hero-preset-tab-{{ $preset.id }}"
+            data-hero-preset-panel="{{ $preset.id }}"
+            {{ if not $selected }}hidden{{ end }}
+          >
+            {{ partial "picture.html" (dict
+              "src" $preset.image_light
+              "alt" $preset.image_alt
+              "class" "app-window__media theme-media theme-media--light"
+              "sizes" "(min-width: 1276px) 1180px, (min-width: 761px) 92vw, calc(100vw - 1.3rem)"
+              "loading" $loading
+            ) }}
+            {{ partial "picture.html" (dict
+              "src" $preset.image_dark
+              "alt" $preset.image_alt
+              "class" "app-window__media theme-media theme-media--dark"
+              "sizes" "(min-width: 1276px) 1180px, (min-width: 761px) 92vw, calc(100vw - 1.3rem)"
+              "loading" $loading
+            ) }}
+          </div>
+        {{ end }}
       </div>
     </div>
 

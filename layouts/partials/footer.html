@@ -1,6 +1,9 @@
 <footer class="site-footer">
   <div class="site-footer__inner shell">
     <p class="site-footer__credit">{{ .Params.footer.credit }}</p>
+    <a class="site-footer__download" href="{{ site.Home.RelPermalink }}#download">
+      {{ .Params.footer.download_label }}
+    </a>
     <nav class="site-footer__links" aria-label="{{ .Params.a11y.footer_navigation }}">
       <a href="{{ site.Params.githubURL }}">{{ .Params.footer.github_label }}</a>
       <a href="{{ site.Params.releasesURL }}">{{ .Params.footer.releases_label }}</a>

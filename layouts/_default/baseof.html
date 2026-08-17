@@ -3,13 +3,14 @@
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body>
+  <body id="top">
     <a class="skip-link" href="#main-content">{{ .Params.a11y.skip_to_content }}</a>
     {{ partial "header.html" . }}
     <main id="main-content">
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
+    {{ partial "back-to-top.html" . }}
     {{ partial "image-lightbox.html" . }}
   </body>
 </html>

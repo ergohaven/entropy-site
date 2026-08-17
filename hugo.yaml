@@ -16,11 +16,15 @@ languages:
     label: English
     contentDir: content/en
     weight: 1
+    params:
+      documentation_url: https://docs.eh.industries/software/entropy/
   ru:
     locale: ru-RU
     label: Русский
     contentDir: content/ru
     weight: 2
+    params:
+      documentation_url: https://docs.eh.works/software/entropy/
 
 markup:
   goldmark:
@@ -35,4 +39,23 @@ params:
   authorName: Ergohaven
   githubURL: https://github.com/ergohaven/entropy
   releasesURL: https://github.com/ergohaven/entropy/releases/latest
+  release_api_url: https://api.github.com/repos/ergohaven/entropy/releases/latest
+  download_assets:
+    linux:
+      default_variant: x86_64
+      variants:
+        x86_64:
+          suffix: -x86_64.AppImage
+    windows:
+      default_variant: x86_64
+      variants:
+        x86_64:
+          suffix: -windows-x86_64.exe
+    macos:
+      default_variant: arm64
+      variants:
+        arm64:
+          suffix: -macos-arm64.dmg
+        x86_64:
+          suffix: -macos-x86_64.dmg
   licenseName: GPL-3.0-or-later

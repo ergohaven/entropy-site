@@ -9,9 +9,10 @@ keywords:
   - QMK
   - RMK
   - keyboard configurator
-og_image: images/screenshots/01-01-hero-layout-en.png
+og_image: images/screenshots/01-01-hero-layout-split-en-light.png
 nav:
   features: Features
+  documentation: Documentation
   download: Download
   github: GitHub
 a11y:
@@ -26,9 +27,12 @@ a11y:
   enlarge_image: Enlarge image
   image_preview: Enlarged image
   close_image: Close enlarged image
+  back_to_top: Back to top
+  back_to_top_aria: Scroll back to the top of the page
   footer_navigation: Footer navigation
 footer:
   credit: Entropy by Ergohaven
+  download_label: Download
   github_label: GitHub
   releases_label: Releases
   license_label: GPL-3.0

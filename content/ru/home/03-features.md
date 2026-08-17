@@ -5,32 +5,38 @@ stories:
   - kicker: Раскладка и Key Picker
     title: Найдите нужное действие, не теряя контекст
     text: Работайте со слоями и находите кейкоды по смыслу — от базовых клавиш и символов до модификаторов и действий прошивки.
-    image: images/screenshots/03-01-key-picker-ru.png
+    image_light: images/screenshots/03-01-key-picker-ru-light.png
+    image_dark: images/screenshots/03-01-key-picker-ru-dark.png
     image_alt: Пикер клавиш Entropy с открытой вкладкой базовых кейкодов поверх раскладки сплит-клавиатуры
   - kicker: Макросы и продвинутые действия
-    title: Назначайте клавише или сочетанию более сложное поведение
+    title: Назначайте отдельной клавише или сочетанию более сложное поведение
     text: Создавайте макросы, Combo и Tap Dance визуально, без ручного редактирования кода прошивки.
-    image: images/screenshots/03-02-advanced-actions-ru.gif
+    image_light: images/screenshots/03-02-advanced-actions-ru-light.gif
+    image_dark: images/screenshots/03-02-advanced-actions-ru-dark.gif
     image_alt: Анимированный пикер клавиш Entropy с настройкой Macro и Tap Dance на раскладке сплит-клавиатуры
   - kicker: Импорт и экспорт
     title: Переносите конфигурацию или превращайте её в понятную схему
-    text: Сохраняйте редактируемую конфигурацию устройства в `.entlayout`, а слои экспортируйте в PNG, SVG или готовый к печати PDF.
-    image: images/screenshots/03-04-import-export-ru.png
+    text: Сохраняйте редактируемую конфигурацию устройства в .entlayout, а слои экспортируйте в PNG, SVG или готовый к печати PDF.
+    image_light: images/screenshots/03-04-import-export-ru-light.png
+    image_dark: images/screenshots/03-04-import-export-ru-dark.png
     image_alt: Экран экспорта раскладки Entropy с настройками формата и слоёв рядом с предпросмотром трёх слоёв
   - kicker: Layout Indicator
     title: Держите активный слой перед глазами
     text: Закрепляйте отдельное окно поверх приложений, настраивайте его прозрачность и следите за текущим слоем и нажатиями, не возвращаясь к конфигуратору.
-    image: images/screenshots/03-05-layout-indicator-ru.gif
+    image_light: images/screenshots/03-05-layout-indicator-ru-light.gif
+    image_dark: images/screenshots/03-05-layout-indicator-ru-dark.gif
     image_alt: Анимированный индикатор раскладки Entropy со сменой слоёв и подсветкой нажатых клавиш сплит-клавиатуры
   - kicker: Text Expander
     title: Превратите короткие команды в текст, который используете каждый день
     text: Создавайте локальные текстовые подстановки для адресов, подписей и повторяющихся фрагментов, сохраняя правила полностью под своим контролем.
-    image: images/screenshots/03-03-text-expander-ru.gif
+    image_light: images/screenshots/03-03-text-expander-ru-light.gif
+    image_dark: images/screenshots/03-03-text-expander-ru-dark.gif
     image_alt: Анимированный Text Expander Entropy с созданием локального правила и подстановкой готового текста
   - kicker: Typing Trainer
     title: Тренируйте скорость и точность, не выходя из Entropy
     text: Запускайте упражнения по времени или количеству слов, выбирайте EN/RU, добавляйте пунктуацию и цифры и отслеживайте историю результатов.
-    image: images/screenshots/03-06-typing-trainer-ru.gif
+    image_light: images/screenshots/03-06-typing-trainer-ru-light.gif
+    image_dark: images/screenshots/03-06-typing-trainer-ru-dark.gif
     image_alt: Анимированный Typing Trainer Entropy с выполнением упражнения на русском языке
 catalog:
   eyebrow: Остальные возможности
@@ -42,7 +48,7 @@ categories:
     items:
       - Key Overrides
       - Magic и Grave Escape
-      - Копирование, зеркалирование и Undo
+      - Копирование, зеркалирование и отмена действий
       - Названия слоёв и элементов
   - title: Прошивка
     text: Настраивайте доступные параметры устройства.
@@ -60,4 +66,4 @@ categories:
       - Live Features
 ---
 
-Раскладки, продвинутые действия, живая диагностика и ежедневные инструменты должны работать вместе. Entropy объединяет их в одной визуальной системе, чтобы путь от идеи до результата был естественным.
+Раскладки, продвинутые действия, диагностика в реальном времени и повседневные инструменты должны работать вместе. Entropy объединяет их в одной визуальной системе, чтобы путь от идеи до результата был естественным.

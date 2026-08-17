@@ -1,7 +1,7 @@
 ---
 title: Entropy
-meta_title: Entropy — open-source конфигуратор клавиатур
-description: Современный open-source конфигуратор программируемых клавиатур и Vial-совместимых устройств ввода.
+meta_title: Entropy — конфигуратор клавиатур с открытым исходным кодом
+description: Современный конфигуратор с открытым исходным кодом для программируемых клавиатур и Vial-совместимых устройств ввода.
 translationKey: home
 keywords:
   - программируемая клавиатура
@@ -9,9 +9,10 @@ keywords:
   - QMK
   - RMK
   - конфигуратор клавиатуры
-og_image: images/screenshots/01-01-hero-layout-ru.png
+og_image: images/screenshots/01-01-hero-layout-split-ru-light.png
 nav:
   features: Возможности
+  documentation: Документация
   download: Скачать
   github: GitHub
 a11y:
@@ -26,9 +27,12 @@ a11y:
   enlarge_image: Увеличить изображение
   image_preview: Увеличенное изображение
   close_image: Закрыть увеличенное изображение
+  back_to_top: Наверх
+  back_to_top_aria: Прокрутить страницу к началу
   footer_navigation: Навигация в подвале
 footer:
   credit: Entropy от Ergohaven
+  download_label: Скачать
   github_label: GitHub
   releases_label: Релизы
   license_label: GPL-3.0
