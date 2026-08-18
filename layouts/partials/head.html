@@ -15,16 +15,19 @@
 
 <script>
   (function () {
+    var darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
+    var theme = darkPreference.matches ? 'dark' : 'light';
+
     try {
       var saved = localStorage.getItem('entropy-theme');
-      var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      var theme = saved === 'light' || saved === 'dark' ? saved : preferred;
-      var favicon = document.querySelector('[data-theme-favicon]');
-      document.documentElement.dataset.theme = theme;
-      if (favicon) favicon.href = theme === 'dark' ? favicon.dataset.darkHref : favicon.dataset.lightHref;
+      if (saved === 'light' || saved === 'dark') theme = saved;
     } catch (_) {
-      document.documentElement.dataset.theme = 'light';
+      // Keep following the system preference when storage is unavailable.
     }
+
+    var favicon = document.querySelector('[data-theme-favicon]');
+    document.documentElement.dataset.theme = theme;
+    if (favicon) favicon.href = theme === 'dark' ? favicon.dataset.darkHref : favicon.dataset.lightHref;
   }());
 </script>
 

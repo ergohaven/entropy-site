@@ -290,6 +290,10 @@ rg -q "event\.key === 'ArrowRight'" assets/js/site.js
 rg -q "event\.key === 'ArrowLeft'" assets/js/site.js
 rg -q 'actionIcon\.hidden = directDownload' assets/js/site.js
 rg -q 'themeFavicon\.href = root\.dataset\.theme' assets/js/site.js
+rg -Fq "var darkPreference = window.matchMedia('(prefers-color-scheme: dark)');" layouts/partials/head.html
+rg -Fq "var theme = darkPreference.matches ? 'dark' : 'light';" layouts/partials/head.html
+rg -Fq "if (saved === 'light' || saved === 'dark') theme = saved;" layouts/partials/head.html
+rg -Fq "if (!storedTheme()) setTheme(event.matches ? 'dark' : 'light');" assets/js/site.js
 rg -q '\.benefits__title-line' assets/css/site.css
 rg -q '\.site-footer__credit-link:focus-visible' assets/css/site.css
 rg -U -q '\.site-footer__credit-link[[:space:]]*\{[^}]*color: var\(--accent\)' assets/css/site.css
