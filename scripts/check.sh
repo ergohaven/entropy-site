@@ -69,6 +69,8 @@ fi
 
 test -f public/index.html
 test -f public/ru/index.html
+test -f public/404.html
+test -f public/ru/404.html
 test -f public/CNAME
 test -f public/favicon-dark.svg
 test -f public/favicon-light.svg
@@ -118,8 +120,10 @@ rg -q 'Macros and advanced actions' public/index.html
 rg -q 'Макросы и продвинутые действия' public/ru/index.html
 rg -q 'href=https://docs\.eh\.industries/software/entropy/' public/index.html
 rg -q 'href=https://docs\.eh\.works/software/entropy/' public/ru/index.html
-rg -q 'href=https://docs\.eh\.industries/software/entropy/[^>]*target=_blank[^>]*rel="noopener noreferrer"' public/index.html
-rg -q 'href=https://docs\.eh\.works/software/entropy/[^>]*target=_blank[^>]*rel="noopener noreferrer"' public/ru/index.html
+if rg -q 'target=_blank' public/index.html public/ru/index.html; then
+  echo "External links must consistently open in the current tab" >&2
+  exit 1
+fi
 rg -q 'Complex firmware\. A calm interface\.' public/index.html
 rg -q 'aria-label="Complex firmware\. A calm interface\."' public/index.html
 rg -q 'aria-label="Сложная прошивка\. Спокойный интерфейс\."' public/ru/index.html
@@ -128,12 +132,31 @@ rg -q 'Подключите устройство на Vial-QMK или Vial-RMK �
 rg -q 'Entropy — приложение с открытым исходным кодом для клавиатур и устройств ввода на базе Vial-QMK или Vial-RMK\. Настраивайте раскладки, параметры устройства и инструменты для рабочего стола — от слоёв и кейкодов до подсветки и поведения устройства — в едином интерфейсе\.' public/ru/index.html
 rg -q 'tools of the future by' public/index.html
 rg -q 'tools of the future by' public/ru/index.html
-rg -q 'class=site-footer__credit-link href=https://eh\.industries/ target=_blank rel="noopener noreferrer">eh\.industries</a>' public/index.html
-rg -q 'class=site-footer__credit-link href=https://eh\.works/ target=_blank rel="noopener noreferrer">eh\.works</a>' public/ru/index.html
-rg -q 'Раскладка и выбор клавиш' public/ru/index.html
+rg -q 'class=site-footer__credit-link href=https://eh\.industries/>eh\.industries</a>' public/index.html
+rg -q 'class=site-footer__credit-link href=https://eh\.works/>eh\.works</a>' public/ru/index.html
+rg -q 'Раскладка и Пикер клавиш' public/ru/index.html
 rg -q 'Индикатор раскладки' public/ru/index.html
-rg -q 'Подстановка текста' public/ru/index.html
+rg -q 'Экспандер текста' public/ru/index.html
 rg -q 'Тренажёр печати' public/ru/index.html
+rg -q 'Процессор Mac' public/ru/index.html
+rg -q 'Другая / не знаю' public/ru/index.html
+rg -q 'Портативный EXE-файл' public/ru/index.html
+rg -q 'Не удалось получить данные о релизе\. Откройте релизы на GitHub' public/ru/index.html
+rg -Fq 'chmod +x Entropy*.AppImage' public/index.html
+rg -Fq 'chmod +x Entropy*.AppImage' public/ru/index.html
+rg -q 'udev' public/index.html public/ru/index.html
+
+if rg -q 'Раскладка и выбор клавиш|Подстановка текста|Архитектура Mac|Другая / не уверен|Portable EXE|portable EXE' public/ru/index.html; then
+  echo "Obsolete Russian feature or download terminology is still rendered" >&2
+  exit 1
+fi
+
+rg -q '<title>Page not found — Entropy</title>' public/404.html
+rg -q '<title>Страница не найдена — Entropy</title>' public/ru/404.html
+rg -q 'This page does not exist' public/404.html
+rg -q 'Такой страницы нет' public/404.html public/ru/404.html
+rg -q 'href=/#download' public/404.html
+rg -q 'href=/ru/#download' public/404.html public/ru/404.html
 
 for page in public/index.html public/ru/index.html; do
   title_line_count=$(rg -o 'class=benefits__title-line' "$page" | wc -l)
@@ -209,6 +232,7 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'data-site-header' "$page"
   rg -q 'data-language-menu' "$page"
   rg -q 'data-image-lightbox' "$page"
+  rg -q 'data-open-original-label' "$page"
   rg -q 'data-hero-presets' "$page"
   rg -q 'data-back-to-top' "$page"
   rg -q 'data-download-flow' "$page"
@@ -272,6 +296,11 @@ for page in public/index.html public/ru/index.html; do
   done
 done
 
+if rg -q 'data-image-lightbox-image' public/index.html public/ru/index.html; then
+  echo "The lightbox image must be created dynamically with a valid src" >&2
+  exit 1
+fi
+
 if rg -q 'story__media:hover|scale\(1\.015\)' assets/css/site.css; then
   echo "Feature images must not scale on hover" >&2
   exit 1
@@ -298,6 +327,14 @@ rg -q '\.benefits__title-line' assets/css/site.css
 rg -q '\.site-footer__credit-link:focus-visible' assets/css/site.css
 rg -U -q '\.site-footer__credit-link[[:space:]]*\{[^}]*color: var\(--accent\)' assets/css/site.css
 rg -q 'prefers-reduced-motion: reduce' assets/css/site.css
+rg -q 'aspect-ratio: 16 / 9' assets/css/site.css
+rg -q 'max-height: calc\(100dvh - 4rem\)' assets/css/site.css
+rg -q 'min-width: 981px' layouts/partials/sections/features.html
+rg -q '<section class="features__catalog" aria-labelledby="features-catalog-title">' layouts/partials/sections/features.html
+rg -Fq "document.createElement('img')" assets/js/site.js
+rg -q 'CrOS|Chrome OS' assets/js/site.js
+rg -q 'FreeBSD|OpenBSD|NetBSD' assets/js/site.js
+rg -q 'isIPadOS' assets/js/site.js
 rg -q 'api\.github\.com/repos/ergohaven/entropy/releases/latest' hugo.yaml
 rg -q -- '-x86_64\.AppImage' hugo.yaml
 rg -q -- '-windows-x86_64\.exe' hugo.yaml

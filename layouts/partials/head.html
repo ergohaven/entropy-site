@@ -33,6 +33,10 @@
 
 {{ $description := .Params.description | default site.Params.description }}
 {{ $pageTitle := .Params.meta_title | default .Title }}
+{{ if eq .Kind "404" }}
+  {{ $description = site.Home.Params.not_found.text }}
+  {{ $pageTitle = site.Home.Params.not_found.meta_title }}
+{{ end }}
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $description }}">
 {{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}

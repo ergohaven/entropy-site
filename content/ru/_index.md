@@ -27,6 +27,7 @@ a11y:
   enlarge_image: Увеличить изображение
   image_preview: Увеличенное изображение
   close_image: Закрыть увеличенное изображение
+  open_original_image: Открыть изображение в полном размере
   back_to_top: Наверх
   back_to_top_aria: Прокрутить страницу к началу
   footer_navigation: Навигация в подвале
@@ -37,4 +38,11 @@ footer:
   github_label: GitHub
   releases_label: Релизы
   license_label: GPL-3.0
+not_found:
+  meta_title: Страница не найдена — Entropy
+  eyebrow: Ошибка 404
+  title: Такой страницы нет
+  text: Возможно, адрес устарел или набран с ошибкой. Вернитесь на главную Entropy или сразу перейдите к загрузке.
+  home_label: На главную
+  download_label: Скачать Entropy
 ---

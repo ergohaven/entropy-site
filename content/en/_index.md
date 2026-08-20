@@ -27,6 +27,7 @@ a11y:
   enlarge_image: Enlarge image
   image_preview: Enlarged image
   close_image: Close enlarged image
+  open_original_image: Open full-size image
   back_to_top: Back to top
   back_to_top_aria: Scroll back to the top of the page
   footer_navigation: Footer navigation
@@ -37,4 +38,11 @@ footer:
   github_label: GitHub
   releases_label: Releases
   license_label: GPL-3.0
+not_found:
+  meta_title: Page not found — Entropy
+  eyebrow: Error 404
+  title: This page does not exist
+  text: The address may be outdated or mistyped. Return to Entropy or go straight to the downloads.
+  home_label: Go to home
+  download_label: Download Entropy
 ---

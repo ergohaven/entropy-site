@@ -1,0 +1,47 @@
+{{- $englishHome := hugo.Sites.Default.Home -}}
+{{- $russianHome := false -}}
+{{- range hugo.Sites -}}
+  {{- if eq .Language.Lang "ru" -}}
+    {{- $russianHome = .Home -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $russianHome -}}
+  {{- errorf "The branded 404 page requires the Russian site" -}}
+{{- end -}}
+<!doctype html>
+<html lang="{{ site.Language.Locale }}" data-theme="light" data-not-found-page>
+  <head>
+    {{ partial "head.html" . }}
+    <script>
+      if (/^\/ru(?:\/|$)/i.test(window.location.pathname)) {
+        document.documentElement.lang = 'ru-RU';
+        document.title = {{ $russianHome.Params.not_found.meta_title | jsonify | safeJS }};
+      }
+    </script>
+  </head>
+  <body class="not-found-page">
+    <main class="not-found" id="main-content">
+      <article class="not-found__locale not-found__locale--en" lang="en-US">
+        <a class="not-found__brand" href="{{ $englishHome.RelPermalink }}">entropy</a>
+        <p class="eyebrow">{{ $englishHome.Params.not_found.eyebrow }}</p>
+        <h1>{{ $englishHome.Params.not_found.title }}</h1>
+        <p class="not-found__text">{{ $englishHome.Params.not_found.text }}</p>
+        <div class="button-row">
+          <a class="button button--primary" href="{{ $englishHome.RelPermalink }}">{{ $englishHome.Params.not_found.home_label }}</a>
+          <a class="button button--secondary" href="{{ $englishHome.RelPermalink }}#download">{{ $englishHome.Params.not_found.download_label }}</a>
+        </div>
+      </article>
+
+      <article class="not-found__locale not-found__locale--ru" lang="ru-RU">
+        <a class="not-found__brand" href="{{ $russianHome.RelPermalink }}">entropy</a>
+        <p class="eyebrow">{{ $russianHome.Params.not_found.eyebrow }}</p>
+        <h1>{{ $russianHome.Params.not_found.title }}</h1>
+        <p class="not-found__text">{{ $russianHome.Params.not_found.text }}</p>
+        <div class="button-row">
+          <a class="button button--primary" href="{{ $russianHome.RelPermalink }}">{{ $russianHome.Params.not_found.home_label }}</a>
+          <a class="button button--secondary" href="{{ $russianHome.RelPermalink }}#download">{{ $russianHome.Params.not_found.download_label }}</a>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

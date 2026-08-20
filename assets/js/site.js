@@ -16,9 +16,10 @@
   const downloadFlow = document.querySelector('[data-download-flow]');
   const imageLightbox = document.querySelector('[data-image-lightbox]');
   const imageLightboxClose = imageLightbox?.querySelector('[data-image-lightbox-close]');
-  const imageLightboxImage = imageLightbox?.querySelector('[data-image-lightbox-image]');
   const darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
   let activeImageTrigger = null;
+  let imageLightboxImage = null;
+  let imageLightboxOriginal = null;
   let lastHeaderScrollY = Math.max(window.scrollY, 0);
   let headerScrollFrame = null;
   const headerHideProgress = 0.12;
@@ -201,7 +202,10 @@
     const userAgentDataPlatform = navigator.userAgentData?.platform || '';
     const source = `${userAgentDataPlatform} ${navigator.platform || ''} ${navigator.userAgent || ''}`;
 
-    if (/Android|iPhone|iPad|iPod/i.test(source)) return 'other';
+    const isIPadOS = /MacIntel/i.test(navigator.platform || '') && navigator.maxTouchPoints > 1;
+
+    if (isIPadOS || /Android|iPhone|iPad|iPod|Mobile/i.test(source)) return 'other';
+    if (/CrOS|Chrome OS|FreeBSD|OpenBSD|NetBSD|DragonFly|\bBSD\b/i.test(source)) return 'other';
     if (/Windows|Win32|Win64/i.test(source)) return 'windows';
     if (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(source)) return 'macos';
     if (/Linux|X11/i.test(source)) return 'linux';
@@ -466,15 +470,25 @@
 
   document.addEventListener('click', (event) => {
     const trigger = event.target.closest?.('[data-image-zoom-trigger]');
-    if (!trigger || !imageLightbox || !imageLightboxImage) return;
+    if (!trigger || !imageLightbox) return;
 
     const source = trigger.dataset.imageSrc;
     const sourceImage = trigger.querySelector('img');
     if (!source || !sourceImage) return;
 
     activeImageTrigger = trigger;
+    imageLightboxImage = document.createElement('img');
+    imageLightboxImage.className = 'image-lightbox__image';
+    imageLightboxImage.decoding = 'async';
     imageLightboxImage.src = source;
     imageLightboxImage.alt = sourceImage.alt;
+
+    imageLightboxOriginal = document.createElement('a');
+    imageLightboxOriginal.className = 'image-lightbox__original';
+    imageLightboxOriginal.href = source;
+    imageLightboxOriginal.textContent = imageLightbox.dataset.openOriginalLabel || '';
+
+    imageLightbox.append(imageLightboxImage, imageLightboxOriginal);
     body.classList.add('image-lightbox-open');
     imageLightbox.showModal();
   });
@@ -492,8 +506,10 @@
 
   imageLightbox?.addEventListener('close', () => {
     body.classList.remove('image-lightbox-open');
-    imageLightboxImage?.removeAttribute('src');
-    if (imageLightboxImage) imageLightboxImage.alt = '';
+    imageLightboxImage?.remove();
+    imageLightboxOriginal?.remove();
+    imageLightboxImage = null;
+    imageLightboxOriginal = null;
     if (activeImageTrigger?.isConnected) activeImageTrigger.focus();
     activeImageTrigger = null;
   });

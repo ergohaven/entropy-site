@@ -24,7 +24,8 @@ platforms:
   - id: linux
     name: Linux
     package: AppImage · x86_64
-    instruction: Download the AppImage, make it executable, and run it.
+    instruction: Download the AppImage, make it executable with the command below, and run it. If the device is not detected, install suitable udev rules for the Vial/HID device and reconnect it.
+    command: chmod +x Entropy*.AppImage
   - id: windows
     name: Windows
     package: Portable EXE · x86_64

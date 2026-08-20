@@ -3,6 +3,7 @@
   class="image-lightbox"
   aria-label="{{ .Params.a11y.image_preview }}"
   data-image-lightbox
+  data-open-original-label="{{ .Params.a11y.open_original_image }}"
 >
   <button
     type="button"
@@ -14,5 +15,4 @@
       <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
     </svg>
   </button>
-  <img class="image-lightbox__image" alt="" decoding="async" data-image-lightbox-image>
 </dialog>

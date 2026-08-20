@@ -28,19 +28,19 @@
                 "src" $story.image_light
                 "alt" $story.image_alt
                 "class" "theme-media theme-media--light"
-                "sizes" "(min-width: 900px) 54vw, 94vw"
+                "sizes" "(min-width: 981px) 54vw, 94vw"
               ) }}
               {{ partial "picture.html" (dict
                 "src" $story.image_dark
                 "alt" $story.image_alt
                 "class" "theme-media theme-media--dark"
-                "sizes" "(min-width: 900px) 54vw, 94vw"
+                "sizes" "(min-width: 981px) 54vw, 94vw"
               ) }}
             {{ else if $story.image }}
               {{ partial "picture.html" (dict
                 "src" $story.image
                 "alt" $story.image_alt
-                "sizes" "(min-width: 900px) 54vw, 94vw"
+                "sizes" "(min-width: 981px) 54vw, 94vw"
               ) }}
             {{ else }}
               {{ errorf "Feature story %q requires an image or placeholder: true" $story.title }}
@@ -50,7 +50,7 @@
       {{ end }}
     </div>
 
-    <div class="features__catalog" aria-labelledby="features-catalog-title">
+    <section class="features__catalog" aria-labelledby="features-catalog-title">
       <header class="section-heading section-heading--split">
         <div>
           <p class="eyebrow">{{ .Params.catalog.eyebrow }}</p>
@@ -72,6 +72,6 @@
           </article>
         {{ end }}
       </div>
-    </div>
+    </section>
   </div>
 </section>
