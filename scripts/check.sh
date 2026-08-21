@@ -65,6 +65,12 @@ if command -v node >/dev/null 2>&1; then
   node --check assets/js/site.js
 fi
 
+rg -q 'const russianShortWordPattern' assets/js/site.js
+rg -q 'const englishShortWordPattern' assets/js/site.js
+rg -q 'const innerWordHyphenPattern' assets/js/site.js
+rg -q 'text-wrap: balance' assets/css/site.css
+rg -q 'text-wrap: pretty' assets/css/site.css
+
 "$project_dir/scripts/build.sh"
 
 test -f public/index.html
@@ -111,13 +117,24 @@ rg -qi 'перепрошив' public/ru/index.html
 rg -q 'Bluetooth' public/index.html
 rg -q 'Bluetooth' public/ru/index.html
 rg -qi 'wirelessly' public/index.html
-rg -qi 'без проводов' public/ru/index.html
+rg -q 'по USB или Bluetooth' public/ru/index.html
 rg -qi 'battery' public/index.html
 rg -qi 'заряд' public/ru/index.html
 rg -q 'not tied to a single model' public/index.html
 rg -q 'не привязана к одной модели' public/ru/index.html
 rg -q 'Macros and advanced actions' public/index.html
 rg -q 'Макросы и продвинутые действия' public/ru/index.html
+rg -q 'Назначайте отдельным клавишам и их сочетаниям более сложное поведение' public/ru/index.html
+rg -q 'Создавайте макросы, Combo и Tap Dance наглядно, без ручного редактирования кода прошивки\.' public/ru/index.html
+rg -q 'Закрепите отдельное окно поверх приложений, настройте прозрачность и следите за переключением слоёв и нажатиями, не возвращаясь к конфигуратору\.' public/ru/index.html
+rg -q 'Создавайте собственные правила: введите сокращение, и Entropy автоматически заменит его на сохранённый адрес, подпись или любой часто используемый фрагмент\. Все правила сохраняются локально и остаются только под вашим контролем\.' public/ru/index.html
+rg -q 'Настраивайте упражнения по времени или количеству слов, добавляйте пунктуацию и цифры, отслеживайте историю результатов\.' public/ru/index.html
+rg -q 'Основные сценарии дополнены инструментами для продвинутых функций ввода, настройки прошивки и повседневной работы с устройством\.' public/ru/index.html
+rg -q 'Используйте тонкие настройки поведения клавиш и поддерживайте порядок в раскладке\.' public/ru/index.html
+rg -q 'Копирование, перенос и отмена действий' public/ru/index.html
+rg -q 'Проверяйте устройство и расширяйте его возможности для эффективной работы\.' public/ru/index.html
+rg -q 'Ваше устройство умеет многое\. Раскройте его возможности\.' public/ru/index.html
+rg -q 'должны работать вместе\.<br>Entropy объединяет' public/ru/index.html
 rg -q 'href=https://docs\.eh\.industries/software/entropy/' public/index.html
 rg -q 'href=https://docs\.eh\.works/software/entropy/' public/ru/index.html
 if rg -q 'target=_blank' public/index.html public/ru/index.html; then
@@ -126,10 +143,13 @@ if rg -q 'target=_blank' public/index.html public/ru/index.html; then
 fi
 rg -q 'Complex firmware\. A calm interface\.' public/index.html
 rg -q 'aria-label="Complex firmware\. A calm interface\."' public/index.html
-rg -q 'aria-label="Сложная прошивка\. Спокойный интерфейс\."' public/ru/index.html
+rg -q 'aria-label="Сложная прошивка\. Простой интерфейс\."' public/ru/index.html
 rg -q 'Connect a Vial-QMK or Vial-RMK device and Entropy shows the controls its firmware actually supports\.' public/index.html
 rg -q 'Подключите устройство на Vial-QMK или Vial-RMK — Entropy покажет только те настройки, которые поддерживает его прошивка\.' public/ru/index.html
-rg -q 'Entropy — приложение с открытым исходным кодом для клавиатур и устройств ввода на базе Vial-QMK или Vial-RMK\. Настраивайте раскладки, параметры устройства и инструменты для рабочего стола — от слоёв и кейкодов до подсветки и поведения устройства — в едином интерфейсе\.' public/ru/index.html
+rg -q 'Изменения в раскладке, подсветке и параметрах применяются сразу и сохраняются на устройстве — без пересборки и перепрошивки\.' public/ru/index.html
+rg -q 'aria-label="Учитывает прошивку"' public/ru/index.html
+rg -q 'Каждое изменение применяется и сохраняется на устройстве — перепрошивка и пересборка не требуются\.' public/ru/index.html
+rg -q 'Entropy — приложение с открытым исходным кодом для клавиатур и устройств ввода на базе Vial-QMK или Vial-RMK\. Настраивайте раскладки, параметры устройства и инструменты для ввода — от слоёв и кейкодов до подсветки и поведения устройства — в едином интерфейсе\.' public/ru/index.html
 rg -q 'tools of the future by' public/index.html
 rg -q 'tools of the future by' public/ru/index.html
 rg -q 'class=site-footer__credit-link href=https://eh\.industries/>eh\.industries</a>' public/index.html
@@ -140,7 +160,9 @@ rg -q 'Экспандер текста' public/ru/index.html
 rg -q 'Тренажёр печати' public/ru/index.html
 rg -q 'Процессор Mac' public/ru/index.html
 rg -q 'Другая / не знаю' public/ru/index.html
-rg -q 'Портативный EXE-файл' public/ru/index.html
+rg -q 'Entropy для Windows' public/ru/index.html
+rg -q 'Скачать EXE' public/ru/index.html
+rg -q 'Установка и запуск' public/ru/index.html
 rg -q 'Не удалось получить данные о релизе\. Откройте релизы на GitHub' public/ru/index.html
 rg -Fq 'chmod +x Entropy*.AppImage' public/index.html
 rg -Fq 'chmod +x Entropy*.AppImage' public/ru/index.html
@@ -162,6 +184,12 @@ for page in public/index.html public/ru/index.html; do
   title_line_count=$(rg -o 'class=benefits__title-line' "$page" | wc -l)
   if [[ "$title_line_count" -ne 2 ]]; then
     echo "Expected exactly two intentional Benefits title lines in $page, found $title_line_count" >&2
+    exit 1
+  fi
+
+  hero_title_line_count=$(rg -o 'class=hero__title-line' "$page" | wc -l)
+  if [[ "$hero_title_line_count" -ne 2 ]]; then
+    echo "Expected exactly two intentional Hero title lines in $page, found $hero_title_line_count" >&2
     exit 1
   fi
 done
