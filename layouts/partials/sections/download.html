@@ -27,9 +27,19 @@
         <label class="download-field">
           <span class="download-field__label">{{ .Params.flow.os_label }}</span>
           <span class="download-select">
-            <select data-platform-select>
+            <select
+              data-platform-select
+              data-detected-template="{{ .Params.flow.detected }}"
+              data-selected-template="{{ .Params.flow.selected }}"
+            >
               {{ range .Params.platforms }}
-                <option value="{{ .id }}" data-package="{{ .package }}">{{ .name }}</option>
+                <option
+                  value="{{ .id }}"
+                  data-build-title="{{ .build_title }}"
+                  data-architecture="{{ .architecture }}"
+                  data-action-label="{{ .action_label }}"
+                  data-platform-name="{{ .name }}"
+                >{{ .name }}</option>
               {{ end }}
             </select>
             <i aria-hidden="true"></i>
@@ -50,26 +60,19 @@
       </div>
 
       <div class="download-flow__summary">
+        <p class="download-flow__package" data-download-package>{{ $firstPlatform.build_title }}</p>
         <p
-          class="download-flow__selection"
-          data-download-selection
-          data-detected-template="{{ .Params.flow.detected }}"
-          data-selected-template="{{ .Params.flow.selected }}"
-          data-unknown-text="{{ .Params.flow.detection_unknown }}"
-        ></p>
-        <p class="download-flow__package" data-download-package>{{ $firstPlatform.package }}</p>
-        <div class="download-flow__release" role="status" aria-live="polite" aria-atomic="true">
-          <p
-            class="download-flow__status"
-            data-download-status
-            data-loading-text="{{ .Params.flow.loading }}"
-            data-ready-template="{{ .Params.flow.ready }}"
-            data-unavailable-template="{{ .Params.flow.unavailable }}"
-            data-error-text="{{ .Params.flow.error }}"
-            data-unknown-text="{{ .Params.flow.unknown }}"
-          >{{ .Params.flow.loading }}</p>
-          <p class="download-flow__file" data-download-file hidden></p>
-        </div>
+          class="download-flow__status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          data-download-status
+          data-loading-text="{{ .Params.flow.loading }}"
+          data-ready-template="{{ .Params.flow.ready }}"
+          data-unavailable-template="{{ .Params.flow.unavailable }}"
+          data-error-text="{{ .Params.flow.error }}"
+          data-unknown-text="{{ .Params.flow.unknown }}"
+        >{{ .Params.flow.loading }}</p>
       </div>
 
       <div class="download-flow__actions">
@@ -78,7 +81,6 @@
           href="{{ site.Params.releasesURL }}"
           data-download-action
           data-loading-label="{{ .Params.flow.action_loading }}"
-          data-ready-template="{{ .Params.flow.action_ready }}"
           data-releases-label="{{ .Params.flow.action_releases }}"
         >
           <span data-download-action-label>{{ .Params.flow.action_loading }}</span>

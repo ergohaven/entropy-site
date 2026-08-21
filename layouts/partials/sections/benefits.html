@@ -23,7 +23,19 @@
       {{ range .Params.items }}
         <article class="benefit">
           <span class="benefit__marker">{{ .marker }}</span>
-          <h3>{{ .title }}</h3>
+          {{ $item := . }}
+          {{ with .title_lines }}
+            {{ if ne (delimit . " ") $item.title }}
+              {{ errorf "Benefit title_lines must reproduce the item title (%s, item %s)" site.Language.Lang $item.marker }}
+            {{ end }}
+            <h3 aria-label="{{ $item.title }}">
+              {{ range . }}
+                <span class="benefit__title-line" aria-hidden="true">{{ . }}</span>
+              {{ end }}
+            </h3>
+          {{ else }}
+            <h3>{{ .title }}</h3>
+          {{ end }}
           <p>{{ .text }}</p>
         </article>
       {{ end }}

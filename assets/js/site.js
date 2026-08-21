@@ -98,6 +98,71 @@
   });
 
   const currentLanguage = root.lang.toLowerCase().startsWith('ru') ? 'ru' : 'en';
+  const russianShortWordPattern = /(^|[\s([{«„"'])((?:а|без|в|во|для|до|за|и|из|изо|или|к|ко|на|над|не|ни|но|о|об|обо|от|ото|по|под|подо|при|про|с|со|у))(?=[ \t]+)[ \t]+/giu;
+  const englishShortWordPattern = /(^|[\s([{“‘"'])((?:a|an|and|as|at|but|by|for|from|if|in|into|nor|of|on|onto|or|per|so|the|to|up|via|with|without|yet))(?=[ \t]+)[ \t]+/giu;
+  const innerWordHyphenPattern = /([\p{L}\p{N}])-([\p{L}\p{N}])/gu;
+  const typographySkipSelector = 'script, style, code, pre, textarea, [data-typography-skip]';
+
+  const bindShortWords = (value, pattern) => {
+    let formatted = value;
+    let previous;
+
+    do {
+      previous = formatted;
+      formatted = formatted.replace(pattern, '$1$2\u00A0');
+    } while (formatted !== previous);
+
+    return formatted;
+  };
+
+  const applyTypography = (scope) => {
+    if (!scope) return;
+
+    const textNodes = [];
+    const collectTextNode = (node) => {
+      if (node.nodeType !== Node.TEXT_NODE || !node.nodeValue?.trim()) return;
+      if (node.parentElement?.closest(typographySkipSelector)) return;
+      textNodes.push(node);
+    };
+
+    if (scope.nodeType === Node.TEXT_NODE) {
+      collectTextNode(scope);
+    } else {
+      const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) collectTextNode(node);
+    }
+
+    const shortWordPattern = currentLanguage === 'ru'
+      ? russianShortWordPattern
+      : englishShortWordPattern;
+
+    textNodes.forEach((node) => {
+      const formatted = bindShortWords(node.nodeValue, shortWordPattern)
+        .replace(innerWordHyphenPattern, '$1\u2011$2');
+      if (formatted !== node.nodeValue) node.nodeValue = formatted;
+    });
+  };
+
+  applyTypography(body);
+
+  const typographyObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'characterData') {
+        applyTypography(mutation.target);
+        return;
+      }
+
+      mutation.addedNodes.forEach(applyTypography);
+    });
+  });
+
+  typographyObserver.observe(body, {
+    subtree: true,
+    childList: true,
+    characterData: true
+  });
+
   const englishHomeLink = languageLinks.find((link) => link.dataset.language === 'en');
   const defaultHomePath = englishHomeLink ? new URL(englishHomeLink.href).pathname : null;
 
@@ -219,10 +284,8 @@
     const architectureField = downloadFlow.querySelector('[data-architecture-field]');
     const architectureSelect = downloadFlow.querySelector('[data-architecture-select]');
     const manifestElement = downloadFlow.querySelector('[data-download-manifest]');
-    const selection = downloadFlow.querySelector('[data-download-selection]');
     const packageName = downloadFlow.querySelector('[data-download-package]');
     const status = downloadFlow.querySelector('[data-download-status]');
-    const file = downloadFlow.querySelector('[data-download-file]');
     const action = downloadFlow.querySelector('[data-download-action]');
     const actionLabel = downloadFlow.querySelector('[data-download-action-label]');
     const actionIcon = downloadFlow.querySelector('[data-download-action-icon]');
@@ -255,6 +318,22 @@
 
     const selectedOption = () => platformSelect.options[platformSelect.selectedIndex];
 
+    const updatePlatformSelectLabel = () => {
+      [...platformSelect.options].forEach((option) => {
+        option.textContent = option.dataset.platformName || option.textContent;
+      });
+
+      const option = selectedOption();
+      if (!option) return;
+
+      const template = automaticSelection
+        ? platformSelect.dataset.detectedTemplate
+        : platformSelect.dataset.selectedTemplate;
+      option.textContent = formatTemplate(template, {
+        platform: option.dataset.platformName || option.textContent
+      });
+    };
+
     const setAction = (label, url, directDownload = false) => {
       action.href = isTrustedReleaseUrl(url) ? url : fallbackUrl;
       actionLabel.textContent = label;
@@ -264,24 +343,11 @@
       }
     };
 
-    const setFile = (asset) => {
-      if (!file) return;
-
-      if (!asset) {
-        file.hidden = true;
-        file.textContent = '';
-        return;
-      }
-
-      const size = formatFileSize(asset.size);
-      file.textContent = size ? `${asset.name} · ${size}` : asset.name;
-      file.hidden = false;
-    };
-
     const renderDownloadFlow = () => {
+      updatePlatformSelectLabel();
       const option = selectedOption();
       const platform = option?.value || 'other';
-      const platformName = option?.textContent.trim() || '';
+      const platformName = option?.dataset.platformName || '';
       const platformConfig = manifest[platform];
       const isMac = platform === 'macos';
 
@@ -289,28 +355,16 @@
       downloadFlow.setAttribute('aria-busy', String(releaseState === 'loading'));
       if (architectureField) architectureField.hidden = !isMac;
       if (architectureSelect) architectureSelect.disabled = !isMac;
-      if (packageName) packageName.textContent = option?.dataset.package || '';
+      if (packageName) packageName.textContent = option?.dataset.buildTitle || '';
       installationInstructions.forEach((instruction) => {
         instruction.hidden = instruction.dataset.downloadInstruction !== platform;
       });
-
-      if (selection) {
-        if (automaticSelection && detectedPlatform === 'other') {
-          selection.textContent = selection.dataset.unknownText;
-        } else {
-          const template = automaticSelection
-            ? selection.dataset.detectedTemplate
-            : selection.dataset.selectedTemplate;
-          selection.textContent = formatTemplate(template, { platform: platformName });
-        }
-      }
 
       if (releaseNotes) releaseNotes.href = releasePageUrl;
 
       if (releaseState === 'loading') {
         downloadFlow.dataset.state = 'loading';
         status.textContent = status.dataset.loadingText;
-        setFile(null);
         setAction(action.dataset.loadingLabel, fallbackUrl);
         return;
       }
@@ -318,7 +372,6 @@
       if (releaseState === 'error') {
         downloadFlow.dataset.state = 'error';
         status.textContent = status.dataset.errorText;
-        setFile(null);
         setAction(action.dataset.releasesLabel, fallbackUrl);
         return;
       }
@@ -326,7 +379,6 @@
       if (platform === 'other') {
         downloadFlow.dataset.state = 'unknown';
         status.textContent = status.dataset.unknownText;
-        setFile(null);
         setAction(action.dataset.releasesLabel, releasePageUrl);
         return;
       }
@@ -347,18 +399,21 @@
         status.textContent = formatTemplate(status.dataset.unavailableTemplate, {
           platform: platformName
         });
-        setFile(null);
         setAction(action.dataset.releasesLabel, releasePageUrl);
         return;
       }
 
       downloadFlow.dataset.state = 'ready';
+      const architecture = isMac
+        ? architectureSelect?.value || ''
+        : option?.dataset.architecture || '';
       status.textContent = formatTemplate(status.dataset.readyTemplate, {
-        version: releaseData.tag_name
+        version: releaseData.tag_name.replace(/^v(?=\d)/i, ''),
+        architecture,
+        size: formatFileSize(asset.size)
       });
-      setFile(asset);
       setAction(
-        formatTemplate(action.dataset.readyTemplate, { platform: platformName }),
+        option?.dataset.actionLabel || action.dataset.releasesLabel,
         asset.browser_download_url,
         true
       );
@@ -373,7 +428,6 @@
     });
 
     architectureSelect?.addEventListener('change', () => {
-      automaticSelection = false;
       renderDownloadFlow();
     });
 

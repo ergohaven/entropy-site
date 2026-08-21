@@ -9,7 +9,9 @@
 
   <div class="hero__inner shell">
     <div class="hero__copy">
-      <h1 id="hero-title">{{ .Title }}</h1>
+      <h1 id="hero-title" aria-label="{{ .Title }}">
+        {{ range .Params.title_lines }}<span class="hero__title-line">{{ . }}</span>{{ end }}
+      </h1>
       <div class="hero__lead prose">{{ .Content }}</div>
       <div class="button-row">
         <a class="button button--primary" href="{{ site.Home.RelPermalink }}#download">

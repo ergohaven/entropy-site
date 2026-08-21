@@ -1,5 +1,8 @@
 ---
 title: Make your keyboard truly yours
+title_lines:
+  - Make your keyboard
+  - truly yours
 primary:
   label: Download Entropy
 secondary:
