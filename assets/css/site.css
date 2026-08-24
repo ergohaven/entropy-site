@@ -19,8 +19,8 @@
   --accent-contrast: #fffafb;
   --ambient-glow: rgb(189 131 141 / 13%);
   --pattern-line: rgb(143 89 99 / 6%);
-  --control-shadow: 0 8px 22px rgb(73 48 55 / 12%);
-  --shadow: 0 30px 80px rgb(45 32 36 / 14%);
+  --control-shadow: 0 8px 22px rgb(0 0 0 / 10%);
+  --shadow: 0 30px 80px rgb(0 0 0 / 12%);
   --shell: 1240px;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --section-space: clamp(6rem, 10vw, 9rem);
@@ -71,9 +71,7 @@ body {
   min-width: 320px;
   margin: 0;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 50% -8rem, var(--ambient-glow), transparent 36rem),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1rem;
@@ -581,7 +579,7 @@ html[data-theme="dark"] .button--primary {
 .button--secondary:focus-visible {
   border-color: var(--line-strong);
   background: var(--surface);
-  box-shadow: 0 6px 18px rgb(56 44 49 / 8%);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
 }
 
 /* Hero */
@@ -962,10 +960,7 @@ html[data-theme="dark"] .button--primary {
 /* Features */
 
 .features {
-  background:
-    radial-gradient(circle at 12% 20%, var(--ambient-glow), transparent 30rem),
-    radial-gradient(circle at 88% 76%, var(--ambient-glow), transparent 34rem),
-    var(--bg-elevated);
+  background: var(--bg-elevated);
 }
 
 .features__stories {
@@ -1024,7 +1019,7 @@ html[data-theme="dark"] .button--primary {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--surface);
-  box-shadow: 0 22px 55px rgb(40 30 34 / 12%);
+  box-shadow: 0 22px 55px rgb(0 0 0 / 12%);
 }
 
 .story__placeholder {
@@ -1214,7 +1209,6 @@ html[data-theme="dark"] .theme-media--dark {
 
 .download {
   background:
-    radial-gradient(circle at 78% 26%, var(--ambient-glow), transparent 28rem),
     linear-gradient(135deg, transparent 0 49.8%, var(--pattern-line) 50%, transparent 50.2%) 0 0 / 7rem 7rem,
     var(--accent-soft);
 }
@@ -1288,7 +1282,7 @@ html[data-theme="dark"] .theme-media--dark {
 .download-select select:focus-visible {
   border-color: var(--line-strong);
   background: var(--surface);
-  box-shadow: 0 6px 18px rgb(56 44 49 / 8%);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
 }
 
 .download-select select:focus-visible {
@@ -1489,7 +1483,7 @@ html[data-theme="dark"] .theme-media--dark {
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--bg-elevated);
-  box-shadow: 0 10px 30px rgb(42 31 36 / 12%);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
   color: var(--text-soft);
   opacity: 0;
   pointer-events: none;
