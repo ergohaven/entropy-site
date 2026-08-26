@@ -35,23 +35,23 @@
 }
 
 html[data-theme="dark"] {
-  --bg: #1b1a1c;
-  --bg-elevated: #252227;
-  --surface: #2d2930;
-  --surface-strong: #37323a;
-  --text: #f2eeef;
-  --text-soft: #b5adb1;
-  --line: #3d3840;
-  --line-strong: #59515b;
-  --accent: #c49da1;
-  --accent-deep: #d1a8ad;
-  --accent-hover: #ddb6ba;
-  --accent-soft: #252227;
-  --accent-contrast: #1d181a;
-  --ambient-glow: rgb(196 157 161 / 7%);
-  --pattern-line: rgb(209 168 173 / 5%);
-  --control-shadow: 0 10px 28px rgb(0 0 0 / 24%);
-  --shadow: 0 34px 90px rgb(0 0 0 / 34%);
+  --bg: #111012;
+  --bg-elevated: #181719;
+  --surface: #211f22;
+  --surface-strong: #2a282c;
+  --text: #f0eced;
+  --text-soft: #aaa3a6;
+  --line: #302e32;
+  --line-strong: #4a464c;
+  --accent: #c58b95;
+  --accent-deep: #d5a2aa;
+  --accent-hover: #dfb0b8;
+  --accent-soft: #271a1e;
+  --accent-contrast: #171214;
+  --ambient-glow: rgb(197 139 149 / 10%);
+  --pattern-line: rgb(213 162 170 / 5%);
+  --control-shadow: 0 10px 28px rgb(0 0 0 / 28%);
+  --shadow: 0 34px 90px rgb(0 0 0 / 40%);
   color-scheme: dark;
 }
 
@@ -1211,6 +1211,12 @@ html[data-theme="dark"] .theme-media--dark {
   background:
     linear-gradient(135deg, transparent 0 49.8%, var(--pattern-line) 50%, transparent 50.2%) 0 0 / 7rem 7rem,
     var(--accent-soft);
+}
+
+html[data-theme="dark"] .download {
+  background:
+    linear-gradient(135deg, transparent 0 49.8%, rgb(209 168 173 / 5%) 50%, transparent 50.2%) 0 0 / 7rem 7rem,
+    #1b1a1c;
 }
 
 .download__inner {
