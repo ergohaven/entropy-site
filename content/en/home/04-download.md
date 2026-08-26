@@ -50,4 +50,5 @@ architectures:
     name: Intel · x86_64
 ---
 
-Choose a build, connect a Vial-compatible device, and start with the layout already stored in its firmware. No account, no cloud, no lock-in.
+Choose a build, connect a Vial-compatible device, and start with the layout already stored in its firmware.\
+No account, no cloud, no lock-in.
