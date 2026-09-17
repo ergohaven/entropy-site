@@ -705,6 +705,12 @@ html[data-theme="dark"] .button--primary {
   color: var(--accent-deep);
 }
 
+html[data-theme="dark"] .hero__preset-tab[aria-selected="true"] {
+  background: rgb(197 139 149 / 22%);
+  color: #f3cbd2;
+  box-shadow: inset 0 0 0 1px rgb(197 139 149 / 10%);
+}
+
 .hero__preset-tab:focus-visible {
   outline-offset: 2px;
 }

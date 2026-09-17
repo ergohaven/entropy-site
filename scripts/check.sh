@@ -347,6 +347,7 @@ rg -q "event\.key === 'ArrowRight'" assets/js/site.js
 rg -q "event\.key === 'ArrowLeft'" assets/js/site.js
 rg -q 'actionIcon\.hidden = directDownload' assets/js/site.js
 rg -q 'themeFavicon\.href = root\.dataset\.theme' assets/js/site.js
+rg -U -q 'html\[data-theme="dark"\] \.hero__preset-tab\[aria-selected="true"\][[:space:]]*\{[^}]*background: rgb\(197 139 149 / 22%\)' assets/css/site.css
 rg -Fq "var darkPreference = window.matchMedia('(prefers-color-scheme: dark)');" layouts/partials/head.html
 rg -Fq "var theme = darkPreference.matches ? 'dark' : 'light';" layouts/partials/head.html
 rg -Fq "if (saved === 'light' || saved === 'dark') theme = saved;" layouts/partials/head.html
