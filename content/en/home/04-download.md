@@ -36,8 +36,12 @@ platforms:
     name: macOS
     build_title: Entropy for macOS
     action_label: Download DMG
-    instruction: Open the DMG for your Mac and drag Entropy.app to Applications. If macOS blocks it, use the command below to remove quarantine.
-    command: xattr -dr com.apple.quarantine /Applications/Entropy.app
+    instruction: >-
+      Download the DMG from this site or GitHub Releases, not Telegram. Open it, drag Entropy.app onto Applications, eject the image, and launch Entropy from Applications.
+      If macOS blocks it, open System Settings → Privacy & Security → Open Anyway and confirm.
+      The app uses a project self-signed certificate and is not notarized by Apple.
+      For Text Expander, allow Accessibility and Input Monitoring, then quit with ⌘Q and reopen.
+      To update, quit Entropy, install the new app the same way, and choose Replace; do not remove existing permission grants.
   - id: other
     name: Other / not sure
     build_title: All Entropy builds
