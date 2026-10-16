@@ -1378,7 +1378,9 @@ html[data-theme="dark"] .download {
   margin-bottom: 0.65rem;
 }
 
-.download-flow__instruction p {
+.download-flow__instruction p,
+.download-flow__instruction ol,
+.download-flow__instruction ul {
   margin: 0;
   color: var(--text-soft);
   font-size: 0.85rem;
@@ -1387,6 +1389,20 @@ html[data-theme="dark"] .download {
 
 .download-flow__instruction {
   min-width: 0;
+  max-width: 65ch;
+}
+
+.download-flow__instruction ol,
+.download-flow__instruction ul {
+  padding-left: 1.4em;
+}
+
+.download-flow__instruction li + li {
+  margin-top: 0.45rem;
+}
+
+.download-flow__instruction > :not(:first-child) {
+  margin-top: 0.85rem;
 }
 
 .download-flow__instruction code {

@@ -36,12 +36,16 @@ platforms:
     name: macOS
     build_title: Entropy for macOS
     action_label: Download DMG
-    instruction: >-
-      Download the DMG from this site or GitHub Releases, not Telegram. Open it, drag Entropy.app onto Applications, eject the image, and launch Entropy from Applications.
-      If macOS blocks it, open System Settings → Privacy & Security → Open Anyway and confirm.
+    instruction: |-
+      1. Download and open the DMG for your Mac.
+      2. Drag Entropy.app onto Applications, eject the image, and launch Entropy from Applications.
+      3. If macOS blocks it, open **System Settings → Privacy & Security → Open Anyway** and confirm.
+
+      **Text Expander:** allow Accessibility and Input Monitoring, then quit with ⌘Q and reopen.
+
+      **Updates:** quit Entropy with ⌘Q, install the new copy, and choose Replace. Keep existing permission grants.
+
       The app uses a project self-signed certificate and is not notarized by Apple.
-      For Text Expander, allow Accessibility and Input Monitoring, then quit with ⌘Q and reopen.
-      To update, quit Entropy, install the new app the same way, and choose Replace; do not remove existing permission grants.
   - id: other
     name: Other / not sure
     build_title: All Entropy builds

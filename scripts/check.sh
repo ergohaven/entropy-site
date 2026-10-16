@@ -275,6 +275,11 @@ for page in public/index.html public/ru/index.html; do
   rg -q 'data-download-instruction=linux' "$page"
   rg -q 'data-download-instruction=windows' "$page"
   rg -q 'data-download-instruction=macos' "$page"
+  rg -q 'data-download-instruction=macos[^>]*><ol><li>' "$page"
+  if rg -q 'Telegram|xattr -dr com\.apple\.quarantine' "$page"; then
+    echo "Mac installation instructions must not mention Telegram or quarantine commands" >&2
+    exit 1
+  fi
   rg -q 'data-download-instruction=other' "$page"
   rg -q 'data-state=loading' "$page"
   rg -q 'site-footer__license' "$page"
